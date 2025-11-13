@@ -1,0 +1,75 @@
+# ================== NODE.JS (CẢ BACKEND & FRONTEND) ==================
+node_modules/
+*/node_modules/
+
+# Build outputs
+dist/
+build/
+*/dist/
+*/build/
+
+# Environment variables
+.env
+*.env
+*.env.local
+*.env.development
+*.env.production
+*/.env
+*/.env.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Dependency directories
+.pnp/
+.pnp.js
+.yarn/
+.yarn-integrity
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ================== BACKEND SPECIFIC ==================
+backend/dist/
+backend/build/
+backend/.env
+backend/npm-debug.log*
+
+# ================== FRONTEND SPECIFIC (React/Vue/Angular/Vite) ==================
+frontend/dist/
+frontend/build/
+frontend/.env.local
+frontend/.env.development
+frontend/.env.production
+
+# React / CRA
+frontend/.cache/
+frontend/public/
+
+# Vite
+frontend/.vite/
+
+# Next.js (nếu dùng)
+frontend/.next/
+frontend/out/
+
+# Vue
+frontend/.npm/
+
+# ================== GIT (QUAN TRỌNG) ==================
+# Ngăn copy nhầm .git từ thư mục con
+.git/
+*/.git/
+.gitmodules
