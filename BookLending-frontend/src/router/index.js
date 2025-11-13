@@ -61,6 +61,11 @@ const routes = [
     path: "/publishers/add",
     name: "publisher.add",
     component: () => import("../views/shared/PublisherAdd.vue"),
+  },
+  {
+    path: "/books/:id",
+    name: "book.detail",
+    component: () => import("../views/shared/BookDetail.vue"),
   }
 ];
 const router = createRouter({

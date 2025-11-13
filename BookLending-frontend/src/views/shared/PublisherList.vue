@@ -96,8 +96,8 @@ onMounted(async () => {
             :key="publisher._id"
             :publisher="publisher"
           ></PublisherCard>
-          <div class="flex justify-center items-center">
-            <button class="btn btn-circle w-15 h-15 text-4xl text-primary" @click="goToAddPublisher">+</button>
+          <div class="flex justify-center items-center ">
+            <button class="btn btn-circle w-15 h-15 text-4xl text-primary " @click="goToAddPublisher">+</button>
           </div>
         </div>
       </template>
