@@ -43,19 +43,17 @@ const goToAddBook = () => {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen bg-zinc-100">
     <div class="flex-grow container mx-auto px-4 py-8">
       <!-- Tiêu đề + Thanh tìm kiếm -->
-      <div class="flex flex-end md:flex-row items-center mb-8 gap-4">
 
-        <div class=" gap-2 w-full md:w-1/3">
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Tìm kiếm sách..."
-            class="input input-bordered w-full "
-          />
-        </div>
+      <div class="flex flex-col justify-end gap-2 w-full md:w-1/3 mb-4">
+        <input
+          v-model="searchQuery"
+          type="text"
+          placeholder="Tìm kiếm sách..."
+          class="input input-bordered w-full"
+        />
       </div>
 
       <!-- Lưới hiển thị sách -->
@@ -71,7 +69,7 @@ const goToAddBook = () => {
       </div>
 
       <!-- Nút thêm sách -->
-      <div class="flex justify-end mt-10">
+      <div v-if="role === 'staff'" class="flex justify-end mt-10">
         <button
           class="btn btn-primary btn-circle text-2xl"
           @click="goToAddBook"
@@ -83,4 +81,3 @@ const goToAddBook = () => {
     </div>
   </div>
 </template>
-

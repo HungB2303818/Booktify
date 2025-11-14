@@ -39,7 +39,7 @@ onMounted(() => {
 <template>
   <div class="max-w-md mx-auto my-8 bg-white shadow-sm rounded-lg p-6">
     <!-- Tiêu đề -->
-    <h2 class="text-2xl font-semibold text-blue-600 mb-6">
+    <h2 class="text-2xl font-semibold mb-6">
       Thêm nhà xuất bản
     </h2>
 

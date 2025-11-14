@@ -26,13 +26,14 @@ const goBack = () => router.push("/books");
 const goToEdit = () => router.push(`/books/edit/${book.value._id}`);
 
 const deleteBook = async () => {
-    confirm("Xác nhận xóa sách này?");
-  try {
-    await bookService.deleteBook(book.value._id);
-    router.push("/books");
-    push.success("Xóa sách thành công");
-  } catch (err) {
-    console.error("Lỗi xóa sách:", err);
+  if (confirm("Xác nhận xóa sách này?")) {
+    try {
+      await bookService.deleteBook(book.value._id);
+      router.push("/books");
+      push.success("Xóa sách thành công");
+    } catch (err) {
+      console.error("Lỗi xóa sách:", err);
+    }
   }
 };
 </script>
@@ -41,7 +42,7 @@ const deleteBook = async () => {
   <div class="container mx-auto px-6 py-10">
     <div class="flex flex-col md:flex-row items-start gap-8">
       <!-- Ảnh bìa -->
-      <div class="w-full md:w-1/3 flex justify-center">
+      <div class="w-full md:w-1/3 flex justify-center border-">
         <img
           :src="book.image || defaultImage"
           alt="Bìa sách"
@@ -51,7 +52,7 @@ const deleteBook = async () => {
 
       <!-- Thông tin chi tiết -->
       <div class="flex-1 space-y-4">
-        <h1 class="text-3xl font-bold text-primary">{{ book.title }}</h1>
+        <h1 class="text-3xl font-bold ">{{ book.title }}</h1>
 
         <div class="text-gray-700 space-y-1">
           <p><span class="font-semibold">Tác giả:</span>{{ book.author }}</p>
@@ -69,12 +70,24 @@ const deleteBook = async () => {
           </p>
         </div>
 
-        <!-- Nút điều hướng -->
         <div class="flex gap-3 pt-6">
-          <button @click="goBack"class="btn btn-outline">Quay lại</button>
-          <button v-if="role === 'staff' "class="btn btn-warning" @click="goToEdit">Chỉnh sửa</button>
-          <button v-if="role === 'staff'" class="btn btn-error" @click="deleteBook">Xóa</button>
-          <button v-else-if="role === 'user'" class="btn btn-success">Mượn sách</button>
+          <button
+            v-if="role === 'staff'"
+            class="btn btn-warning"
+            @click="goToEdit"
+          >
+            Chỉnh sửa
+          </button>
+          <button
+            v-if="role === 'staff'"
+            class="btn bg-red-600 text-white hover:bg-red-700"
+            @click="deleteBook"
+          >
+            Xóa
+          </button>
+          <button v-else-if="role === 'user'" class="btn btn-success">
+            Mượn sách
+          </button>
         </div>
       </div>
     </div>

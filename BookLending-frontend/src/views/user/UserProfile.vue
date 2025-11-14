@@ -30,7 +30,7 @@ onMounted(async () => {
     <div class="card bg-base-100 shadow-xl w-full max-w-2xl">
       <div class="card-body">
         <div class="mb-4">
-          <h2 class="text-2xl font-bold text-primary">Thông tin người dùng</h2>
+          <h2 class="text-2xl font-bold">Thông tin người dùng</h2>
         </div>
 
         <!-- Danh sách thông tin -->

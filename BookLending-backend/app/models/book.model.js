@@ -18,6 +18,14 @@ const bookschema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: false,
+  },
+  publisher: {
+    type: String,
+    required: true,
+  },
 });
 
 const Book = mongoose.model("Book", bookschema);

@@ -89,11 +89,11 @@ const { logOut } = useAuth();
             >
           </li>
           <li>
-          <RouterLink
-            to="/users"
-            class="text-base hover:font-bold hover:underline"
-            >Người dùng</RouterLink
-          >
+            <RouterLink
+              to="/users"
+              class="text-base hover:font-bold hover:underline"
+              >Người dùng</RouterLink
+            >
           </li>
           <li>
             <a class="text-base hover:font-bold hover:underline">Nhân viên</a>
@@ -102,15 +102,13 @@ const { logOut } = useAuth();
         <!-- USER MENU (desktop) -->
         <template v-if="role === 'user'">
           <li>
-            <a class="text-base hover:font-bold hover:underline"
-              >Danh mục sách</a
+            <RouterLink
+              to="/books"
+              class="text-base hover:font-bold hover:underline"
+              >Danh mục sách</RouterLink
             >
           </li>
-          <li>
-            <a class="text-base hover:font-bold hover:underline"
-              >Kiểm tra đơn mượn sách</a
-            >
-          </li>
+          
         </template>
       </ul>
     </div>
@@ -128,12 +126,23 @@ const { logOut } = useAuth();
       </template>
       <!-- Đã đăng nhập - user -->
       <template v-else-if="role === 'user'">
+       
+          <RouterLink
+              to="/borrowrecords/user"
+              class="text-base hover:font-bold hover:underline mx-3"
+              ><img
+                src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
+                alt="cart"
+                class="w-6 h-6 invert hover:scale-[1.05] cursor-pointer"
+              />
+            </RouterLink>
+
         <div class="dropdown dropdown-end">
           <label
             tabindex="0"
             class="btn btn-ghost normal-case text-base font-bold"
           >
-            Xin chào, {{ username }}
+            {{ username }}
             <svg
               class="ml-2 h-4 w-4 inline-block"
               xmlns="http://www.w3.org/2000/svg"
