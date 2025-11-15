@@ -94,7 +94,7 @@ onMounted(() => {
           <dd class="col-span-2">
             <input
               v-model="year"
-              type="text"
+              type="number"
               placeholder="Nhập năm xuất bản"
               class="input input-bordered w-full input-sm"
             />
@@ -106,11 +106,23 @@ onMounted(() => {
           <dd class="col-span-2">
             <input
               v-model="quantity"
-              type="text"
+              type="number"
               placeholder="Nhập số lượng"
               class="input input-bordered w-full input-sm"
             />
             <span class="text-xs text-red-600">{{ quantityError }}</span>
+          </dd>
+        </div>
+        <div class="py-4 grid grid-cols-3 items-center">
+          <dt class="font-semibold text-gray-800 text-sm">Đơn giá</dt>
+          <dd class="col-span-2">
+            <input
+              v-model="price"
+              type="number"
+              placeholder="Nhập giá sách"
+              class="input input-bordered w-full input-sm"
+            />
+            <span class="text-xs text-red-600">{{ priceError }}</span>
           </dd>
         </div>
       </dl>

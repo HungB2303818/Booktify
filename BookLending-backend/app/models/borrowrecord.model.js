@@ -2,19 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const borrowRecordSchema = new mongoose.Schema({
-  bookCode: {
-    type: String,
-    required: true,
+  book_id: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Book",
   },
-  readerCode: {
-    type: String,
-    required: true,
-  },
-  book: { type: mongoose.Schema.Types.ObjectId, ref: "Book", required: true },
-  reader: {
-    type: mongoose.Schema.Types.ObjectId,
+  reader_id: {
+    type: mongoose.Schema.ObjectId,
     ref: "Reader",
-    required: true,
+  },
+  employee_id: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Employee",
   },
   borrowDate: {
     type: Date,
@@ -27,7 +25,7 @@ const borrowRecordSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["borrowing", "returned", "overdue"],
+    enum: ["waiting", "borrowing", "returned", "overdue", "rejected"],
     required: true,
     default: "borrowing",
   },

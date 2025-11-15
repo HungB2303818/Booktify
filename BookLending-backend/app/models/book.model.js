@@ -22,6 +22,10 @@ const bookschema = new Schema({
     type: String,
     required: false,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   publisher: {
     type: String,
     required: true,

@@ -4,11 +4,20 @@ const ApiError = require("../api-error");
 // [POST] /api/borrowrecords
 exports.create = async (req, res, next) => {
   try {
-    const { readerCode, bookCode } = req.body;
-    if (!readerCode || !bookCode) {
-      return next(new ApiError(400, "Thông tin mượn sách không đầy đủ"));
+    const { reader_id, book_id } = req.body;
+
+    // Validate
+    if (!reader_id || !book_id) {
+      return next(new ApiError(400, "Thiếu readerId hoặc bookId"));
     }
-    const record = await borrowrecordService.create(req.body);
+
+    // Tạo record
+    const record = await borrowrecordService.create({
+      reader_id,
+      book_id,
+      ...req.body, // các field khác như borrowDate, returnDate...
+    });
+
     return res.status(201).json(record);
   } catch (error) {
     return next(error);

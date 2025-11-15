@@ -5,41 +5,40 @@ const Reader = require("../models/reader.model");
 
 const BorrowRecordService = {
   async create(data) {
-    const { readerCode, bookCode, quantity } = data;
+    const { readerId, bookId, quantity } = data;
 
-    // 1️⃣ Kiểm tra bạn đọc
-    const reader = await Reader.findOne({ readerCode });
+    //Kiểm tra bạn đọc theo ObjectId
+    const reader = await Reader.findById(readerId);
     if (!reader) {
       throw new ApiError(404, "Không tìm thấy bạn đọc");
     }
 
-    // 2️⃣ Kiểm tra sách
-    const book = await Book.findOne({ bookCode });
+    //Kiểm tra sách theo ObjectId
+    const book = await Book.findById(bookId);
     if (!book) {
       throw new ApiError(404, "Không tìm thấy sách");
     }
 
-    // 3️⃣ Kiểm tra số lượng còn lại
+    //Kiểm tra số lượng sách còn lại
     if (book.quantity < quantity) {
       throw new ApiError(400, "Không đủ số lượng sách để mượn");
     }
 
-    // 4️⃣ Tạo bản ghi mượn
+    //Tạo phiếu mượn
     const record = new BorrowRecord({
-      readerCode,
-      bookCode,
       reader: reader._id,
       book: book._id,
       quantity,
+      borrowDate: data.borrowDate,
       returnDate: data.returnDate,
-      status: data.status,
+      status: data.status || "PENDING",
     });
 
-    // 5️⃣ Giảm số lượng sách còn lại
+    //Trừ số lượng sách
     book.quantity -= quantity;
     await book.save();
 
-    // 6️⃣ Lưu phiếu mượn
+    //Lưu vào DB
     await record.save();
 
     return record;

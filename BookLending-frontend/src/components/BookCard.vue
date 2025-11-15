@@ -37,6 +37,7 @@ const defaultImage = computed(() => "/img/harry.jpg");
         <p class="text-sm text-gray-600">
           <span class="font-bold">Nhà xuất bản: </span> {{ book.publisher }}
         </p>
+        <p class="text-md">{{ book.price }} <span> đ</span></p>
       </div>
       <!-- Nút hành động -->
       <div class="mt-4 flex justify-between items-center">

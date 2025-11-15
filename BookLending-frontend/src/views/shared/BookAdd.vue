@@ -1,49 +1,49 @@
 <script setup>
-import { useRouter } from 'vue-router';
-import { computed, onMounted, ref } from 'vue';
-import { push } from 'notivue';
+import { useRouter } from "vue-router";
+import { computed, onMounted, ref } from "vue";
+import { push } from "notivue";
 import BookService from "@/services/book.service";
 import { useForm, useField } from "vee-validate";
-import { bookSchema } from '@/validations/book.validation';
+import { bookSchema } from "@/validations/book.validation";
 
 const router = useRouter();
 const bookService = new BookService();
 const role = computed(() => localStorage.getItem("role"));
 
 const { handleSubmit } = useForm({
-    validationSchema: bookSchema,
+  validationSchema: bookSchema,
 });
 
 const handleCreateBook = handleSubmit(async (values) => {
-    try {
-        await bookService.createBook(values);
-        push.success("Thêm sách thành công");
+  try {
+    await bookService.createBook(values);
+    push.success("Thêm sách thành công");
 
-        router.push("/books");
-    } catch (error) {
-        console.log(error);
-        push.error("Đã có lỗi xảy ra khi tạo sách");
-    }
+    router.push("/books");
+  } catch (error) {
+    console.log(error);
+    push.error("Đã có lỗi xảy ra khi tạo sách");
+  }
 });
 
 const { value: title, errorMessage: titleError } = useField("title");
 const { value: quantity, errorMessage: quantityError } = useField("quantity");
 const { value: author, errorMessage: authorError } = useField("author");
 const { value: year, errorMessage: yearError } = useField("year");
-const { value: publisher, errorMessage: publisherError } = useField("publisher");
+const { value: publisher, errorMessage: publisherError } =
+  useField("publisher");
+const { value: price, errorMessage: priceError } = useField("price");
 onMounted(() => {
-    if (role.value !== "staff") {
-        router.push("/");
-    }
+  if (role.value !== "staff") {
+    router.push("/");
+  }
 });
 </script>
 
 <template>
   <div class="max-w-md mx-auto my-8 bg-white shadow-sm rounded-lg p-6">
     <!-- Tiêu đề -->
-    <h2 class="text-2xl font-semibold text-blue-600 mb-6">
-      Thêm sách
-    </h2>
+    <h2 class="text-2xl font-semibold text-blue-600 mb-6">Thêm sách</h2>
 
     <!-- Form -->
     <form @submit.prevent="handleCreateBook">
@@ -61,7 +61,6 @@ onMounted(() => {
             <span class="text-xs text-red-600">{{ titleError }}</span>
           </dd>
         </div>
-
         <div class="py-4 grid grid-cols-3 items-center">
           <dt class="font-semibold text-gray-800 text-sm">Nhà xuất bản</dt>
           <dd class="col-span-2">
@@ -93,7 +92,7 @@ onMounted(() => {
           <dd class="col-span-2">
             <input
               v-model="year"
-              type="text"
+              type="number"
               placeholder="Nhập năm xuất bản"
               class="input input-bordered w-full input-sm"
             />
@@ -105,21 +104,30 @@ onMounted(() => {
           <dd class="col-span-2">
             <input
               v-model="quantity"
-              type="text"
+              type="number"
               placeholder="Nhập số lượng"
               class="input input-bordered w-full input-sm"
             />
             <span class="text-xs text-red-600">{{ quantityError }}</span>
           </dd>
         </div>
+        <div class="py-4 grid grid-cols-3 items-center">
+          <dt class="font-semibold text-gray-800 text-sm">Đơn giá</dt>
+          <dd class="col-span-2">
+            <input
+              v-model="price"
+              type="number"
+              placeholder="Nhập đơn giá"
+              class="input input-bordered w-full input-sm"
+            />
+            <span class="text-xs text-red-600">{{ priceError }}</span>
+          </dd>
+        </div>
       </dl>
 
       <!-- Nút -->
       <div class="flex justify-end mt-6 space-x-2">
-        <RouterLink
-          to="/books"
-          class="btn btn-ghost text-sm hover:underline"
-        >
+        <RouterLink to="/books" class="btn btn-ghost text-sm hover:underline">
           Quay lại
         </RouterLink>
         <button class="btn btn-success text-sm hover:scale-[1.02] transition">

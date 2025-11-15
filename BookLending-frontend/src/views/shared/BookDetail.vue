@@ -22,7 +22,6 @@ onMounted(async () => {
   }
 });
 
-const goBack = () => router.push("/books");
 const goToEdit = () => router.push(`/books/edit/${book.value._id}`);
 
 const deleteBook = async () => {
@@ -58,6 +57,7 @@ const deleteBook = async () => {
           <p><span class="font-semibold">Tác giả:</span>{{ book.author }}</p>
           <p><span class="font-semibold">Năm xuất bản:</span>{{ book.year }}</p>
           <p><span class="font-semibold">Số lượng:</span>{{ book.quantity }}</p>
+          <p>{{ book.price }} đ</p>
         </div>
 
         <div class="pt-4">
