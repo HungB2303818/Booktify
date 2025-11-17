@@ -23,7 +23,7 @@ onMounted(async () => {
 });
 
 const goToEdit = () => router.push(`/books/edit/${book.value._id}`);
-
+const gotoBorrow = () => router.push(`/borrows/add/${book.value._id}`);
 const deleteBook = async () => {
   if (confirm("Xác nhận xóa sách này?")) {
     try {
@@ -85,7 +85,7 @@ const deleteBook = async () => {
           >
             Xóa
           </button>
-          <button v-else-if="role === 'user'" class="btn btn-success">
+          <button v-else-if="role === 'user'" class="btn btn-success" @click="gotoBorrow">
             Mượn sách
           </button>
         </div>

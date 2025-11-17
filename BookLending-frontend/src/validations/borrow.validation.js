@@ -4,7 +4,7 @@ const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 30);
 
 export const borrowSchema = yup.object({
-  return_date: yup
+  returnDate: yup
     .date()
     .required("Vui lòng chọn ngày trả")
     .min(new Date(), "Ngày trả phải sau ngày mượn")

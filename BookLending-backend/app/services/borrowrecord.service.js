@@ -5,16 +5,16 @@ const Reader = require("../models/reader.model");
 
 const BorrowRecordService = {
   async create(data) {
-    const { readerId, bookId, quantity } = data;
+    const { reader_id, book_id, quantity } = data;
 
     //Kiểm tra bạn đọc theo ObjectId
-    const reader = await Reader.findById(readerId);
+    const reader = await Reader.findById(reader_id);
     if (!reader) {
       throw new ApiError(404, "Không tìm thấy bạn đọc");
     }
 
     //Kiểm tra sách theo ObjectId
-    const book = await Book.findById(bookId);
+    const book = await Book.findById(book_id);
     if (!book) {
       throw new ApiError(404, "Không tìm thấy sách");
     }
@@ -31,7 +31,7 @@ const BorrowRecordService = {
       quantity,
       borrowDate: data.borrowDate,
       returnDate: data.returnDate,
-      status: data.status || "PENDING",
+      status: data.status || "pending",
     });
 
     //Trừ số lượng sách
@@ -46,8 +46,8 @@ const BorrowRecordService = {
 
   async findAll() {
     return await BorrowRecord.find()
-      .populate("reader", "name readerCode")
-      .populate("book", "bookCode title author");
+      .populate("reader", "name")
+      .populate("book", "title author");
   },
 
   async findById(id) {
@@ -76,11 +76,11 @@ const BorrowRecordService = {
     const record = await BorrowRecord.findById(id);
     if (!record) throw new ApiError(404, "Không tìm thấy bản ghi mượn");
 
-    if (record.status === "returned") {
+    if (record.status === "Returned") {
       throw new ApiError(400, "Sách đã được trả trước đó");
     }
 
-    record.status = "returned";
+    record.status = "Returned";
     record.returnDate = new Date();
     await record.save();
 

@@ -76,7 +76,12 @@ const routes = [
     path: "/books/edit/:id",
     name: "book.edit",
     component: () => import("../views/shared/BookEdit.vue"),
-  }
+  },
+  {
+    path: "/borrows/add/:id",
+    name: "borrow.add",
+    component: () => import("../views/shared/BorrowAdd.vue"),
+  },
 ];
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

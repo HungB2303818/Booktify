@@ -5,10 +5,7 @@ class MongoDB {
     if (this.connection) return this.connection;
 
     try {
-      this.connection = await mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      this.connection = await mongoose.connect(uri);
       return this.connection;
     } catch (error) {
       process.exit(1);

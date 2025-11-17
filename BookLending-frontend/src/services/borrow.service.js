@@ -1,7 +1,7 @@
 import ApiClient from "./api.service";
 
 class BorrowService {
-  constructor(baseUrl = "/api/books") {
+  constructor(baseUrl = "/api/borrowrecords") {
     this.api = ApiClient(baseUrl);
   }
 
