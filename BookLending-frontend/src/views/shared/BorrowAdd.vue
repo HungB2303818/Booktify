@@ -19,7 +19,7 @@ const router = useRouter();
 const user_id = computed(() => localStorage.getItem("id"));
 const role = computed(() => localStorage.getItem("role"));
 const book_id = route.params.id;
-const book = ref([]);
+const book = ref({});
 const quantity = ref(1);
 
 const { handleSubmit } = useForm({

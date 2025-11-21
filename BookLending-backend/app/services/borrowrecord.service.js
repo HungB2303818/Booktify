@@ -46,8 +46,8 @@ const BorrowRecordService = {
 
   async findAll() {
     return await BorrowRecord.find()
-      .populate("reader", "name")
-      .populate("book", "title author");
+      .populate("reader_id", "name") // đúng field trong schema
+      .populate("book_id", "title author") // đúng field trong schema
   },
 
   async findById(id) {

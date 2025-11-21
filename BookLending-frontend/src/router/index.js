@@ -50,7 +50,7 @@ const routes = [
   {
     path: "/borrowrecords",
     name: "borrowrecords",
-    component: () => import("../views/shared/BorrowRecordList.vue"),
+    component: () => import("../views/shared/BorrowList.vue"),
   },
   {
     path: "/users",
