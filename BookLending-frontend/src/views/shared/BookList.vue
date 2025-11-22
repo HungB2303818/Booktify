@@ -44,10 +44,8 @@ const goToAddBook = () => {
 
 <template>
   <div class="flex flex-col min-h-screen bg-zinc-100">
-    <div class="flex-grow container mx-auto px-4 py-8">
-      <!-- Tiêu đề + Thanh tìm kiếm -->
-
-      <div class="flex flex-col justify-end gap-2 w-full md:w-1/3 mb-4">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex justify-end gap-2 w-full md:w-1/3 mb-4">
         <input
           v-model="searchQuery"
           type="text"
@@ -58,7 +56,7 @@ const goToAddBook = () => {
 
       <!-- Lưới hiển thị sách -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mx-8"
       >
         <BookCard
           v-for="book in filteredBooks"

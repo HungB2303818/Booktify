@@ -20,11 +20,20 @@ class BookService {
   }
 
   async update(id, data) {
-    const publisher = await Publisher.findOne({ name: data.publisher });
-    if (!publisher) throw new ApiError(404, "Không tìm thấy nhà xuất bản");
-    const book = await Book.findByIdAndUpdate(id, data, { new: true });
-    if (!book) throw new ApiError(404, "Không tìm thấy sách để cập nhật");
+    try{
+    const book = await Book.findByIdAndUpdate(
+      id,
+      { $set: data },
+      { new: true, runValidators: true }
+    )
+      .populate("book_id")
+      .populate("reader_id")
+      .populate("employee_id");;
     return book;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   async delete(id) {

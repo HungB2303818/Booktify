@@ -26,16 +26,14 @@ const BorrowRecordService = {
 
     //Tạo phiếu mượn
     const record = new BorrowRecord({
-      reader: reader._id,
-      book: book._id,
-      quantity,
+      reader_id: reader._id,
+      book_id: book._id,
+      quantity: quantity,
       borrowDate: data.borrowDate,
       returnDate: data.returnDate,
       status: data.status || "pending",
     });
 
-    //Trừ số lượng sách
-    book.quantity -= quantity;
     await book.save();
 
     //Lưu vào DB
@@ -46,8 +44,8 @@ const BorrowRecordService = {
 
   async findAll() {
     return await BorrowRecord.find()
-      .populate("reader_id", "name") // đúng field trong schema
-      .populate("book_id", "title author") // đúng field trong schema
+      .populate("reader_id", "name")
+      .populate("book_id", "title author");
   },
 
   async findById(id) {
@@ -59,11 +57,20 @@ const BorrowRecordService = {
   },
 
   async update(id, data) {
-    const updated = await BorrowRecord.findByIdAndUpdate(id, data, {
-      new: true,
-    });
-    if (!updated) throw new ApiError(404, "Không tìm thấy bản ghi để cập nhật");
-    return updated;
+    try {
+      const updated = await BorrowRecord.findByIdAndUpdate(
+        id,
+        { $set: data },
+        {
+          new: true,
+        }
+      );
+
+      return updated;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   },
 
   async delete(id) {

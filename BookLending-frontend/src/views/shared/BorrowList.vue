@@ -25,35 +25,54 @@ onMounted(fetchBorrows);
 </script>
 
 <template>
-  <div class="p-4">
-
-    <!-- LOADING -->
-    <div v-if="loading" class="text-gray-600">Đang tải...</div>
-
+  <div class="p-4 w-screen h-screen bg-zinc-100 mx-auto">
     <!-- TABLE LIST -->
-    <div v-else class="overflow-x-auto">
-      <table class="w-full">
-        <thead class="bg-blue-600">
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+      <table class="min-w-full divide-y divide-gray-300">
+        <thead class="bg-content-neutral">
           <tr>
-            <th class="w-[140px] px-6 py-3 text-left text-xs uppercase tracking-wider text-white">Người mượn</th>
-            <th class="w-[220px] px-6 py-3 text-left text-xs uppercase tracking-wider text-white">Sách</th>
-            <th class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider text-white">Ngày mượn</th>
-            <th class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider text-white">Ngày trả</th>
-            <th class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider text-white">Trạng thái</th>
-            <th class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider text-white">Thao tác</th>
+            <th
+              class="w-[140px] px-6 py-3 text-left text-xs uppercase tracking-wider"
+            >
+              Người mượn
+            </th>
+            <th
+              class="w-[220px] px-6 py-3 text-left text-xs uppercase tracking-wider"
+            >
+              Sách
+            </th>
+            <th
+              class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider"
+            >
+              Ngày mượn
+            </th>
+            <th
+              class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider"
+            >
+              Ngày trả
+            </th>
+            <th
+              class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider"
+            >
+              Trạng thái
+            </th>
+            <th
+              class="w-[130px] px-6 py-3 text-left text-xs uppercase tracking-wider"
+            >
+              Thao tác
+            </th>
           </tr>
         </thead>
 
-        <tbody>
-              <BorrowCard
-                v-for="borrow in borrows"
-                :key="borrow._id"
-                :borrow="borrow"
-                @fetchBorrows="fetchBorrows"
-              />
+        <tbody class="divide-y divide-gray-200 bg-white">
+          <BorrowCard
+            v-for="borrow in borrows"
+            :key="borrow._id"
+            :borrow="borrow"
+            @fetchBorrows="fetchBorrows"
+          />
         </tbody>
       </table>
     </div>
-
   </div>
 </template>

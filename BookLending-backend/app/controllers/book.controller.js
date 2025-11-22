@@ -46,7 +46,7 @@ exports.update = async (req, res, next) => {
     if (!updatedBook) {
       return next(new ApiError(404, "Book not found"));
     }
-    return res.json(updatedBook);
+    return res.send(updatedBook);
   } catch (error) {
     console.error(error);
     return next(new ApiError(500, "Error updating book"));

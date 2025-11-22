@@ -68,7 +68,7 @@ exports.update = async (req, res, next) => {
 // [DELETE] /api/borrowrecords/:id
 exports.delete = async (req, res, next) => {
   try {
-    const record = await borrowrecordService.deleteBorrowRecord(req.params.id);
+    const record = await borrowrecordService.delete(req.params.id);
     if (!record) {
       return next(new ApiError(404, "Không tìm thấy bản ghi mượn sách để xóa"));
     }

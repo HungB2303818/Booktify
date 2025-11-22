@@ -37,7 +37,8 @@ const handleCreateBorrow = handleSubmit(async () => {
       reader_id: user_id.value,
       book_id: book_id,
       returnDate: returnDate.value,
-      quantity: quantity.value
+      quantity: quantity.value,
+      employee_id: null,
     };
 
     await borrowService.createBorrow(data);
