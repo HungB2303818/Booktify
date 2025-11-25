@@ -26,7 +26,7 @@ const handleApproveBook = async (borrow_id) => {
       status: "borrowing",
     });
     await bookService.updateBook(borrow.book_id?._id, {
-      quantity: borrow.book_id?.quantity - 1
+      quantity: borrow.book_id?.quantity - 1,
     });
     emit("fetchBorrows");
     push.success("Duyệt sách thành công");
@@ -60,7 +60,7 @@ const handleRejectBook = async (borrow_id) => {
       return;
     }
     await borrowService.updateBorrow(borrow._id, {
-      employee_id: employee_id.value,
+      employee_id: staff_id.value,
     });
     await borrowService.updateBorrow(borrow._id, { status: "rejected" });
     push.success("Từ chối duyệt sách thành công");
@@ -85,9 +85,11 @@ const handleReturnBook = async (borrow_id) => {
 };
 const handleDeleteBorrow = async (borrow_id) => {
   try {
-    await borrowService.deleteBorrow(borrow_id);
-    push.success("Xóa đơn mượn thành công");
-    emit("fetchBorrows");
+    if (confirm("Bạn có chắc chắn muốn xóa đơn mượn này không?")) {
+      await borrowService.deleteBorrow(borrow_id);
+      push.success("Xóa đơn mượn thành công");
+      emit("fetchBorrows");
+    }
   } catch (error) {
     console.log(error);
     push.error("Đã xảy ra lỗi khi xóa đơn mượn");
@@ -96,7 +98,8 @@ const handleDeleteBorrow = async (borrow_id) => {
 const statusConfig = {
   pending: {
     label: "Chờ duyệt",
-    class: "px-3 py-1 border bg-amber-100 text-amber-700 font-medium",
+    class:
+      "px-2 py-[2px] rounded-xl bg-amber-100 text-amber-700 font-medium text-sm",
     actions: {
       approve: true,
       reject: true,
@@ -121,7 +124,8 @@ const statusConfig = {
 
   returnpending: {
     label: "Chờ duyệt trả",
-    class: "px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-medium",
+    class:
+      "px-3 py-[2px] rounded-xl bg-amber-100 text-amber-700 font-medium text-sm",
     actions: {
       approveReturn: true,
       reject: false,
@@ -133,7 +137,8 @@ const statusConfig = {
 
   returned: {
     label: "Đã trả",
-    class: "inline-flex rounded-full px-2 text-xs font-semibold leading-5 bg-green-100 text-green-800",
+    class:
+      "px-3 py-[2px] rounded-xl font-medium text-sm bg-green-100 text-green-800",
     actions: {
       delete: true,
     },
@@ -141,7 +146,8 @@ const statusConfig = {
 
   rejected: {
     label: "Từ chối",
-    class: "px-3 py-1 rounded-full bg-red-100 text-red-700 font-medium",
+    class:
+      "px-3 py-[2px] rounded-xl bg-red-100 text-red-700 font-medium text-sm",
     actions: {
       delete: true,
     },
@@ -166,20 +172,41 @@ const currentStatus = computed(() => {
     }
   );
 });
+
+onMounted(() => {
+  console.log("Borrow Debug:", borrow);
+  console.log("Book ID:", borrow?.book_id?._id);
+  console.log("Quantity:", borrow?.book_id?.quantity);
+});
 </script>
 
 <template>
   <tr>
-    <!-- Người mượn (staff mới thấy) -->
+    <!-- Người mượn -->
     <td class="whitespace-nowrap px-6 py-4 text-xl font-bold">
       {{ borrow.reader_id?.name || "Không xác định" }}
     </td>
 
     <!-- Tựa sách -->
     <td
-      class="min-w-[150px] max-w-[220px] px-6 py-4 text-sm text-black font-bold"
+      class="min-w-[150px] max-w-[220px] px-6 py-4 text-sm text-black font-bold flex items-center gap-3"
     >
-      {{ borrow.book_id?.title || "Không xác định" }}
+      <img
+        v-if="borrow.book_id?.image"
+        :src="borrow.book_id.image"
+        alt="Book cover"
+        class="w-10 h-14 object-cover rounded shadow"
+      />
+
+      <div class="flex flex-col">
+        <span class="font-bold">
+          {{ borrow.book_id?.title || "Không xác định" }}
+        </span>
+
+        <span class="text-gray-600 text-xs mt-1">
+          {{ borrow.book_id?.author || "Không rõ tác giả" }}
+        </span>
+      </div>
     </td>
 
     <!-- Ngày mượn -->
@@ -201,25 +228,27 @@ const currentStatus = computed(() => {
     </td>
 
     <!-- Trạng thái -->
-    <td class="flex justify-center item-center whitespace-nowrap px-6 py-4" :class="currentStatus.class">
-      {{ currentStatus.label }}
+    <td class="whitespace-nowrap px-6 py-4 text-start align-middle">
+      <span :class="currentStatus.class" class="inline-block">
+        {{ currentStatus.label }}
+      </span>
     </td>
 
-    <!--staff-->
-    <td class="whitespace-nowrap px-6 py-4 text-sm font-bold cursor-pointer">
-      <div v-if="role === 'staff'" class="mt-4 space-y-2">
+    <td class="px-6 py-4 text-start align-middle">
+      <!--staff-->
+      <div v-if="role === 'staff'" class="flex mt-4 gap-3 ">
         <button
           v-if="currentStatus.actions.approve"
           @click="handleApproveBook(borrow._id)"
-          class="text-green-600 transition-all hover:text-green-900"
+          class="text-green-600 transition-all hover:text-green-900 cursor-pointer"
         >
-          Duyệt sách
+          Duyệt
         </button>
 
         <button
           v-if="currentStatus.actions.reject"
           @click="handleRejectBook(borrow._id)"
-          class="text-red-600 transition-all hover:text-red-900"
+          class="text-red-600 transition-all hover:text-red-900 cursor-pointer"
         >
           Từ chối
         </button>
@@ -227,9 +256,16 @@ const currentStatus = computed(() => {
         <button
           v-if="currentStatus.actions.approveReturn"
           @click="handleApproveReturnBook(borrow._id)"
-          class="text-purple-400 transition-all hover:text-purple-900"
+          class="text-purple-400 transition-all hover:text-purple-900 cursor-pointer"
         >
           Duyệt trả sách
+        </button>
+        <button
+          v-if="currentStatus.actions.delete"
+          @click="handleDeleteBorrow(borrow._id)"
+          class="text-l font-semibold text-red-600 hover:text-red-800 transition-colors cursor-pointer"
+        >
+          Xóa
         </button>
       </div>
 
@@ -238,21 +274,15 @@ const currentStatus = computed(() => {
         <button
           v-if="currentStatus.actions.returnpending"
           @click="handleReturnBook(borrow._id)"
-          class="btn btn-success w-full text-white"
+          class="text-green-600 font-semibold transition-all hover:text-green-900 cursor-pointer"
         >
           Trả sách
         </button>
-
         <button
-          v-else
-          disabled
-          class="btn opacity-50 cursor-not-allowed"
-        >
-          Trả sách
-        </button>
-        <button v-if="currentStatus.actions.delete"
+          v-if="currentStatus.actions.delete"
           @click="handleDeleteBorrow(borrow._id)"
-          class="btn btn-error rounded-full  w-[40px] text-white">
+          class="text-l font-semibold text-red-600 hover:text-red-800 transition-colors cursor-pointer"
+        >
           Xóa
         </button>
       </div>

@@ -3,7 +3,7 @@ const Publisher = require("../models/publisher.model");
 const ApiError = require("../api-error");
 class BookService {
   async create(data) {
-    const publisher = await Publisher.findOne({name:data.publisher});
+    const publisher = await Publisher.findOne({ name: data.publisher });
     if (!publisher) throw new ApiError(404, "Không tìm thấy nhà xuất bản");
     const book = new Book(data);
     return await book.save();
@@ -20,16 +20,13 @@ class BookService {
   }
 
   async update(id, data) {
-    try{
-    const book = await Book.findByIdAndUpdate(
-      id,
-      { $set: data },
-      { new: true, runValidators: true }
-    )
-      .populate("book_id")
-      .populate("reader_id")
-      .populate("employee_id");;
-    return book;
+    try {
+      const book = await Book.findByIdAndUpdate(
+        id,
+        { $set: data },
+        { new: true, runValidators: true }
+      );
+      return book;
     } catch (error) {
       console.error(error);
       throw error;
@@ -41,6 +38,6 @@ class BookService {
     if (!book) throw new Error("Không tìm thấy sách để xóa");
     return book;
   }
-};
+}
 
 module.exports = new BookService();

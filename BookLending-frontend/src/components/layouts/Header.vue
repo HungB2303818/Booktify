@@ -30,39 +30,33 @@ const gotoBorrowRecords = () => {
     </div>
 
     <div class="navbar-center hidden lg:flex">
-      <ul class="menu menu-horizontal px-1 text-base">
+      <ul class="menu menu-horizontal px-1 text-base gap-6">
         <!-- STAFF MENU-->
         <template v-if="role === 'staff'">
           <li>
             <RouterLink
               to="/books"
-              class="text-base hover:font-bold hover:underline"
+              class="text-base font-medium hover:font-bold"
               >Danh mục sách</RouterLink
             >
           </li>
           <li>
-            <RouterLink
-              to="/borrowrecords"
-              class="text-base hover:font-bold hover:underline"
+            <RouterLink to="/borrowrecords" class="text-base hover:font-bold"
               >Đơn mượn sách</RouterLink
             >
           </li>
           <li>
-            <RouterLink
-              to="/publishers"
-              class="text-base hover:font-bold hover:underline"
+            <RouterLink to="/publishers" class="text-base hover:font-bold"
               >Nhà xuất bản</RouterLink
             >
           </li>
           <li>
-            <RouterLink
-              to="/users"
-              class="text-base hover:font-bold hover:underline"
+            <RouterLink to="/users" class="text-base hover:font-bold"
               >Người dùng</RouterLink
             >
           </li>
           <li>
-            <a class="text-base hover:font-bold hover:underline">Nhân viên</a>
+            <a class="text-base hover:font-bold">Nhân viên</a>
           </li>
         </template>
         <!-- USER MENU -->
@@ -84,7 +78,7 @@ const gotoBorrowRecords = () => {
       <template v-if="!username">
         <RouterLink
           to="/user/login"
-          class="btn btn- px-4 text-base mr-2 hover:scale-[1.01] cursor-pointer"
+          class="px-4 py-1 rounded-md bg-white text-blue-600 font-semibold hover:bg-gray-100 transition"
         >
           Đăng Nhập
         </RouterLink>
@@ -110,44 +104,41 @@ const gotoBorrowRecords = () => {
         </div>
 
         <div class="dropdown dropdown-end">
-  <label
-    tabindex="0"
-    class="btn btn-ghost normal-case text-base font-bold text-base-content"
-  >
-    {{ username }}
-    <svg
-      class="ml-2 h-4 w-4 inline-block text-base-content"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="2"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </label>
+          <label
+            tabindex="0"
+            class="btn btn-ghost normal-case text-base font-bold"
+          >
+            {{ username }}
+            <svg
+              class="ml-2 h-4 w-4 inline-block"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </label>
 
-  <ul
-    tabindex="0"
-    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-1"
-  >
-    <li>
-      <RouterLink to="/user/profile" class="text-base-content">
-        Xem thông tin
-      </RouterLink>
-    </li>
-    <li>
-      <button @click="logOut" class="text-error">
-        Đăng xuất
-      </button>
-    </li>
-  </ul>
-</div>
-
+          <ul
+            tabindex="0"
+            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-1"
+          >
+            <li>
+              <RouterLink to="/user/profile" class="text-base-content">
+                Xem thông tin
+              </RouterLink>
+            </li>
+            <li>
+              <button @click="logOut" class="text-error">Đăng xuất</button>
+            </li>
+          </ul>
+        </div>
       </template>
       <!-- Đã đăng nhập - staff -->
       <template v-else-if="role === 'staff'">

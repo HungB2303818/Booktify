@@ -44,14 +44,14 @@ const BorrowRecordService = {
 
   async findAll() {
     return await BorrowRecord.find()
-      .populate("reader_id", "name")
-      .populate("book_id", "title author");
+      .populate("reader_id")
+      .populate("book_id");
   },
 
   async findById(id) {
     const record = await BorrowRecord.findById(id)
-      .populate("reader", "name email")
-      .populate("book", "title author");
+      .populate("reader_id")
+      .populate("book_id");
     if (!record) throw new ApiError(404, "Không tìm thấy bản ghi mượn");
     return record;
   },
@@ -61,9 +61,7 @@ const BorrowRecordService = {
       const updated = await BorrowRecord.findByIdAndUpdate(
         id,
         { $set: data },
-        {
-          new: true,
-        }
+        { new: true, runValidators: true }
       );
 
       return updated;
