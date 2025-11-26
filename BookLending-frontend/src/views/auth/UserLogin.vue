@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from "vue";
 import UserService from "@/services/user.service";
 import { useRouter } from "vue-router";
 import { useForm, useField } from "vee-validate";
 import { loginSchema } from "@/validations/login.validation";
 import { push } from "notivue";
+import { authRole, authUsername, authUserId } from "@/stores/auth";
 const userService = new UserService();
 const router = useRouter();
 const { handleSubmit } = useForm({
@@ -23,6 +23,9 @@ const handleUserLogin = handleSubmit(async () => {
       localStorage.setItem("username", response.data.user.username);
       localStorage.setItem("id", response.data.user.id);
       localStorage.setItem("role", "user");
+      authRole.value = "user";
+      authUsername.value = response.data.user.username;
+      authUserId.value = response.data.user.id;
       push.success("Đăng nhập thành công");
       router.push("/");
     } else {

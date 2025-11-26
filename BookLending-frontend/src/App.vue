@@ -7,6 +7,7 @@ import {
 } from "notivue";
 import { RouterView } from "vue-router";
 import Header from "./components/layouts/Header.vue";
+import Footer from "./components/layouts/Footer.vue"
 </script>
 
 <template>
@@ -20,4 +21,5 @@ import Header from "./components/layouts/Header.vue";
   </Notivue>
 
   <RouterView />
+  <Footer />
 </template>

@@ -1,11 +1,13 @@
 <script setup>
-import { computed, ref } from "vue";
+import { authRole, authUsername, authUserId } from "@/stores/auth";
 import { useAuth } from "@/logout/useAuth";
 import { useRouter } from "vue-router";
-const username = computed(() => localStorage.getItem("username"));
-const role = computed(() => localStorage.getItem("role"));
-const user_id = computed(() => localStorage.getItem("id"));
-const { logOut } = useAuth();
+
+const role = authRole;
+const username = authUsername;
+const user_id = authUserId;
+
+const { logOut } = useAuth(role, username, user_id);
 const router = useRouter();
 const gotoBorrowRecords = () => {
   const path =
@@ -15,6 +17,11 @@ const gotoBorrowRecords = () => {
 
   router.push(path);
 };
+window.addEventListener("storage", () => {
+  role.value = localStorage.getItem("role");
+  username.value = localStorage.getItem("username");
+  user_id.value = localStorage.getItem("id");
+});
 </script>
 
 <template>
@@ -36,27 +43,33 @@ const gotoBorrowRecords = () => {
           <li>
             <RouterLink
               to="/books"
-              class="text-base font-medium hover:font-bold"
+              class="text-base font-semibold hover:font-bold"
               >Danh mục sách</RouterLink
             >
           </li>
           <li>
-            <RouterLink to="/borrowrecords" class="text-base hover:font-bold"
+            <RouterLink
+              to="/borrowrecords"
+              class="text-base font-semibold hover:font-bold"
               >Đơn mượn sách</RouterLink
             >
           </li>
           <li>
-            <RouterLink to="/publishers" class="text-base hover:font-bold"
+            <RouterLink
+              to="/publishers"
+              class="text-base font-semibold hover:font-bold"
               >Nhà xuất bản</RouterLink
             >
           </li>
           <li>
-            <RouterLink to="/users" class="text-base hover:font-bold"
+            <RouterLink
+              to="/users"
+              class="text-base font-semibold hover:font-bold"
               >Người dùng</RouterLink
             >
           </li>
           <li>
-            <a class="text-base hover:font-bold">Nhân viên</a>
+            <a class="text-base font-semibold hover:font-bold">Nhân viên</a>
           </li>
         </template>
         <!-- USER MENU -->

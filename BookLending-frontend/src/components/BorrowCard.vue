@@ -203,7 +203,7 @@ onMounted(() => {
           {{ borrow.book_id?.title || "Không xác định" }}
         </span>
 
-        <span class="text-gray-600 text-xs mt-1">
+        <span class="text-gray-600 text-xs mt-1 font-medium">
           {{ borrow.book_id?.author || "Không rõ tác giả" }}
         </span>
       </div>
@@ -240,15 +240,15 @@ onMounted(() => {
         <button
           v-if="currentStatus.actions.approve"
           @click="handleApproveBook(borrow._id)"
-          class="text-green-600 transition-all hover:text-green-900 cursor-pointer"
+          class="text-green-600 transition-all hover:text-green-900 cursor-pointer underline"
         >
           Duyệt
         </button>
-
+        <span v-if="currentStatus.actions.approve && currentStatus.actions.reject" class="text-base-300">|</span>
         <button
           v-if="currentStatus.actions.reject"
           @click="handleRejectBook(borrow._id)"
-          class="text-red-600 transition-all hover:text-red-900 cursor-pointer"
+          class="text-red-600 transition-all hover:text-red-900 cursor-pointer underline"
         >
           Từ chối
         </button>
@@ -256,14 +256,14 @@ onMounted(() => {
         <button
           v-if="currentStatus.actions.approveReturn"
           @click="handleApproveReturnBook(borrow._id)"
-          class="text-purple-400 transition-all hover:text-purple-900 cursor-pointer"
+          class="text-purple-500 transition-all hover:text-purple-900 cursor-pointer underline"
         >
-          Duyệt trả sách
+          Duyệt trả
         </button>
         <button
           v-if="currentStatus.actions.delete"
           @click="handleDeleteBorrow(borrow._id)"
-          class="text-l font-semibold text-red-600 hover:text-red-800 transition-colors cursor-pointer"
+          class="font-medium text-red-600 hover:text-red-800 transition-colors cursor-pointer underline"
         >
           Xóa
         </button>
@@ -274,14 +274,14 @@ onMounted(() => {
         <button
           v-if="currentStatus.actions.returnpending"
           @click="handleReturnBook(borrow._id)"
-          class="text-green-600 font-semibold transition-all hover:text-green-900 cursor-pointer"
+          class="text-green-600 font-semibold transition-all hover:text-green-900 cursor-pointer underline"
         >
           Trả sách
         </button>
         <button
           v-if="currentStatus.actions.delete"
           @click="handleDeleteBorrow(borrow._id)"
-          class="text-l font-semibold text-red-600 hover:text-red-800 transition-colors cursor-pointer"
+          class="font-semibold text-red-600 hover:text-red-800 transition-colors cursor-pointer underline"
         >
           Xóa
         </button>

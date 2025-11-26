@@ -1,11 +1,10 @@
 <script setup>
-import { ref } from "vue";
 import StaffService from "@/services/staff.service";
 import { useRouter } from "vue-router";
 import { useForm, useField } from "vee-validate";
 import { loginSchema } from "@/validations/login.validation";
 import { push } from "notivue";
-
+import { authRole, authUsername, authUserId } from "@/stores/auth";
 const staffService = new StaffService();
 const router = useRouter();
 const { handleSubmit } = useForm({
@@ -24,9 +23,12 @@ const handleUserLogin = handleSubmit(async () => {
       localStorage.setItem("username", response.data.employee.username);
       localStorage.setItem("id", response.data.employee.id);
       localStorage.setItem("role", "staff");
+      authRole.value = "staff";
+      authUsername.value = response.data.employee.username;
+      authUserId.value = response.data.employee.id;
       push.success("Đăng nhập thành công");
       router.push("/");
-    }else{
+    } else {
       push.error("Đăng nhập thất bại, vui lòng thử lại");
     }
   } catch (error) {
@@ -44,7 +46,7 @@ const handleUserLogin = handleSubmit(async () => {
 </script>
 <template>
   <div class="bg-zinc-100 min-h-screen p-4 flex justify-center items-center">
-    <form @submit.prevent=" handleUserLogin ">
+    <form @submit.prevent="handleUserLogin">
       <fieldset
         class="w-96 bg-base-100 border-base-300 rounded-box border p-6 shadow"
       >
