@@ -43,7 +43,7 @@ const goToAddBook = () => {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen bg-zinc-100">
+  <div v-if="role==='staff'" class="flex flex-col min-h-screen bg-zinc-100">
     <div class="container mx-auto px-4 py-4">
       <div class="flex justify-end mx-8 my-2">
         <input

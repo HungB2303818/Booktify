@@ -41,36 +41,45 @@ const deleteBook = async () => {
   <div class="w-full flex justify-center bg-zinc-100 py-4 px-4 min-h-screen">
     <div class="w-full max-w-6xl rounded-xl">
       <!-- grid 2 cột -->
-      <div class="grid grid-cols-1 md:grid-cols-2 items-start gap-3 items-stretch">
+      <div
+        class="grid grid-cols-1 md:grid-cols-[1fr_2fr] items-start gap-3 items-stretch"
+      >
         <!-- Ảnh bìa -->
         <div class="flex flex-col items-center space-y-4 bg-white rounded-xl">
           <div class="p-4 rounded-lg">
             <img
               :src="book.image || defaultImage"
               alt="Bìa sách"
-              class="w-64 h-86 object-cover rounded-md"
+              class="w-48 h-63 object-cover rounded-md"
             />
           </div>
-          <div class="mb-2">
+          <div class="mb-2 flex gap-3">
+            <!-- Staff buttons -->
             <button
               v-if="role === 'staff'"
-              class="btn btn-warning"
               @click="goToEdit"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500 text-white hover:bg-yellow-600 active:scale-95 transition-all shadow-sm"
             >
+              <i class="fa-solid fa-pen-to-square text-sm"></i>
               Chỉnh sửa
             </button>
+
             <button
               v-if="role === 'staff'"
-              class="btn bg-red-600 text-white hover:bg-red-700"
               @click="deleteBook"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 active:scale-95 transition-all shadow-sm"
             >
+              <i class="fa-solid fa-trash text-sm"></i>
               Xóa
             </button>
+
+            <!-- User button -->
             <button
               v-else-if="role === 'user'"
-              class="btn btn-success"
               @click="gotoBorrow"
+              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 active:scale-95 transition-all shadow-sm"
             >
+              <i class="fa-solid fa-book-open text-sm"></i>
               Mượn sách
             </button>
           </div>
@@ -110,7 +119,7 @@ const deleteBook = async () => {
         <div class="col-span-2 bg-white p-6 rounded-lg shadow">
           <h2 class="text-2xl font-bold mb-6">Đánh giá sản phẩm</h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr] gap-6">
             <!-- ================== CỘT 1: ĐIỂM TRUNG BÌNH ================== -->
             <div class="flex flex-col items-center">
               <p class="text-5xl font-bold">
@@ -160,7 +169,9 @@ const deleteBook = async () => {
             </div>
 
             <!-- ================== CỘT 3: THÔNG BÁO VIẾT ĐÁNH GIÁ ================== -->
-            <div class="flex items-center justify-center text-gray-600">
+            <div
+              class="flex items-center justify-center text-gray-600 w-[300px]"
+            >
               <p>
                 Chỉ có thành viên mới có thể viết nhận xét. Vui lòng
                 <a href="#" class="text-blue-500 hover:underline">đăng nhập</a>

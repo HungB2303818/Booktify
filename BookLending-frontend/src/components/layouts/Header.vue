@@ -27,11 +27,11 @@ window.addEventListener("storage", () => {
 <template>
   <div class="sticky top-0 z-50 navbar bg-blue-700 shadow text-white h-[48px]">
     <!-- PHẦN TRÁI -->
-    <div v-if="role==='user'" class="navbar-start">
+    <div v-if="role!=='staff'" class="navbar-start">
       <!-- Logo -->
       <RouterLink
         to="/"
-        class="ml-2 text-base md:text-lg lg:text-xl font-bold cursor-pointer"
+        class="ml-2 text-base md:text-xl lg:text-2xl font-bold cursor-pointer"
         >Booktify</RouterLink
       >
     </div>
@@ -78,16 +78,6 @@ window.addEventListener("storage", () => {
             <a class="text-base rounded-xl font-semibold hover:font-bold">Nhân viên</a>
           </li>
         </template>
-        <!-- USER MENU -->
-        <template v-if="role === 'user'">
-          <li>
-            <RouterLink
-              to="/books"
-              class="text-base rounded-xl hover:font-bold hover:underline"
-              >Danh mục sách</RouterLink
-            >
-          </li>
-        </template>
       </ul>
     </div>
 
@@ -97,7 +87,8 @@ window.addEventListener("storage", () => {
       <template v-if="!username">
         <RouterLink
           to="/user/login"
-          class="px-4 py-1 rounded-md bg-white text-blue-600 font-semibold hover:bg-gray-100 transition"
+          class="px-5 py-2 bg-white text-black font-semibold rounded-full shadow 
+           hover:bg-gray-100 active:scale-95 transition"
         >
           Đăng Nhập
         </RouterLink>

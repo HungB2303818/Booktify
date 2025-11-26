@@ -7,6 +7,7 @@ import { createNotivue } from "notivue";
 import "notivue/notification.css";
 import "notivue/animations.css";
 import "notivue/notification-progress.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const app = createApp(App);
 const notivue = createNotivue({

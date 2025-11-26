@@ -1,8 +1,8 @@
 <script setup>
-import { useAuth } from '@/logout/useAuth';
+import { useAuth } from "@/logout/useAuth";
 import { ref, computed, onMounted } from "vue";
-import UserService from '@/services/user.service';
-import { useRouter } from 'vue-router';
+import UserService from "@/services/user.service";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 const { logOut } = useAuth();
@@ -21,12 +21,13 @@ onMounted(async () => {
   } catch (error) {
     console.log(error);
   }
-})
-
+});
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-base-200 px-4 py-10">
+  <div
+    class="min-h-screen flex items-center justify-center bg-base-200 px-4 py-10"
+  >
     <div class="card bg-base-100 shadow-xl w-full max-w-2xl">
       <div class="card-body">
         <div class="mb-4">
@@ -55,7 +56,11 @@ onMounted(async () => {
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-3">
             <dt class="font-semibold text-gray-900">Ngày sinh</dt>
             <dd class="text-gray-700 sm:col-span-2">
-              {{ user.birthdate ? new Date(user.birthdate).toLocaleDateString('vi-VN') : "Không xác định" }}
+              {{
+                user.birthdate
+                  ? new Date(user.birthdate).toLocaleDateString("vi-VN")
+                  : "Không xác định"
+              }}
             </dd>
           </div>
 
@@ -90,8 +95,9 @@ onMounted(async () => {
         <div class="card-actions justify-end mt-6">
           <button
             @click="goToUserProfileEdit(user_id)"
-            class="btn btn-neutral hover:scale-[1.02] transition-transform"
+            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 active:scale-95 transition-all duration-200"
           >
+            <i class="fa-solid fa-pen-to-square text-white text-sm"></i>
             Chỉnh sửa
           </button>
         </div>
