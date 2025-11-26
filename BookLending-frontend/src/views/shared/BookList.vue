@@ -44,13 +44,13 @@ const goToAddBook = () => {
 
 <template>
   <div class="flex flex-col min-h-screen bg-zinc-100">
-    <div class="container mx-auto px-4 py-8">
-      <div class="flex justify-end gap-2 w-full md:w-1/3 mb-4">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-end mx-8 my-2">
         <input
           v-model="searchQuery"
           type="text"
           placeholder="Tìm kiếm sách..."
-          class="input input-bordered w-full"
+          class="input input-bordered w-64"
         />
       </div>
 

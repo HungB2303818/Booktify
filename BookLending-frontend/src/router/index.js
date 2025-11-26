@@ -87,6 +87,11 @@ const routes = [
     name: "borrowrecord.detail",
     component: () => import("../views/shared/BorrowList.vue"),
   },
+  {
+    path: "/home/staff",
+    name: "home.staff",
+    component: () => import("../views/shared/HomeStaff.vue")
+  }
 ];
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

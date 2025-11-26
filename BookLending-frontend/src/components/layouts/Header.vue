@@ -25,9 +25,9 @@ window.addEventListener("storage", () => {
 </script>
 
 <template>
-  <div class="navbar bg-blue-700 shadow text-white">
+  <div class="sticky top-0 z-50 navbar bg-blue-700 shadow text-white h-[48px]">
     <!-- PHẦN TRÁI -->
-    <div class="navbar-start">
+    <div v-if="role==='user'" class="navbar-start">
       <!-- Logo -->
       <RouterLink
         to="/"
@@ -35,7 +35,13 @@ window.addEventListener("storage", () => {
         >Booktify</RouterLink
       >
     </div>
-
+    <div v-else class="navbar-start">
+      <RouterLink
+        to="/home/staff"
+        class="ml-2 text-base md:text-lg lg:text-xl font-bold cursor-pointer"
+        >Booktify</RouterLink
+      >
+    </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1 text-base gap-6">
         <!-- STAFF MENU-->
@@ -43,33 +49,33 @@ window.addEventListener("storage", () => {
           <li>
             <RouterLink
               to="/books"
-              class="text-base font-semibold hover:font-bold"
+              class="text-base rounded-xl font-semibold hover:font-bold"
               >Danh mục sách</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/borrowrecords"
-              class="text-base font-semibold hover:font-bold"
+              class="text-base rounded-xl font-semibold hover:font-bold"
               >Đơn mượn sách</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/publishers"
-              class="text-base font-semibold hover:font-bold"
+              class="text-base rounded-xl font-semibold hover:font-bold"
               >Nhà xuất bản</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/users"
-              class="text-base font-semibold hover:font-bold"
+              class="text-base rounded-xl font-semibold hover:font-bold"
               >Người dùng</RouterLink
             >
           </li>
           <li>
-            <a class="text-base font-semibold hover:font-bold">Nhân viên</a>
+            <a class="text-base rounded-xl font-semibold hover:font-bold">Nhân viên</a>
           </li>
         </template>
         <!-- USER MENU -->
@@ -77,7 +83,7 @@ window.addEventListener("storage", () => {
           <li>
             <RouterLink
               to="/books"
-              class="text-base hover:font-bold hover:underline"
+              class="text-base rounded-xl hover:font-bold hover:underline"
               >Danh mục sách</RouterLink
             >
           </li>
