@@ -43,78 +43,63 @@ const goToAddBook = () => {
 
 <template>
   <template v-if="role !== 'staff'">
-    <div class="py-6 bg-white text-center">
-      <h2 class="text-2xl md:text-3xl font-semibold text-gray-800">
-        <span class="text-blue-600 font-bold">Booktify</span> – Mượn sách nhanh,
-        mở rộng tri thức.
-      </h2>
-    </div>
-    <div class="flex justify-center mt-4">
-      <div
-        class="carousel h-[224px] max-w-6xl mx-auto rounded-xl shadow-lg overflow-hidden"
-      >
-        <div id="slide1" class="carousel-item relative w-full">
-          <img src="/img/banner.webp" class="w-full" />
-          <div
-            class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"
-          >
-            <a href="#slide4" class="btn btn-circle">❮</a>
-            <a href="#slide2" class="btn btn-circle">❯</a>
-          </div>
-        </div>
-        <div id="slide2" class="carousel-item relative w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-            class="w-full"
-          />
-          <div
-            class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"
-          >
-            <a href="#slide1" class="btn btn-circle">❮</a>
-            <a href="#slide3" class="btn btn-circle">❯</a>
-          </div>
-        </div>
-        <div id="slide3" class="carousel-item relative w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-            class="w-full"
-          />
-          <div
-            class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"
-          >
-            <a href="#slide2" class="btn btn-circle">❮</a>
-            <a href="#slide4" class="btn btn-circle">❯</a>
-          </div>
-        </div>
-        <div id="slide4" class="carousel-item relative w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-            class="w-full"
-          />
-          <div
-            class="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between"
-          >
-            <a href="#slide3" class="btn btn-circle">❮</a>
-            <a href="#slide1" class="btn btn-circle">❯</a>
-          </div>
-        </div>
+    <section class="py-16 bg-white text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+        Mượn sách nhanh – Mở rộng tri thức.
+      </h1>
+      <p class="mt-3 text-gray-600 max-w-2xl mx-auto text-lg">
+        Khám phá hàng ngàn đầu sách thuộc mọi thể loại, từ kinh điển đến hiện
+        đại, tất cả đều trong tầm tay bạn.
+      </p>
+
+      <div class="mt-6 flex justify-center gap-4">
+        <button
+          class="px-6 py-3 rounded-lg bg-blue-600 text-white font-medium shadow hover:bg-blue-700 transition"
+        >
+          Khám phá sách
+        </button>
+        <button v-if="role===''"
+          class="px-6 py-3 rounded-lg bg-gray-100 text-gray-800 font-medium shadow hover:bg-gray-200 transition"
+        >
+          Đăng ký ngay
+        </button>
       </div>
-    </div>
+    </section>
+    <section class="px-4 mb-24">
+      <div class="max-w-6xl mx-auto flex gap-4 overflow-x-auto scrollbar-hide">
+        <img
+          src="/img/banner.webp"
+          class="rounded-xl shadow-lg h-40 w-72 object-cover flex-shrink-0"
+        />
+        <img
+          src="/img/lrc1.webp"
+          class="rounded-xl shadow-lg h-40 w-72 object-cover flex-shrink-0"
+        />
+        <img
+          src="/img/lrc2.webp"
+          class="rounded-xl shadow-lg h-40 w-72 object-cover flex-shrink-0"
+        />
+        <img
+          src="/img/t3_may_tinh_2.jpg"
+          class="rounded-xl shadow-lg h-40 w-72 object-cover flex-shrink-0"
+        />
+      </div>
+    </section>
   </template>
   <div class="flex flex-col min-h-screen bg-zinc-100">
     <div class="container mx-auto px-4 py-4">
-      <div class="flex justify-end mx-8 my-2">
+      <div class="flex justify-center mb-16 mt-6">
         <input
           v-model="searchQuery"
           type="text"
-          placeholder="Tìm kiếm sách..."
-          class="input input-bordered w-64"
+          placeholder="Tìm kiếm sách, tác giả..."
+          class="w-full max-w-2xl px-6 py-3 rounded-full shadow bg-white border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
         />
       </div>
 
       <!-- Lưới hiển thị sách -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mx-8"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8"
       >
         <BookCard
           v-for="book in filteredBooks"
@@ -153,5 +138,12 @@ const goToAddBook = () => {
   100% {
     transform: translateX(-50%);
   }
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

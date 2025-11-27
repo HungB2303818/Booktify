@@ -16,14 +16,14 @@ const defaultImage = computed(() => "/img/harry.jpg");
 <template>
   <div
     @click="$emit('view-detail', book._id)"
-    class="flex flex-col shadow rounded-lg overflow-hidden hover:shadow-lg hover:scale-[1.01] transition bg-base-100 cursor-pointer"
+    class="flex flex-col bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
   >
     <!-- Ảnh bìa sách -->
-    <div class="relative">
+    <div class="w-full flex justify-center py-4 bg-zinc-100">
       <img
         :src="book.image || defaultImage"
         alt="Book cover"
-        class="w-full h-56 object-cover"
+        class="h-56 object-cover rounded-md shadow-sm"
       />
     </div>
 
@@ -32,13 +32,18 @@ const defaultImage = computed(() => "/img/harry.jpg");
       <div>
         <h2 class="font-semibold text-lg truncate">{{ book.title }}</h2>
         <p class="text-sm text-gray-600">
-          <span class="font-bold">Tác giả: </span> {{ book.author }}
+          <span class="font-bold"></span> {{ book.author }}
         </p>
-        <p class="text-sm text-gray-600">
-          <span class="font-bold">Nhà xuất bản: </span> {{ book.publisher }}
-        </p>
-        <p class="my-2 text-xl text-red-700 font-semibold">{{ Number(book.price).toLocaleString("vi-VN") }} <span> đ</span></p>
+        <p class="mt-4 mb-2 text-base text-red-600 font-semibold">{{ Number(book.price).toLocaleString("vi-VN") }} <span> đ</span></p>
       </div>
+    </div>
+    <div class="px-4 pb-4">
+      <button
+        class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 cursor-pointer"
+        @click.stop="$emit('view-detail', book._id)"
+      >
+        Mượn ngay
+      </button>
     </div>
   </div>
 </template>

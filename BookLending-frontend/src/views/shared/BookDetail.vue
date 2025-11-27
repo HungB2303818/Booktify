@@ -45,8 +45,8 @@ const deleteBook = async () => {
         class="grid grid-cols-1 md:grid-cols-[1fr_2fr] items-start gap-3 items-stretch"
       >
         <!-- Ảnh bìa -->
-        <div class="flex flex-col items-center space-y-4 bg-white rounded-xl">
-          <div class="p-4 rounded-lg">
+        <div class="flex flex-col items-center space-y-4 bg-white rounded-xl shadow">
+          <div class="w-full flex justify-center py-4 bg-zinc-50">
             <img
               :src="book.image || defaultImage"
               alt="Bìa sách"
