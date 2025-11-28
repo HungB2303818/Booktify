@@ -12,7 +12,9 @@ class BorrowService {
   async getBorrowById(id) {
     return (await this.api.get(`/${id}`)).data;
   }
-
+  async getBorrowByUser(id){
+    return (await this.api.get(`/user/${id}`)).data;
+  }
   async createBorrow(data) {
     return (await this.api.post("/", data)).data;
   }

@@ -43,9 +43,7 @@ const BorrowRecordService = {
   },
 
   async findAll() {
-    return await BorrowRecord.find()
-      .populate("reader_id")
-      .populate("book_id");
+    return await BorrowRecord.find().populate("reader_id").populate("book_id");
   },
 
   async findById(id) {
@@ -54,6 +52,11 @@ const BorrowRecordService = {
       .populate("book_id");
     if (!record) throw new ApiError(404, "Không tìm thấy bản ghi mượn");
     return record;
+  },
+  async findByUser(reader_id) {
+    return await BorrowRecord.find({ reader_id })
+      .populate("reader_id")
+      .populate("book_id");
   },
 
   async update(id, data) {

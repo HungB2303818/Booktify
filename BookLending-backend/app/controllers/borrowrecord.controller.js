@@ -34,6 +34,19 @@ exports.findAll = async (req, res, next) => {
   }
 };
 
+// GET /api/borrowsrecords/user/:id
+exports.findByUser = async (req, res, next) => {
+  try {
+    const borrows = await borrowrecordService.findByUser(req.params.id);
+
+    res.send(borrows);
+  } catch (e) {
+    console.log(e);
+    next(new ApiError(500, "Lỗi khi lấy đơn mượn theo người dùng"));
+  }
+};
+
+
 // [GET] /api/borrowrecords/:id
 exports.findOne = async (req, res, next) => {
   try {

@@ -36,7 +36,6 @@ const routes = [
     name: "staffprofile",
     component: () => import("../views/staff/StaffProfile.vue"),
   },
-  // STAFF ROUTES
   {
     path: "/publishers",
     name: "publishers",
@@ -91,11 +90,31 @@ const routes = [
     path: "/home/staff",
     name: "home.staff",
     component: () => import("../views/shared/HomeStaff.vue")
+  },
+  {
+    path: "/aboutus",
+    name: "aboutus",
+    component: () => import("../views/shared/AboutUs.vue")
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: () => import("../views/shared/Contact.vue")
   }
 ];
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: "smooth",
+      };
+    }
+    return { top: 0 };
+  },
 });
 
 export default router;

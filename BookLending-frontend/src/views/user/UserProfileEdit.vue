@@ -1,7 +1,6 @@
 <script setup>
-import { useRouter } from "vue-router";
-import { useRoute } from "vue-router";
-import { computed, onMounted, ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { computed, onMounted } from "vue";
 import { push } from "notivue";
 import { userSchema } from "@/validations/user.validation";
 import UserService from "@/services/user.service";
@@ -12,44 +11,11 @@ const router = useRouter();
 const route = useRoute();
 const role = computed(() => localStorage.getItem("role"));
 
+const user_id = route.params.id;
+
 const { handleSubmit, resetForm } = useForm({
   validationSchema: userSchema,
 });
-
-const user_id = route.params.id;
-
-const handleUserProfileEdit = handleSubmit(async (values) => {
-  try {
-    await userService.updateUser(user_id, values);
-    push.success("Cập nhật thông tin người dùng thành công");
-    if (role.value === "staff") {
-      router.push("/users");
-    } else {
-      router.push("/user/profile");
-    }
-  } catch (error) {
-    console.log(error);
-    if (error.response.status === 400) {
-      push.error("Vui lòng điền đầy đủ thông tin");
-    } else if (error.response.status === 409) {
-      push.error("Tên đăng nhập đã tồn tại");
-    } else {
-      push.error("Đã xảy ra lỗi khi cập nhật thông tin người dùng");
-    }
-  }
-});
-
-const handleUserProfileDelete = async (user_id) => {
-  try {
-    if (confirm("Xác nhận xóa người dùng?")) {
-      await userService.deleteUser(user_id);
-      push.success("Xóa người dùng thành công");
-      router.push("/users");
-    }
-  } catch (error) {
-    push.error("Đã xảy ra lỗi khi xóa người dùng");
-  }
-};
 
 const { value: name, errorMessage: nameError } = useField("name");
 const { value: username, errorMessage: usernameError } = useField("username");
@@ -60,178 +26,233 @@ const { value: sex, errorMessage: sexError } = useField("sex");
 const { value: address, errorMessage: addressError } = useField("address");
 const { value: phone, errorMessage: phoneError } = useField("phone");
 
+const handleUserProfileEdit = handleSubmit(async (values) => {
+  try {
+    await userService.updateUser(user_id, values);
+    push.success("Cập nhật thông tin người dùng thành công");
+
+    if (role.value === "staff") {
+      router.push("/users");
+    } else {
+      router.push("/user/profile");
+    }
+  } catch (error) {
+    console.log(error);
+    if (error.response?.status === 400) {
+      push.error("Vui lòng điền đầy đủ thông tin");
+    } else if (error.response?.status === 409) {
+      push.error("Tên đăng nhập đã tồn tại");
+    } else {
+      push.error("Đã xảy ra lỗi khi cập nhật thông tin người dùng");
+    }
+  }
+});
+
+// ====== INIT VALUES ======
 onMounted(async () => {
   const user = await userService.getUser(user_id);
-  console.log();
+  console.log("USER DATA:", user);
   resetForm({
     values: {
-      name: user.name,
-      gender: user.gender,
-      address: user.address,
-      birthday: new Date(user.birthday).toISOString().slice(0, 10),
-      phone: user.phone,
-      username: user.username,
-      // password: userData.password
+      name: user.name || "",
+      username: user.username || "",
+      password: "",
+      birthdate: user.birthdate
+        ? new Date(user.birthdate).toISOString().slice(0, 10)
+        : "",
+      sex: user.sex === true ? true : user.sex === false ? false : null,
+      address: user.address || "",
+      phone: user.phone || "",
     },
   });
 });
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col">
-    <div class="flex justify-center items-center flex-grow">
-      <form @submit.prevent>
-        <fieldset
-          class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4 text-base shadow"
-        >
-          <legend class="fieldset-legend text-xl">Cập nhật người dùng</legend>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Tên -->
-            <div>
-              <label class="label font-medium" for="name">Tên</label>
-              <input
-                v-model="name"
-                type="text"
-                class="input input-bordered w-full"
-                id="name"
-                placeholder="Nhập tên"
-              />
-              <span class="text-sm text-red-600">{{ nameError }}</span>
-            </div>
+  <div class="min-h-screen bg-gray-100 px-4 py-10">
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-center mb-10">Chỉnh sửa thông tin</h1>
 
-            <!-- Ngày sinh -->
-            <div>
-              <label class="label font-medium" for="birthdate">Ngày sinh</label>
-              <input
-                v-model="birthdate"
-                type="date"
-                id="birthdate"
-                class="input input-bordered w-full"
-              />
-              <span class="text-sm text-red-600">{{ birthdateError }}</span>
-            </div>
+    <!-- Avatar -->
+    <div class="flex flex-col items-center mb-8">
+      <div
+        class="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden shadow"
+      >
+        <img v-if="avatar" :src="avatar" class="w-full h-full object-cover" />
+        <i v-else class="fa-regular fa-user text-5xl text-gray-500"></i>
+      </div>
+    </div>
 
-            <!-- Giới tính -->
-            <div class="md:col-span-2">
-              <label class="label font-medium">Giới tính</label>
-              <div class="flex gap-8 items-center pl-2">
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    v-model="sex"
-                    :value="true"
-                    type="radio"
-                    name="radio-1"
-                    class="radio"
-                  />
-                  <span>Nam</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input
-                    v-model="sex"
-                    :value="false"
-                    type="radio"
-                    name="radio-1"
-                    class="radio"
-                  />
-                  <span>Nữ</span>
-                </label>
-              </div>
-              <span class="text-sm text-red-600">{{ sexError }}</span>
-            </div>
-
-            <!-- Địa chỉ -->
-            <div class="md:col-span-2">
-              <label class="label font-medium">Địa chỉ</label>
-              <input
-                v-model="address"
-                type="text"
-                class="input input-bordered w-full"
-                placeholder="Nhập địa chỉ"
-              />
-              <span class="text-sm text-red-600">{{ addressError }}</span>
-            </div>
-
-            <!-- Số điện thoại -->
-            <div>
-              <label class="label font-medium">Số điện thoại</label>
-              <input
-                v-model="phone"
-                type="text"
-                class="input input-bordered w-full"
-                placeholder="Nhập số điện thoại"
-              />
-              <span class="text-sm text-red-600">{{ phoneError }}</span>
-            </div>
-
-            <!-- Tên đăng nhập -->
-            <div>
-              <label class="label font-medium" for="username"
-                >Tên đăng nhập</label
-              >
-              <input
-                v-model="username"
-                type="text"
-                class="input input-bordered w-full"
-                id="username"
-                placeholder="Nhập tên đăng nhập"
-              />
-              <span class="text-sm text-red-600">{{ usernameError }}</span>
-            </div>
-
-            <!-- Mật khẩu -->
-            <div class="md:col-span-2">
-              <label class="label font-medium" for="password">Mật khẩu</label>
-              <input
-                v-model="password"
-                type="password"
-                minlength="3"
-                class="input input-bordered w-full"
-                id="password"
-                placeholder="Nhập mật khẩu"
-              />
-              <span class="text-sm text-red-600">{{ passwordError }}</span>
-            </div>
+    <!-- FORM CARD -->
+    <div class="max-w-5xl mx-auto bg-white rounded-xl shadow p-8">
+      <form @submit.prevent class="space-y-6">
+        <!-- GRID FORM 2 COLUMNS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- TÊN -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-1">
+              <i class="fa-regular fa-user"></i>
+              Tên
+            </label>
+            <input
+              name="name"
+              v-model="name"
+              type="text"
+              class="input input-bordered w-full"
+              placeholder="Nhập tên"
+            />
+            <p class="text-sm text-red-600">{{ nameError }}</p>
           </div>
 
-          <template v-if="role === 'staff'">
-            <div class="grid grid-cols-2 gap-2">
-              <button
-                class="btn btn-neutral mt-4 hover:scale-[1.01] text-base"
-                @click="handleUserProfileEdit(user_id)"
-              >
-                Lưu thay đổi
-              </button>
-              <button
-                class="btn btn-neutral mt-4 hover:scale-[1.01] text-base"
-                @click="handleUserProfileDelete(user_id)"
-              >
-                Xóa
-              </button>
+          <!-- TÊN ĐĂNG NHẬP -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-1">
+              <i class="fa-solid fa-at"></i>
+              Tên đăng nhập
+            </label>
+            <input
+              name="username"
+              v-model="username"
+              type="text"
+              class="input input-bordered w-full"
+              placeholder="Nhập tên đăng nhập"
+            />
+            <p class="text-sm text-red-600">{{ usernameError }}</p>
+          </div>
+
+          <!-- NGÀY SINH -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-1">
+              <i class="fa-regular fa-calendar"></i>
+              Ngày sinh
+            </label>
+            <input
+              name="birthdate"
+              v-model="birthdate"
+              type="date"
+              class="input input-bordered w-full"
+            />
+            <p class="text-sm text-red-600">{{ birthdateError }}</p>
+          </div>
+
+          <!-- GIỚI TÍNH -->
+          <div>
+            <label class="font-medium flex items-center gap-2 mb-1">
+              <i class="fa-solid fa-people-group"></i>
+              Giới tính
+            </label>
+
+            <div class="flex items-center gap-6 mt-1">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  name="sex"
+                  v-model="sex"
+                  :value="true"
+                  type="radio"
+                  class="radio radio-primary"
+                />
+                Nam
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  name="sex"
+                  v-model="sex"
+                  :value="false"
+                  type="radio"
+                  class="radio radio-primary"
+                />
+                Nữ
+              </label>
+
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input
+                  name="sex"
+                  v-model="sex"
+                  :value="null"
+                  type="radio"
+                  class="radio radio-primary"
+                />
+                Khác
+              </label>
             </div>
-          </template>
-          <template v-else>
-            <div class="grid grid-cols-1 gap-2">
-              <button
-                class="btn btn-neutral mt-4 hover:scale-[1.01] text-base"
-                @click="handleUserProfileEdit(user_id)"
-              >
-                Lưu thay đổi
-              </button>
-            </div>
-          </template>
-          <span class="mt-4">
-            <strong class="hover:underline">
-              <template v-if="role === 'staff'">
-                <RouterLink to="/users" class="text-base">Quay lại</RouterLink>
-              </template>
-              <template v-else>
-                <RouterLink to="/user/profile" class="text-base"
-                  >Quay lại</RouterLink
-                >
-              </template>
-            </strong>
-          </span>
-        </fieldset>
+
+            <p class="text-sm text-red-600">{{ sexError }}</p>
+          </div>
+        </div>
+
+        <!-- ĐỊA CHỈ -->
+        <div>
+          <label class="font-medium flex items-center gap-2 mb-1">
+            <i class="fa-solid fa-location-dot"></i>
+            Địa chỉ
+          </label>
+          <input
+            name="address"
+            v-model="address"
+            type="text"
+            class="input input-bordered w-full"
+            placeholder="Nhập địa chỉ"
+          />
+          <p class="text-sm text-red-600">{{ addressError }}</p>
+        </div>
+
+        <!-- SỐ ĐIỆN THOẠI -->
+        <div>
+          <label class="font-medium flex items-center gap-2 mb-1">
+            <i class="fa-solid fa-phone"></i>
+            Số điện thoại
+          </label>
+          <input
+            name="phone"
+            v-model="phone"
+            type="text"
+            class="input input-bordered w-full"
+            placeholder="Nhập số điện thoại"
+          />
+          <p class="text-sm text-red-600">{{ phoneError }}</p>
+        </div>
+
+        <!-- PASSWORD -->
+        <div>
+          <label class="font-medium flex items-center gap-2 mb-1">
+            <i class="fa-solid fa-lock"></i>
+            Mật khẩu
+          </label>
+          <input
+            name="password"
+            v-model="password"
+            type="password"
+            class="input input-bordered w-full"
+            placeholder="Nhập mật khẩu mới"
+          />
+          <p class="text-sm text-red-600">{{ passwordError }}</p>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="flex justify-end gap-3 pt-4">
+          <RouterLink
+            v-if="role === 'staff'"
+            to="/users"
+            class="btn bg-gray-200 text-gray-700 hover:bg-gray-300"
+          >
+            Hủy
+          </RouterLink>
+          <RouterLink
+            v-else
+            to="/user/profile"
+            class="btn bg-gray-200 text-gray-700 hover:bg-gray-300"
+          >
+            Hủy
+          </RouterLink>
+
+          <button
+            class="btn bg-blue-600 text-white hover:bg-blue-700"
+            @click="handleUserProfileEdit(user_id)"
+          >
+            Lưu thay đổi
+          </button>
+        </div>
       </form>
     </div>
   </div>

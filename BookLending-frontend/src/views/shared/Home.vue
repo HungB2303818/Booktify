@@ -58,7 +58,7 @@ const goToAddBook = () => {
         >
           Khám phá sách
         </button>
-        <button v-if="role===''"
+        <button v-if="role!=='user' && role!=='staff'"
           class="px-6 py-3 rounded-lg bg-gray-100 text-gray-800 font-medium shadow hover:bg-gray-200 transition"
         >
           Đăng ký ngay
@@ -99,7 +99,7 @@ const goToAddBook = () => {
 
       <!-- Lưới hiển thị sách -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8"
+        id="books" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8"
       >
         <BookCard
           v-for="book in filteredBooks"

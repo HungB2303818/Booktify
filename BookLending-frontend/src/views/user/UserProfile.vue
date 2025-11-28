@@ -25,83 +25,123 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div
-    class="min-h-screen flex items-center justify-center bg-base-200 px-4 py-10"
-  >
-    <div class="card bg-base-100 shadow-xl w-full max-w-2xl">
-      <div class="card-body">
-        <div class="mb-4">
-          <h2 class="text-2xl font-bold">Thông tin người dùng</h2>
+  <div class="min-h-screen bg-gray-100 pt-10 px-4 pb-20">
+    <!-- AVATAR + NAME SECTION -->
+    <div class="flex flex-col items-center mb-10">
+      <!-- Avatar -->
+      <div class="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center shadow-inner">
+        <img
+          v-if="user.avatar"
+          :src="user.avatar"
+          alt="Avatar"
+          class="w-full h-full rounded-full object-cover"
+        />
+        <i v-else class="fa-regular fa-user text-5xl text-gray-500"></i>
+      </div>
+
+      <!-- Name -->
+      <h2 class="mt-4 text-2xl font-bold text-gray-900">
+        {{ user.name || "Người dùng" }}
+      </h2>
+
+      <!-- Username -->
+      <p class="text-gray-500 -mt-1">
+        @{{ user.username || "unknown" }}
+      </p>
+    </div>
+
+    <!-- PERSONAL INFO CARD -->
+    <div class="max-w-5xl mx-auto bg-white rounded-xl shadow px-8 py-6">
+      <h3 class="text-xl font-semibold mb-4">Thông tin cá nhân</h3>
+
+      <!-- GRID INFO (3 COLUMNS) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-2">
+
+        <!-- Tên -->
+        <div>
+          <div class="flex items-center gap-2 text-gray-500">
+            <i class="fa-regular fa-user"></i>
+            <span>Tên</span>
+          </div>
+          <p class="font-medium text-gray-900 mt-1">
+            {{ user.name || "Không xác định" }}
+          </p>
         </div>
 
-        <!-- Danh sách thông tin -->
-        <dl class="divide-y divide-base-300 text-base">
-          <!-- Họ tên -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-3">
-            <dt class="font-semibold text-gray-900">Tên</dt>
-            <dd class="text-gray-700 sm:col-span-2">
-              {{ user.name || "Không xác định" }}
-            </dd>
+        <!-- Tên đăng nhập -->
+        <div>
+          <div class="flex items-center gap-2 text-gray-500">
+            <i class="fa-solid fa-at"></i>
+            <span>Tên đăng nhập</span>
           </div>
-
-          <!-- Tên đăng nhập -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-3">
-            <dt class="font-semibold text-gray-900">Tên đăng nhập</dt>
-            <dd class="text-gray-700 sm:col-span-2">
-              {{ user.username || "Không xác định" }}
-            </dd>
-          </div>
-
-          <!-- Ngày sinh -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-3">
-            <dt class="font-semibold text-gray-900">Ngày sinh</dt>
-            <dd class="text-gray-700 sm:col-span-2">
-              {{
-                user.birthdate
-                  ? new Date(user.birthdate).toLocaleDateString("vi-VN")
-                  : "Không xác định"
-              }}
-            </dd>
-          </div>
-
-          <!-- Giới tính -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-3">
-            <dt class="font-semibold text-gray-900">Giới tính</dt>
-            <dd class="text-gray-700 sm:col-span-2">
-              <template v-if="user.sex === true">Nam</template>
-              <template v-else-if="user.sex === false">Nữ</template>
-              <template v-else>Không xác định</template>
-            </dd>
-          </div>
-
-          <!-- Địa chỉ -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-3">
-            <dt class="font-semibold text-gray-900">Địa chỉ</dt>
-            <dd class="text-gray-700 sm:col-span-2">
-              {{ user.address || "Không xác định" }}
-            </dd>
-          </div>
-
-          <!-- Số điện thoại -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 py-3">
-            <dt class="font-semibold text-gray-900">Số điện thoại</dt>
-            <dd class="text-gray-700 sm:col-span-2">
-              {{ user.phone || "Không xác định" }}
-            </dd>
-          </div>
-        </dl>
-
-        <!-- Nút chỉnh sửa -->
-        <div class="card-actions justify-end mt-6">
-          <button
-            @click="goToUserProfileEdit(user_id)"
-            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 active:scale-95 transition-all duration-200"
-          >
-            <i class="fa-solid fa-pen-to-square text-white text-sm"></i>
-            Chỉnh sửa
-          </button>
+          <p class="font-medium text-gray-900 mt-1">
+            @{{ user.username || "Không xác định" }}
+          </p>
         </div>
+
+        <!-- Ngày sinh -->
+        <div>
+          <div class="flex items-center gap-2 text-gray-500">
+            <i class="fa-regular fa-calendar"></i>
+            <span>Ngày sinh</span>
+          </div>
+          <p class="font-medium text-gray-900 mt-1">
+            {{
+              user.birthdate
+                ? new Date(user.birthdate).toLocaleDateString("vi-VN")
+                : "Không xác định"
+            }}
+          </p>
+        </div>
+
+        <!-- Giới tính -->
+        <div>
+          <div class="flex items-center gap-2 text-gray-500">
+            <i class="fa-solid fa-people-group"></i>
+            <span>Giới tính</span>
+          </div>
+          <p class="font-medium text-gray-900 mt-1">
+            <template v-if="user.sex === true">Nam</template>
+            <template v-else-if="user.sex === false">Nữ</template>
+            <template v-else>Không xác định</template>
+          </p>
+        </div>
+
+        <!-- Địa chỉ -->
+        <div>
+          <div class="flex items-center gap-2 text-gray-500">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Địa chỉ</span>
+          </div>
+          <p class="font-medium text-gray-900 mt-1">
+            {{ user.address || "Không xác định" }}
+          </p>
+        </div>
+
+        <!-- Số điện thoại -->
+        <div>
+          <div class="flex items-center gap-2 text-gray-500">
+            <i class="fa-solid fa-phone"></i>
+            <span>Số điện thoại</span>
+          </div>
+          <p class="font-medium text-gray-900 mt-1">
+            {{ user.phone || "Không xác định" }}
+          </p>
+        </div>
+
+      </div>
+
+      <!-- BUTTON -->
+      <div class="flex justify-end mt-8">
+        <button
+          @click="goToUserProfileEdit(user_id)"
+          class="flex items-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition active:scale-95"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+          Chỉnh sửa thông tin
+        </button>
       </div>
     </div>
   </div>
 </template>
+

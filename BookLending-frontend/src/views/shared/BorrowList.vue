@@ -2,19 +2,31 @@
 import { ref, onMounted } from "vue";
 import BorrowService from "@/services/borrow.service";
 import BorrowCard from "@/components/BorrowCard.vue";
+import { authUserId, authRole } from "@/stores/auth";
 import { push } from "notivue";
 
 const borrows = ref([]);
 const loading = ref(true);
+const role = authRole;      // "user" hoặc "staff"
+const userId = authUserId;
 
 const borrowService = new BorrowService();
+
 
 const fetchBorrows = async () => {
   try {
     loading.value = true;
-    borrows.value = await borrowService.getAllBorrows();
+
+    if (role.value === "staff") {
+      // STAFF → xem tất cả đơn mượn
+      borrows.value = await borrowService.getAllBorrows();
+    } else {
+      // USER → xem đơn mượn của chính họ
+      borrows.value = await borrowService.getBorrowByUser(userId.value);
+    }
+
   } catch (error) {
-    console.log(error);
+    console.error(error);
     push.error("Không thể tải danh sách đơn mượn");
   } finally {
     loading.value = false;
@@ -25,7 +37,7 @@ onMounted(fetchBorrows);
 </script>
 
 <template>
-  <div class="p-4 w-screen h-screen bg-zinc-100 mx-auto">
+  <div class="p-4 w-screen min-h-screen bg-zinc-100 mx-auto">
     <!-- TABLE LIST -->
     <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
       <table class="min-w-full divide-y divide-gray-300">

@@ -34,7 +34,7 @@ const defaultImage = computed(() => "/img/harry.jpg");
         <p class="text-sm text-gray-600">
           <span class="font-bold"></span> {{ book.author }}
         </p>
-        <p class="mt-4 mb-2 text-base text-red-600 font-semibold">{{ Number(book.price).toLocaleString("vi-VN") }} <span> đ</span></p>
+        <p class="mt-4 mb-2 text-base font-semibold">{{ Number(book.price).toLocaleString("vi-VN") }} <span> đ</span></p>
       </div>
     </div>
     <div class="px-4 pb-4">

@@ -1,83 +1,67 @@
 <script setup>
+import UserService from "../services/user.service";
 import { useRouter } from "vue-router";
+import { ref, computed, onMounted } from "vue";
+import { push } from "notivue";
+// Nhận props
+const { user } = defineProps(["user"]);
+const userService = new UserService();
+const emit = defineEmits(["fetchUsers"]);
 
-const router = useRouter();
-
-const props = defineProps({
-    user: {
-        type: Object,
-        required: true
+const handleDeleteUser = async (user_id) => {
+  try {
+    if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
+      await userService.deleteUser(user_id);
+      emit("fetchUsers");
+      push.success("Xóa đơn người dùng thành công");
     }
-});
-
-const goToEditUser = (user_id) => {
-    router.push({ name: "userprofile.edit", params: { id: user_id } });
+  } catch (error) {
+    console.log(error);
+    push.error("Đã xảy ra lỗi khi xóa người dùng");
+  }
 };
 </script>
 
 <template>
-    <div
-        class="flex flex-wrap flex-col shadow rounded-lg overflow-hidden hover:shadow-lg hover:scale-[1.001] transition">
-        <div class="flow-root">
-            <dl class="divide-y divide-gray-200 rounded border border-gray-200 text-sm">
-                <div class="grid grid-cols-2 p-2">
-                    <dt class="font-bold text-gray-900">Họ lót</dt>
+  <tr>
+    <!-- Họ và tên -->
+    <td class="whitespace-nowrap px-6 py-4 text-medium">
+      {{ user.name }}
+    </td>
 
-                    <dd class="text-gray-800 sm:col-span-2 truncate">{{ user.last_name || "Không xác định" }}</dd>
-                </div>
+    <!-- Tên đăng nhập -->
+    <td class="px-6 py-4 text-sm text-black font-bold">
+      {{ user.username }}
+    </td>
 
-                <div class="grid grid-cols-2 p-2">
-                    <dt class="font-bold text-gray-900">Tên</dt>
+    <!-- Ngày sinh -->
+    <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-600">
+      {{
+        user.birthdate
+          ? new Date(user.birthdate).toLocaleDateString("vi-VN")
+          : "Không xác định"
+      }}
+    </td>
+    <td class="px-6 py-4 text-sm text-black">
+      {{ user.sex === true ? "Nữ" : "Nam" }}
+    </td>
+    <td class="px-6 py-4 text-sm text-black">
+      {{ user.address }}
+    </td>
 
-                    <dd class="text-gray-800 sm:col-span-2 truncate">{{ user.first_name || "Không xác định" }}</dd>
-                </div>
+    <td class="px-6 py-4 text-sm text-black">
+      {{ user.phone }}
+    </td>
 
-                <div class="grid grid-cols-2 p-2">
-                    <dt class="font-bold text-gray-900">Tên đăng nhập</dt>
-
-                    <dd class="text-gray-800 sm:col-span-2 truncate">{{ user.username || "Không xác định" }}</dd>
-                </div>
-
-                <div class="grid grid-cols-2 p-2">
-                    <dt class="font-bold text-gray-900">Ngày sinh</dt>
-
-                    <dd class="text-gray-800 sm:col-span-2 truncate">{{ user.birthday ? new Date( user.birthday
-                    ).toLocaleDateString(
-                        'vi-VN' ) :
-                        "Không xác định" }}</dd>
-                </div>
-
-                <div class="grid grid-cols-2 p-2">
-                    <dt class="font-bold text-gray-900">Giới tính</dt>
-                    <template v-if=" user.gender === true ">
-                        <dd class="text-gray-800 sm:col-span-2 truncate">Nam</dd>
-                    </template>
-                    <template v-else-if=" user.gender === false ">
-                        <dd class=" text-gray-800 sm:col-span-2 truncate">Nữ</dd>
-                    </template>
-                    <template v-else>
-                        <dd class=" text-gray-800 sm:col-span-2 truncate">Không xác định</dd>
-                    </template>
-                </div>
-
-                <div class="grid grid-cols-2 p-2">
-                    <dt class="font-bold text-gray-900">Địa chỉ</dt>
-
-                    <dd class="text-gray-800 sm:col-span-2 truncate">{{ user.address || "Không xác định" }}</dd>
-                </div>
-
-                <div class="grid grid-cols-2 p-2">
-                    <dt class="font-bold text-gray-900">Số điện thoại</dt>
-
-                    <dd class="text-gray-800 sm:col-span-2 truncate">{{ user.phone || "Không xác định" }}</dd>
-                </div>
-                <div class="grid grid-cols-1">
-                    <button @click=" goToEditUser( props.user._id )"
-                        class="btn btn-ghost text-base hover:underline hover:btn-info hover:text-white">Chỉnh
-                        sửa</button>
-                </div>
-            </dl>
-        </div>
-
-    </div>
+    <td class="px-6 py-4 text-start align-middle">
+      <div class="flex mt-4 gap-3">
+        <button
+          @click="handleDeleteUser(user._id)"
+          class="text-red-600 transition-all hover:text-green-900 cursor-pointer underline"
+        >
+          Xóa
+        </button>
+      </div>
+    </td>
+  </tr>
 </template>

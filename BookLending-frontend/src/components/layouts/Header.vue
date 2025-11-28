@@ -22,12 +22,13 @@ window.addEventListener("storage", () => {
   username.value = localStorage.getItem("username");
   user_id.value = localStorage.getItem("id");
 });
+
 </script>
 
 <template>
   <div class="sticky top-0 z-50 navbar bg-blue-700 shadow text-white h-[48px]">
     <!-- PHẦN TRÁI -->
-    <div v-if="role!=='staff'" class="navbar-start">
+    <div v-if="role !== 'staff'" class="navbar-start">
       <!-- Logo -->
       <RouterLink
         to="/"
@@ -74,9 +75,22 @@ window.addEventListener("storage", () => {
               >Người dùng</RouterLink
             >
           </li>
-          <li>
-            <a class="text-base rounded-xl font-semibold hover:font-bold">Nhân viên</a>
-          </li>
+        </template>
+        <template v-if="role !== 'staff'">
+          <ul class="hidden md:flex items-center gap-6 font-medium">
+            <li class="hover:bg-blue-600 rounded-xl transition cursor-pointer">
+              <RouterLink to="/">Trang chủ</RouterLink>
+            </li>
+            <li class="hover:text-black cursor-pointer">
+              <router-link to="/#books">Sách</router-link>
+            </li>
+            <li class="hover:bg-blue-600 rounded-xl transition cursor-pointer">
+              <RouterLink to="/aboutus">Giới thiệu</RouterLink>
+            </li>
+            <li class="hover:bg-blue-600 rounded-xl transition cursor-pointer">
+              <RouterLink to="/contact">Liên hệ</RouterLink>
+            </li>
+          </ul>
         </template>
       </ul>
     </div>
@@ -87,8 +101,7 @@ window.addEventListener("storage", () => {
       <template v-if="!username">
         <RouterLink
           to="/user/login"
-          class="px-5 py-2 bg-white text-black font-semibold rounded-full shadow 
-           hover:bg-gray-100 active:scale-95 transition"
+          class="px-5 py-2 bg-white text-black font-semibold rounded-full shadow hover:bg-gray-100 active:scale-95 transition"
         >
           Đăng Nhập
         </RouterLink>
@@ -195,9 +208,4 @@ window.addEventListener("storage", () => {
   </div>
 </template>
 
-<style scoped>
-/* Giữ nguyên hiệu ứng hover, active */
-a {
-  transition: all 0.2s ease-in-out;
-}
-</style>
+<style scoped></style>

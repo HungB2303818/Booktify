@@ -43,7 +43,7 @@ const handleCreateBorrow = handleSubmit(async () => {
 
     await borrowService.createBorrow(data);
     push.success("Tạo đơn mượn sách thành công");
-    router.push("/books");
+    router.push("/");
   } catch (error) {
     console.log(error);
     if (error.response.status === 422) {
