@@ -22,7 +22,7 @@ const routes = [
     component: () => import("../views/user/UserProfile.vue"),
   },
   {
-    path: "/user/profile/edit",
+    path: "/user/:id/edit",
     name: "userprofile.edit",
     component: () => import("../views/user/UserProfileEdit.vue"),
   },
@@ -35,6 +35,11 @@ const routes = [
     path: "/staff/profile",
     name: "staffprofile",
     component: () => import("../views/staff/StaffProfile.vue"),
+  },
+  {
+    path: "/staff/:id/edit",
+    name: "staffprofile.edit",
+    component: () => import("../views/staff/StaffProfileEdit.vue"),
   },
   {
     path: "/publishers",

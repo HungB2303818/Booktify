@@ -42,6 +42,7 @@ exports.findOne = async (req, res, next) => {
     }
     return res.json(reader);
   } catch (error) {
+    console.error("GET USER ERROR:", error);
     return next(new ApiError(500, "Lỗi khi tìm bạn đọc"));
   }
 };

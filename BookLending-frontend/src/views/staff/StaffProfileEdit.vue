@@ -2,40 +2,32 @@
 import { useRouter, useRoute } from "vue-router";
 import { computed, onMounted, ref } from "vue";
 import { push } from "notivue";
-import { userSchema } from "@/validations/user.validation";
-import UserService from "@/services/user.service";
+import { staffSchema } from "@/validations/staff.validation";
+import StaffService from "@/services/staff.service";
 import { useForm, useField } from "vee-validate";
 
-const userService = new UserService();
+const staffService = new StaffService();
 const router = useRouter();
 const route = useRoute();
 const role = computed(() => localStorage.getItem("role"));
-const user = ref({});
-const user_id = computed(() => localStorage.getItem("id"));
+const staff = ref({});
+const staff_id = computed(() => localStorage.getItem("id"));
 
 const { handleSubmit, resetForm } = useForm({
-  validationSchema: userSchema,
+  validationSchema: staffSchema,
 });
 
 const { value: name, errorMessage: nameError } = useField("name");
 const { value: username, errorMessage: usernameError } = useField("username");
 const { value: password, errorMessage: passwordError } = useField("password");
-const { value: birthdate, errorMessage: birthdateError } =
-  useField("birthdate");
-const { value: sex, errorMessage: sexError } = useField("sex");
 const { value: address, errorMessage: addressError } = useField("address");
 const { value: phone, errorMessage: phoneError } = useField("phone");
 
 const handleUserProfileEdit = handleSubmit(async (values) => {
   try {
-    await userService.updateUser(user_id.value, values);
-    push.success("Cập nhật thông tin người dùng thành công");
-
-    if (role.value === "staff") {
-      router.push("/users");
-    } else {
-      router.push("/user/profile");
-    }
+    await staffService.updateStaff(staff_id.value, values);
+    push.success("Cập nhật thông tin nhân viên thành công");
+    router.push("/staff/profile");
   } catch (error) {
     console.log(error);
     if (error.response?.status === 400) {
@@ -43,29 +35,22 @@ const handleUserProfileEdit = handleSubmit(async (values) => {
     } else if (error.response?.status === 409) {
       push.error("Tên đăng nhập đã tồn tại");
     } else {
-      push.error("Đã xảy ra lỗi khi cập nhật thông tin người dùng");
+      push.error("Đã xảy ra lỗi khi cập nhật thông tin nhân viên");
     }
   }
 });
 
 // ====== INIT VALUES ======
 onMounted(async () => {
-  const user_data = await userService.getUser(user_id.value);
-  user.value = user_data;
-  console.log("ROUTE PARAM:", route.params);
-  console.log("USER ID:", user_id);
-
+  const staff_data = await staffService.getStaff(staff_id.value);
+  staff.value = staff_data;
   resetForm({
     values: {
-      name: user.value.name || "",
-      username: user.value.username || "",
+      name: staff.value.name || "",
+      username: staff.value.username || "",
       password: "",
-      birthdate: user.value.birthdate
-        ? new Date(user.value.birthdate).toISOString().slice(0, 10)
-        : "",
-      sex: user.value.sex === 'true' ? 'true' : user.value.sex === 'false' ? 'false' : null,
-      address: user.value.address || "",
-      phone: user.value.phone || "",
+      address: staff.value.address || "",
+      phone: staff.value.phone || "",
     },
   });
 });
@@ -121,67 +106,7 @@ onMounted(async () => {
               placeholder="Nhập tên đăng nhập"
             />
             <p class="text-sm text-red-600">{{ usernameError }}</p>
-          </div>
-
-          <!-- NGÀY SINH -->
-          <div>
-            <label class="font-medium flex items-center gap-2 mb-1">
-              <i class="fa-regular fa-calendar"></i>
-              Ngày sinh
-            </label>
-            <input
-              name="birthdate"
-              v-model="birthdate"
-              type="date"
-              class="input input-bordered w-full"
-            />
-            <p class="text-sm text-red-600">{{ birthdateError }}</p>
-          </div>
-
-          <!-- GIỚI TÍNH -->
-          <div>
-            <label class="font-medium flex items-center gap-2 mb-1">
-              <i class="fa-solid fa-people-group"></i>
-              Giới tính
-            </label>
-
-            <div class="flex items-center gap-6 mt-1">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input
-                  name="sex"
-                  v-model="sex"
-                  :value="true"
-                  type="radio"
-                  class="radio radio-primary"
-                />
-                Nam
-              </label>
-
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input
-                  name="sex"
-                  v-model="sex"
-                  :value="false"
-                  type="radio"
-                  class="radio radio-primary"
-                />
-                Nữ
-              </label>
-
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input
-                  name="sex"
-                  v-model="sex"
-                  :value="null"
-                  type="radio"
-                  class="radio radio-primary"
-                />
-                Khác
-              </label>
-            </div>
-
-            <p class="text-sm text-red-600">{{ sexError }}</p>
-          </div>
+          </div>          
         </div>
 
         <!-- ĐỊA CHỈ -->
@@ -243,7 +168,7 @@ onMounted(async () => {
           </RouterLink>
           <RouterLink
             v-else
-            to="/user/profile"
+            to="/staff/profile"
             class="btn bg-gray-200 text-gray-700 hover:bg-gray-300"
           >
             Hủy

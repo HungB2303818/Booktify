@@ -1,11 +1,9 @@
 <script setup>
-import { useAuth } from "@/logout/useAuth";
 import { ref, computed, onMounted } from "vue";
 import UserService from "@/services/user.service";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const { logOut } = useAuth();
 const userService = new UserService();
 const user = ref({});
 const user_id = computed(() => localStorage.getItem("id"));
@@ -101,8 +99,8 @@ onMounted(async () => {
             <span>Giới tính</span>
           </div>
           <p class="font-medium text-gray-900 mt-1">
-            <template v-if="user.sex === true">Nam</template>
-            <template v-else-if="user.sex === false">Nữ</template>
+            <template v-if="user.sex === 'true'">Nam</template>
+            <template v-else-if="user.sex === 'false'">Nữ</template>
             <template v-else>Không xác định</template>
           </p>
         </div>
