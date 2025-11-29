@@ -12,12 +12,11 @@ const searchQuery = ref("");
 
 const role = computed(() => localStorage.getItem("role"));
 
-const defaultImage = "https://cdn-icons-png.flaticon.com/512/29/29302.png";
-// Lấy danh sách sách từ API (hoặc dữ liệu mẫu)
 onMounted(async () => {
   try {
     const res = await bookService.getAllBooks();
     books.value = res;
+    console.log("ROLE:", role);
   } catch (err) {
     console.error("Lỗi tải sách:", err);
   }
@@ -35,15 +34,26 @@ const filteredBooks = computed(() => {
 const goToDetail = (id) => {
   router.push(`/books/${id}`);
 };
-
+const goToEdit = (id) => router.push(`/books/edit/${id}`);
 // Điều hướng tới trang thêm mới
 const goToAddBook = () => {
   router.push("/books/add");
 };
+const deleteBook = async (id) => {
+  if (confirm("Xác nhận xóa sách này?")) {
+    try {
+      await bookService.deleteBook(id);
+      router.push("/books");
+      push.success("Xóa sách thành công");
+    } catch (err) {
+      console.error("Lỗi xóa sách:", err);
+    }
+  }
+};
 </script>
 
 <template>
-  <div v-if="role==='staff'" class="flex flex-col min-h-screen bg-zinc-100">
+  <div v-if="role === 'staff'" class="flex flex-col min-h-screen bg-zinc-100">
     <div class="container mx-auto px-4 py-4">
       <div class="flex justify-end mx-8 my-2">
         <input
@@ -62,7 +72,10 @@ const goToAddBook = () => {
           v-for="book in filteredBooks"
           :key="book._id"
           :book="book"
+          :role="role"
           @view-detail="goToDetail"
+          @view-edit="goToEdit"
+          @delete="deleteBook"
         />
       </div>
 

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed,onMounted } from "vue";
 
 // Nhận props
 const props = defineProps({
@@ -7,10 +7,15 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  role: {
+    type: String,
+    required: true,
+  }
 });
-
-// Ảnh mặc định nếu sách không có ảnh
 const defaultImage = computed(() => "/img/harry.jpg");
+onMounted(() => {
+  console.log("ROLE RECEIVED:", props.role);
+});
 </script>
 
 <template>
@@ -34,15 +39,32 @@ const defaultImage = computed(() => "/img/harry.jpg");
         <p class="text-sm text-gray-600">
           <span class="font-bold"></span> {{ book.author }}
         </p>
-        <p class="mt-4 mb-2 text-base font-semibold">{{ Number(book.price).toLocaleString("vi-VN") }} <span> đ</span></p>
+        <p class="mt-4 mb-2 text-base font-semibold">
+          {{ Number(book.price).toLocaleString("vi-VN") }} <span> đ</span>
+        </p>
       </div>
     </div>
-    <div class="px-4 pb-4">
+    <div v-if="role==='user'" class="px-4 pb-4">
       <button
         class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 cursor-pointer"
         @click.stop="$emit('view-detail', book._id)"
       >
         Mượn ngay
+      </button>
+    </div>
+    <div v-else class="px-4 pb-4 flex gap-2">
+      <button
+        class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 cursor-pointer"
+        @click.stop="$emit('view-edit', book._id)"
+      >
+        Chỉnh sửa
+      </button>
+
+      <button
+        class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 cursor-pointer"
+        @click.stop="$emit('delete', book._id)"
+      >
+        Xóa
       </button>
     </div>
   </div>

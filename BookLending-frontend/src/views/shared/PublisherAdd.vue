@@ -82,7 +82,7 @@ onMounted(() => {
           >
             Quay lại
           </RouterLink>
-          <button class="btn btn-success text-sm hover:scale-[1.02] transition">
+          <button class="btn bg-blue-600 text-white text-sm hover:scale-[1.02] transition">
             Thêm nhà xuất bản
           </button>
         </div>

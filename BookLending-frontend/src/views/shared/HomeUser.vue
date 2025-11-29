@@ -56,9 +56,10 @@ const goToAddBook = () => {
         <button
           class="px-6 py-3 rounded-lg bg-blue-600 text-white font-medium shadow hover:bg-blue-700 transition"
         >
-          Khám phá sách
+          <router-link to="/#books">Khám phá sách</router-link>
         </button>
-        <button v-if="role!=='user' && role!=='staff'"
+        <button
+          v-if="role !== 'user' && role !== 'staff'"
           class="px-6 py-3 rounded-lg bg-gray-100 text-gray-800 font-medium shadow hover:bg-gray-200 transition"
         >
           Đăng ký ngay
@@ -99,12 +100,14 @@ const goToAddBook = () => {
 
       <!-- Lưới hiển thị sách -->
       <div
-        id="books" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8"
+        id="books"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8"
       >
         <BookCard
           v-for="book in filteredBooks"
           :key="book._id"
           :book="book"
+          :role="role"
           @view-detail="goToDetail"
         />
       </div>

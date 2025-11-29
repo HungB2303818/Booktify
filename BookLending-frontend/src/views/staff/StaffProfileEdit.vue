@@ -44,6 +44,8 @@ const handleUserProfileEdit = handleSubmit(async (values) => {
 onMounted(async () => {
   const staff_data = await staffService.getStaff(staff_id.value);
   staff.value = staff_data;
+  console.log("ROUTE PARAM:", route.params);
+  console.log("STAFF ID:", staff_id);
   resetForm({
     values: {
       name: staff.value.name || "",

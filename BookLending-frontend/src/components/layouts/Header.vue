@@ -107,8 +107,8 @@ window.addEventListener("storage", () => {
         </RouterLink>
       </template>
       <!-- Đã đăng nhập - user -->
-      <template v-else-if="role === 'user'">
-        <div class="text-white">
+      <template v-else>
+        <div v-if="role==='user'" class="text-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -152,8 +152,13 @@ window.addEventListener("storage", () => {
             tabindex="0"
             class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-1"
           >
-            <li>
+            <li v-if="role==='user'">
               <RouterLink to="/user/profile" class="text-base-content">
+                Xem thông tin
+              </RouterLink>
+            </li>
+             <li v-else>
+              <RouterLink to="/staff/profile" class="text-base-content">
                 Xem thông tin
               </RouterLink>
             </li>
@@ -164,46 +169,7 @@ window.addEventListener("storage", () => {
         </div>
       </template>
       <!-- Đã đăng nhập - staff -->
-      <template v-else-if="role === 'staff'">
-        <div class="dropdown dropdown-end">
-          <label
-            tabindex="0"
-            class="btn btn-ghost normal-case text-base font-bold"
-          >
-            {{ username }}
-            <svg
-              class="ml-2 h-4 w-4 inline-block"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </label>
-          <ul
-            tabindex="0"
-            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-1"
-          >
-            <li>
-              <RouterLink
-                to="/staff/profile"
-                class="text-base-content justify-between"
-              >
-                Xem thông tin
-              </RouterLink>
-            </li>
-            <li>
-              <button @click="logOut" class="text-secondary">Đăng xuất</button>
-            </li>
-          </ul>
-        </div>
-      </template>
+      
     </div>
   </div>
 </template>

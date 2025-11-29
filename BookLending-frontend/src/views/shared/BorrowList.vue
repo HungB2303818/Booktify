@@ -7,11 +7,10 @@ import { push } from "notivue";
 
 const borrows = ref([]);
 const loading = ref(true);
-const role = authRole;      // "user" hoặc "staff"
+const role = authRole; // "user" hoặc "staff"
 const userId = authUserId;
 
 const borrowService = new BorrowService();
-
 
 const fetchBorrows = async () => {
   try {
@@ -24,7 +23,6 @@ const fetchBorrows = async () => {
       // USER → xem đơn mượn của chính họ
       borrows.value = await borrowService.getBorrowByUser(userId.value);
     }
-
   } catch (error) {
     console.error(error);
     push.error("Không thể tải danh sách đơn mượn");
@@ -39,7 +37,9 @@ onMounted(fetchBorrows);
 <template>
   <div class="p-4 w-screen min-h-screen bg-zinc-100 mx-auto">
     <!-- TABLE LIST -->
-    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+    <div
+      class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100"
+    >
       <table class="min-w-full divide-y divide-gray-300">
         <thead class="bg-content-neutral">
           <tr>
@@ -83,6 +83,11 @@ onMounted(fetchBorrows);
             :borrow="borrow"
             @fetchBorrows="fetchBorrows"
           />
+          <tr v-if="!borrows.length">
+            <td colspan="100%" class="text-center py-4 text-base">
+              Chưa có đơn mượn
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -77,7 +77,7 @@ const deleteBook = async () => {
             <button
               v-else-if="role === 'user'"
               @click="gotoBorrow"
-              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 active:scale-95 transition-all shadow-sm"
+              class="flex items-center gap-2 px-4 py-2 mb-6 rounded-lg bg-blue-600 text-white hover:bg-blue-700 cursor-pointer active:scale-95 transition-all shadow-sm"
             >
               <i class="fa-solid fa-book-open text-sm"></i>
               Mượn sách
@@ -117,11 +117,11 @@ const deleteBook = async () => {
           </div>
         </div>
         <div class="col-span-2 bg-white p-6 rounded-lg shadow">
-          <h2 class="text-2xl font-bold mb-6">Đánh giá sản phẩm</h2>
+          <h2 class="text-2xl font-bold mb-6 ml-12">Đánh giá sản phẩm</h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr] gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6">
             <!-- ================== CỘT 1: ĐIỂM TRUNG BÌNH ================== -->
-            <div class="flex flex-col items-center">
+            <div class="flex flex-col items-center justify-start">
               <p class="text-5xl font-bold">
                 0<span class="text-3xl">/5</span>
               </p>
@@ -135,7 +135,6 @@ const deleteBook = async () => {
               <p class="text-gray-500 text-sm">(0 đánh giá)</p>
             </div>
 
-            <!-- ================== CỘT 2: BIỂU ĐỒ TỈ LỆ ================== -->
             <div class="space-y-2">
               <div class="flex items-center gap-3 text-sm">
                 <span class="w-10">5 sao</span>
@@ -169,16 +168,6 @@ const deleteBook = async () => {
             </div>
 
             <!-- ================== CỘT 3: THÔNG BÁO VIẾT ĐÁNH GIÁ ================== -->
-            <div
-              class="flex items-center justify-center text-gray-600 w-[300px]"
-            >
-              <p>
-                Chỉ có thành viên mới có thể viết nhận xét. Vui lòng
-                <a href="#" class="text-blue-500 hover:underline">đăng nhập</a>
-                hoặc
-                <a href="#" class="text-blue-500 hover:underline">đăng ký</a>.
-              </p>
-            </div>
           </div>
         </div>
       </div>
