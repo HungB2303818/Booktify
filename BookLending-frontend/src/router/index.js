@@ -4,7 +4,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: () => import("../views/shared/Home.vue"),
+    component: () => import("../views/shared/HomeUser.vue"),
   },
   {
     path: "/user/login",

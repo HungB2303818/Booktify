@@ -46,21 +46,20 @@ const handleUserRegister = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="bg-zinc-100">
     <div
-      class="m-8 bg-zinc-100 backdrop-blur-xs flex justify-center items-center min-h-screen"
+      class="min-h-screen bg-zinc-100 flex justify-center items-center p-6"
     >
-      <form @submit.prevent="handleUserRegister">
+      <form @submit.prevent="handleUserRegister" class="w-full max-w-md">
         <fieldset
-          class="fieldset bg-base-100 border-base-300 rounded-box w-96 border p-4 shadow m-4"
+          class="fieldset bg-white border-base-300 rounded-2xl border p-8 shadow"
         >
-          <h1 class="font-bold text-2xl text-center">Tạo tài khoản mới</h1>
+          <h1 class="font-bold text-2xl text-center mb-6">Tạo tài khoản mới</h1>
 
-          <label class="label" for="name">Tên</label>
+          <label class="label font-medium" for="name">Tên</label>
           <input
             v-model="name"
             type="text"
-            class="input"
+            class="input w-full mb-1"
             id="name"
             placeholder="Nhập họ và tên"
           />
@@ -70,14 +69,14 @@ const handleUserRegister = handleSubmit(async (values) => {
           <input
             v-model="username"
             type="text"
-            class="input"
+            class="input w-full"
             id="username"
             placeholder="Nhập tên đăng nhập"
           />
           <span class="text-red-600 text-sm">{{ usernameError }}</span>
 
           <label class="label" for="birthdate">Ngày sinh</label>
-          <input v-model="birthdate" type="date" id="birthdate" class="input" />
+          <input v-model="birthdate" type="date" id="birthdate" class="input w-full mb-1" />
           <span class="text-red-600 text-sm">{{ birthdateError }}</span>
 
           <label class="label">Giới tính</label>
@@ -109,7 +108,7 @@ const handleUserRegister = handleSubmit(async (values) => {
           <input
             v-model="address"
             type="text"
-            class="input"
+            class="input w-full mb-1"
             id="address"
             placeholder="Nhập địa chỉ"
           />
@@ -119,7 +118,7 @@ const handleUserRegister = handleSubmit(async (values) => {
           <input
             v-model="phone"
             type="text"
-            class="input"
+            class="input w-full mb-1"
             id="phone"
             placeholder="Nhập số điện thoại"
           />
@@ -129,7 +128,7 @@ const handleUserRegister = handleSubmit(async (values) => {
           <input
             v-model="password"
             type="password"
-            class="input"
+            class="input w-full mb-1"
             id="password"
             placeholder="Nhập mật khẩu"
           />
@@ -137,15 +136,15 @@ const handleUserRegister = handleSubmit(async (values) => {
           <div class="flex justify-center">
             <button
               type="submit"
-              class="btn w-48 btn-success text-white mt-4 hover:scale-[1.01] text-base"
+              class="btn w-72 btn-success text-white mt-4 hover:scale-[1.01] text-base"
             >
               Đăng Ký
             </button>
           </div>
-          <span class="mt-8"
+          <span class="mt-8 text-base"
             >Bạn đã có tài khoản?
             <strong class="hover:underline">
-              <RouterLink to="/user/login" class="text-base"
+              <RouterLink to="/user/login" class="text-base underline"
                 >Đăng nhập</RouterLink
               >
             </strong>
@@ -153,5 +152,4 @@ const handleUserRegister = handleSubmit(async (values) => {
         </fieldset>
       </form>
     </div>
-  </div>
 </template>

@@ -45,50 +45,79 @@ const handleUserLogin = handleSubmit(async () => {
 });
 </script>
 <template>
-  <div class="bg-zinc-100 min-h-screen p-4 flex justify-center items-center">
-    <form @submit.prevent="handleUserLogin">
-      <fieldset
-        class="w-96 bg-base-100 border-base-300 rounded-box border p-6 shadow"
-      >
-        <h1 class="font-bold text-2xl text-center mb-4">Đăng nhập</h1>
-
-        <label class="label" for="username">Tên đăng nhập</label>
-        <input
-          v-model="username"
-          type="text"
-          class="input w-full mb-2"
-          id="username"
-          placeholder="Nhập tên đăng nhập"
-        />
-        <span class="text-red-600 text-sm ">{{ usernameError }}</span>
-
-        <label class="label " for="password">Mật khẩu</label>
-        <input
-          v-model="password"
-          type="password"
-          class="input w-full mb-2"
-          id="password"
-          placeholder="Nhập mật khẩu"
-        />
-        <span class="text-red-600 text-sm">{{ passwordError }}</span>
-        <div class="flex jutify-center">
-          <button type="submit" class="btn btn-success text-white w-48 mt-4">
-            Đăng nhập
-          </button>
+  <div class="min-h-screen bg-zinc-100 flex">
+    <div class="hidden md:flex flex-col justify-center px-16 w-1/2 bg-zinc-100">
+      <div class="mb-6">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="text-4xl font-semibold text-blue-600">Booktify</span>
         </div>
-        <p class="text-sm mt-4">
-          Chưa có tài khoản?
-          <RouterLink to="/user/register" class="text-blue-600 underline"
-            >Đăng ký ngay</RouterLink
-          >
+
+        <h1 class="text-4xl font-bold mb-4">
+          Khám phá thế giới sách<br />
+          Của riêng bạn.
+        </h1>
+
+        <p class="text-gray-500 max-w-md">
+          Borrow, read, and share thousands of titles with our community.
         </p>
-        <p class="text-sm mt-2">
-          Đăng nhập với vai trò quản trị viên?
-          <RouterLink to="/staff/login" class="text-blue-600 underline"
-            >Đăng nhập tại đây</RouterLink
-          >
-        </p>
-      </fieldset>
-    </form>
+      </div>
+    </div>
+
+    <!-- RIGHT SECTION - LOGIN FORM -->
+    <div class="flex justify-center items-center w-full md:w-1/2 p-6">
+      <form @submit.prevent="handleUserLogin" class="w-full max-w-md">
+        <fieldset
+          class="bg-white border border-base-300 rounded-2xl shadow p-8"
+        >
+          <h1 class="font-bold text-2xl text-center mb-2">Đăng nhập</h1>
+          <!-- Username -->
+          <label class="label font-medium" for="username">Tên đăng nhập</label>
+          <input
+            v-model="username"
+            type="text"
+            class="input input-bordered w-full mb-1"
+            id="username"
+            placeholder="Nhập tên đăng nhập"
+          />
+          <span class="text-red-600 text-sm">{{ usernameError }}</span>
+
+          <!-- Password -->
+          <label class="label font-medium mt-3" for="password">Mật khẩu</label>
+          <input
+            v-model="password"
+            type="password"
+            class="input input-bordered w-full mb-1"
+            id="password"
+            placeholder="Nhập mật khẩu"
+          />
+          <span class="text-red-600 text-sm">{{ passwordError }}</span>
+
+          <!-- Button -->
+          <div class="flex justify-center">
+            <button
+              type="submit"
+              class="btn w-full mt-6 bg-blue-600 text-white hover:bg-blue-700"
+            >
+              Đăng nhập
+            </button>
+          </div>
+
+          <!-- Links -->
+          <p class="text-sm mt-4">
+            Chưa có tài khoản?
+            <RouterLink to="/user/register" class="text-base font-semibold underline">
+              Đăng ký ngay
+            </RouterLink>
+          </p>
+
+          <p class="text-sm mt-2">
+            Đăng nhập với vai trò quản trị viên?
+            <RouterLink to="/staff/login" class="text-base font-semibold underline">
+              Đăng nhập tại đây
+            </RouterLink>
+          </p>
+        </fieldset>
+      </form>
+    </div>
   </div>
 </template>

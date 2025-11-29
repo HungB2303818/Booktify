@@ -183,7 +183,7 @@ onMounted(() => {
 <template>
   <tr>
     <!-- Người mượn -->
-    <td class="whitespace-nowrap px-6 py-4 text-lg font-bold">
+    <td class="whitespace-nowrap px-6 py-4 text-sm font-semibold">
       {{ borrow.reader_id?.name || "Không xác định" }}
     </td>
 

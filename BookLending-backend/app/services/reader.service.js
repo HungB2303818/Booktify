@@ -31,9 +31,16 @@ class ReaderService {
     return reader;
   }
   async updateReader(id, data) {
-    const reader = await Reader.findByIdAndUpdate(id, data, { new: true });
+    const reader = await Reader.findById(id);
     if (!reader) throw new Error("Không tìm thấy độc giả để cập nhật");
-    return reader;
+
+    // Nếu có password mới → hash lại
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 12);
+    }
+
+    Object.assign(reader, data);
+    return await reader.save();
   }
   async deleteReader(id) {
     const reader = await Reader.findByIdAndDelete(id);
