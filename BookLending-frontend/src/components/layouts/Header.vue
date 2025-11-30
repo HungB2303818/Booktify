@@ -22,7 +22,6 @@ window.addEventListener("storage", () => {
   username.value = localStorage.getItem("username");
   user_id.value = localStorage.getItem("id");
 });
-
 </script>
 
 <template>
@@ -77,18 +76,45 @@ window.addEventListener("storage", () => {
           </li>
         </template>
         <template v-if="role !== 'staff'">
-          <ul class="hidden md:flex items-center gap-6 font-medium">
-            <li class="hover:bg-blue-600 rounded-xl transition cursor-pointer">
-              <RouterLink to="/">Trang chủ</RouterLink>
+          <ul class="hidden md:flex items-center gap-4 font-medium">
+            <!-- Trang chủ -->
+            <li>
+              <RouterLink
+                to="/"
+                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+              >
+                Trang chủ
+              </RouterLink>
             </li>
-            <li class="hover:text-black cursor-pointer">
-              <router-link to="/#books">Sách</router-link>
+
+            <!-- Sách -->
+            <li>
+              <RouterLink
+                to="/#books"
+                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+              >
+                Sách
+              </RouterLink>
             </li>
-            <li class="hover:bg-blue-600 rounded-xl transition cursor-pointer">
-              <RouterLink to="/aboutus">Giới thiệu</RouterLink>
+
+            <!-- Giới thiệu -->
+            <li>
+              <RouterLink
+                to="/aboutus"
+                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+              >
+                Giới thiệu
+              </RouterLink>
             </li>
-            <li class="hover:bg-blue-600 rounded-xl transition cursor-pointer">
-              <RouterLink to="/contact">Liên hệ</RouterLink>
+
+            <!-- Liên hệ -->
+            <li>
+              <RouterLink
+                to="/contact"
+                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+              >
+                Liên hệ
+              </RouterLink>
             </li>
           </ul>
         </template>
@@ -108,28 +134,35 @@ window.addEventListener("storage", () => {
       </template>
       <!-- Đã đăng nhập - user -->
       <template v-else>
-        <div v-if="role==='user'" class="text-white">
+        <!-- Nút xem lịch sử mượn cho USER -->
+        <div v-if="role === 'user'" class="text-white flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            stroke-width="1.8"
             stroke="currentColor"
-            class="w-6 h-6 hover:scale-[1.05] cursor-pointer"
+            class="w-6 h-6 cursor-pointer transition-transform hover:scale-110"
             @click="gotoBorrowRecords"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+              d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 
+           1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 
+           0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 
+           1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 
+           0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 
+           0 .375.375 0 0 1 .75 0Z"
             />
           </svg>
         </div>
 
+        <!-- DROPDOWN USERNAME -->
         <div class="dropdown dropdown-end">
           <label
             tabindex="0"
-            class="btn btn-ghost normal-case text-base font-bold"
+            class="flex items-center bg-transparent px-4 py-2 rounded-lg font-semibold text-white cursor-pointer hover:bg-white/10 transition"
           >
             {{ username }}
             <svg
@@ -148,28 +181,40 @@ window.addEventListener("storage", () => {
             </svg>
           </label>
 
+          <!-- MENU DROPDOWN -->
           <ul
             tabindex="0"
-            class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-1"
+            class="dropdown-content menu p-3 shadow-lg bg-white rounded-xl w-52 mt-2 border border-gray-100"
           >
-            <li v-if="role==='user'">
-              <RouterLink to="/user/profile" class="text-base-content">
+            <li v-if="role === 'user'">
+              <RouterLink
+                to="/user/profile"
+                class="hover:bg-gray-100 rounded-lg text-black px-2 py-2"
+              >
                 Xem thông tin
               </RouterLink>
             </li>
-             <li v-else>
-              <RouterLink to="/staff/profile" class="text-base-content">
+
+            <li v-else>
+              <RouterLink
+                to="/staff/profile"
+                class="hover:bg-gray-100 text-black rounded-lg px-2 py-2"
+              >
                 Xem thông tin
               </RouterLink>
             </li>
+
             <li>
-              <button @click="logOut" class="text-error">Đăng xuất</button>
+              <button
+                @click="logOut"
+                class="text-error hover:bg-red-50 rounded-lg px-2 py-2"
+              >
+                Đăng xuất
+              </button>
             </li>
           </ul>
         </div>
       </template>
-      <!-- Đã đăng nhập - staff -->
-      
     </div>
   </div>
 </template>

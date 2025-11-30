@@ -17,7 +17,7 @@
       <!-- Hero Image -->
       <section class="my-6">
         <img
-          src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2070&auto=format"
+          src="/img/t3_may_tinh_2.jpg"
           class="w-full rounded-2xl shadow-md"
         />
       </section>
@@ -64,11 +64,11 @@
             class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2070&auto=format"
+              src="/img/lrc1.webp"
               class="w-full h-40 object-cover"
             />
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-900">📚 Tri thức</h3>
+              <h3 class="text-xl font-semibold text-gray-900">Tri thức</h3>
               <p class="mt-2 text-gray-600 text-sm leading-relaxed">
                 Chúng tôi tin vào sức mạnh của tri thức trong việc thay đổi cuộc
                 sống và cam kết xây dựng một văn hóa học tập liên tục.
@@ -81,11 +81,11 @@
             class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=2070&auto=format"
+              src="/img/unnamed.webp"
               class="w-full h-40 object-cover"
             />
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-900">👥 Cộng đồng</h3>
+              <h3 class="text-xl font-semibold text-gray-900">Cộng đồng</h3>
               <p class="mt-2 text-gray-600 text-sm leading-relaxed">
                 Chúng tôi nỗ lực xây dựng một cộng đồng sôi động gồm độc giả,
                 người yêu sách và những người thích khám phá — kết nối với nhau
@@ -99,11 +99,11 @@
             class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2070&auto=format"
+              src="/img/student.jpeg"
               class="w-full h-40 object-cover"
             />
             <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-900">⭐ Chất lượng</h3>
+              <h3 class="text-xl font-semibold text-gray-900">Chất lượng</h3>
               <p class="mt-2 text-gray-600 text-sm leading-relaxed">
                 Chúng tôi cam kết mang đến bộ sưu tập sách chất lượng cao và
                 trải nghiệm nền tảng ổn định, đáng tin cậy.
@@ -143,7 +143,7 @@
 
         <div>
           <img
-            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2070&auto=format"
+            src="/img/gate.jpg"
             class="w-full rounded-2xl shadow-md"
           />
         </div>
@@ -164,7 +164,8 @@
         <button
           class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-500 transition cursor-pointer"
         >
-          Bắt đầu hành trình khám phá
+        <RouterLink to="/">Bắt đầu hành trình khám phá</RouterLink>  
+        
         </button>
       </section>
     </div>

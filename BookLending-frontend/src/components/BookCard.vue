@@ -52,15 +52,15 @@ onMounted(() => {
         Mượn ngay
       </button>
     </div>
-    <div v-else-if="role==='staff'" class="px-4 pb-4 flex gap-2 justify-end">
+    <div v-else-if="role==='staff'" class="px-4 pb-4 flex gap-2 justify-center">
       <button
-        class="px-2 py-2 bg-yellow-500 text-black hover:bg-yellow-600 font-medium rounded-lg cursor-pointer"
+        class="h-9 w-9 bg-yellow-500 text-black hover:bg-yellow-600 font-medium rounded-full cursor-pointer"
         @click.stop="$emit('view-edit', book._id)"
       ><i class="fa-solid fa-pen text-sm"></i>
       </button>
 
       <button
-        class="px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 cursor-pointer"
+        class="h-9 w-9 bg-red-600 text-white font-medium rounded-full hover:bg-red-700 cursor-pointer"
         @click.stop="$emit('delete', book._id)"
       >
         <i class="fa-solid fa-trash text-sm"></i>

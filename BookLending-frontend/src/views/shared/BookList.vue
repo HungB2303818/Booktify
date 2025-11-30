@@ -55,13 +55,31 @@ const deleteBook = async (id) => {
 <template>
   <div v-if="role === 'staff'" class="flex flex-col min-h-screen bg-zinc-100">
     <div class="container mx-auto px-4 py-4">
-      <div class="flex justify-center mb-16 mt-10">
-        <input
-          v-model="searchQuery"
-          type="text"
-          placeholder="Tìm kiếm sách..."
-          class="w-full max-w-2xl px-6 py-3 rounded-full shadow bg-white border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
-        />
+      <div class="flex flex-col items-center mb-16 mt-10 w-full">
+        <div class="flex items-center w-full max-w-2xl relative">
+          <!-- Icon search -->
+          <span class="absolute left-4 text-gray-400">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+
+          <!-- Ô tìm kiếm -->
+          <input
+            v-model="searchQuery"
+            type="text"
+            placeholder="Tìm kiếm sách..."
+            class="w-full pl-12 pr-4 py-3 rounded-full shadow-md bg-white border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition"
+          />
+
+          <!-- Nút thêm sách (hiển thị khi staff) -->
+          <button
+            v-if="role === 'staff'"
+            @click="goToAddBook"
+            title="Thêm sách mới"
+            class="ml-4 w-13 h-12 flex items-center justify-center rounded-full bg-blue-600 cursor-pointer text-white text-2xl shadow-lg hover:bg-blue-700 hover:shadow-xl active:scale-95 transition-transform"
+          >
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Lưới hiển thị sách -->
@@ -80,15 +98,6 @@ const deleteBook = async (id) => {
       </div>
 
       <!-- Nút thêm sách -->
-      <div v-if="role === 'staff'" class="flex justify-end mt-10">
-        <button
-          class="btn btn-primary btn-circle text-2xl"
-          @click="goToAddBook"
-          title="Thêm sách mới"
-        >
-          +
-        </button>
-      </div>
     </div>
   </div>
 </template>
