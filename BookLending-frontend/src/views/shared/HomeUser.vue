@@ -69,7 +69,7 @@ const goToAddBook = () => {
     <section class="px-4 mb-24">
       <div class="max-w-6xl mx-auto flex gap-4 overflow-x-auto scrollbar-hide">
         <img
-          src="/img/banner.webp"
+          src="/img/unnamed.webp"
           class="rounded-xl shadow-lg h-40 w-72 object-cover flex-shrink-0"
         />
         <img

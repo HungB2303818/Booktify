@@ -52,19 +52,18 @@ onMounted(() => {
         Mượn ngay
       </button>
     </div>
-    <div v-else class="px-4 pb-4 flex gap-2">
+    <div v-else-if="role==='staff'" class="px-4 pb-4 flex gap-2 justify-end">
       <button
-        class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 cursor-pointer"
+        class="px-2 py-2 bg-yellow-500 text-black hover:bg-yellow-600 font-medium rounded-lg cursor-pointer"
         @click.stop="$emit('view-edit', book._id)"
-      >
-        Chỉnh sửa
+      ><i class="fa-solid fa-pen text-sm"></i>
       </button>
 
       <button
-        class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 cursor-pointer"
+        class="px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 cursor-pointer"
         @click.stop="$emit('delete', book._id)"
       >
-        Xóa
+        <i class="fa-solid fa-trash text-sm"></i>
       </button>
     </div>
   </div>

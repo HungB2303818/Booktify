@@ -168,9 +168,9 @@ onMounted(async () => {
           <!-- Submit Button -->
           <button
             type="submit"
-            class="mt-6 py-3 px-2 bg-blue-600 hover:bg-blue-700 cursor-pointer text-white text-lg rounded-lg shadow transition"
+            class="mt-6 py-3 px-5 w-[128px] bg-blue-600 hover:bg-blue-700 cursor-pointer text-white rounded-lg shadow transition"
           >
-            Thêm phiếu mượn
+            Mượn
           </button>
 
           <!-- Back Link -->

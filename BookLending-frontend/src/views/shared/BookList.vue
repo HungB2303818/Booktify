@@ -55,12 +55,12 @@ const deleteBook = async (id) => {
 <template>
   <div v-if="role === 'staff'" class="flex flex-col min-h-screen bg-zinc-100">
     <div class="container mx-auto px-4 py-4">
-      <div class="flex justify-end mx-8 my-2">
+      <div class="flex justify-center mb-16 mt-10">
         <input
           v-model="searchQuery"
           type="text"
           placeholder="Tìm kiếm sách..."
-          class="input input-bordered w-64"
+          class="w-full max-w-2xl px-6 py-3 rounded-full shadow bg-white border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none"
         />
       </div>
 
