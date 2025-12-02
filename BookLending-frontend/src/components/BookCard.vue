@@ -1,5 +1,5 @@
 <script setup>
-import { computed,onMounted } from "vue";
+import { computed, onMounted } from "vue";
 
 // Nhận props
 const props = defineProps({
@@ -10,7 +10,7 @@ const props = defineProps({
   role: {
     type: String,
     required: true,
-  }
+  },
 });
 const defaultImage = computed(() => "/img/harry.jpg");
 onMounted(() => {
@@ -24,11 +24,11 @@ onMounted(() => {
     class="flex flex-col bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden cursor-pointer"
   >
     <!-- Ảnh bìa sách -->
-    <div class="w-full flex justify-center py-4 bg-zinc-100">
+    <div class="w-full flex justify-center py-2 bg-zinc-100">
       <img
-        :src="book.image || defaultImage"
+        :src="`http://localhost:8080${book.image}`"
         alt="Book cover"
-        class="h-56 object-cover rounded-md shadow-sm"
+        class="h-56 object-cover rounded-md shadow-sm transform rotate-y-6"
       />
     </div>
 
@@ -44,19 +44,13 @@ onMounted(() => {
         </p>
       </div>
     </div>
-    <div v-if="role==='user'" class="px-4 pb-4">
-      <button
-        class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 cursor-pointer"
-        @click.stop="$emit('view-detail', book._id)"
-      >
-        Mượn ngay
-      </button>
-    </div>
-    <div v-else-if="role==='staff'" class="px-4 pb-4 flex gap-2 justify-center">
+
+    <div v-if="role === 'staff'" class="px-4 pb-4 flex gap-2 justify-center">
       <button
         class="h-9 w-9 bg-yellow-500 text-black hover:bg-yellow-600 font-medium rounded-full cursor-pointer"
         @click.stop="$emit('view-edit', book._id)"
-      ><i class="fa-solid fa-pen text-sm"></i>
+      >
+        <i class="fa-solid fa-pen text-sm"></i>
       </button>
 
       <button

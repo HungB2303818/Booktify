@@ -70,7 +70,7 @@ onMounted(async () => {
         >
           <img
             name="image"
-            :src="book.image"
+            :src="`http://localhost:8080${book.image}`"
             alt="Book cover"
             class="w-64 h-96 object-cover rounded-xl shadow-md"
           />

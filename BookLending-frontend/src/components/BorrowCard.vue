@@ -192,8 +192,7 @@ onMounted(() => {
       class="min-w-[150px] max-w-[220px] px-6 py-4 text-sm text-black font-bold flex items-center gap-3"
     >
       <img
-        v-if="borrow.book_id?.image"
-        :src="borrow.book_id.image"
+        :src="`http://localhost:8080${book.image}`"
         alt="Book cover"
         class="w-10 h-14 object-cover rounded shadow"
       />

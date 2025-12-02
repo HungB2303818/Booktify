@@ -43,30 +43,64 @@ const goToAddBook = () => {
 
 <template>
   <template v-if="role !== 'staff'">
-    <section class="py-16 bg-white text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
-        Mượn sách nhanh – Mở rộng tri thức.
-      </h1>
-      <p class="mt-3 text-gray-600 max-w-2xl mx-auto text-lg">
-        Khám phá hàng ngàn đầu sách thuộc mọi thể loại, từ kinh điển đến hiện
-        đại, tất cả đều trong tầm tay bạn.
-      </p>
+    <section class="relative w-full py-24 text-center overflow-hidden">
+      <!-- Background image -->
+      <img
+        src="/img/library.jpg"
+        alt="background"
+        class="absolute inset-0 w-full h-full"
+      />
 
-      <div class="mt-6 flex justify-center gap-4">
-        <button
-          class="px-6 py-3 rounded-lg bg-blue-600 text-white font-medium shadow hover:bg-blue-700 transition"
-        >
-          <router-link to="/#books">Khám phá sách</router-link>
-        </button>
-        <button
-          v-if="role !== 'user' && role !== 'staff'"
-          class="px-6 py-3 rounded-lg bg-gray-100 text-gray-800 font-medium shadow hover:bg-gray-200 transition"
-        >
-          Đăng ký ngay
-        </button>
+      <!-- GRADIENT FADE (từ trong suốt → trắng) -->
+      <div
+        class="absolute inset-0 z-[5]"
+        style="
+          background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.65) 0%,
+            rgba(255, 255, 255, 0.75) 35%,
+            rgba(255, 255, 255, 0.85) 55%,
+            rgba(255, 255, 255, 0.95) 75%,
+            rgba(255, 255, 255, 1) 100%
+          );
+        "
+      ></div>
+
+      <!-- CONTENT -->
+      <div class="relative z-10 max-w-4xl mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
+          Mượn sách nhanh – Mở rộng tri thức
+        </h1>
+
+        <p class="mt-3 text-gray-600 text-lg">
+          Khám phá hàng ngàn đầu sách thuộc mọi thể loại từ kinh điển đến hiện
+          đại <br />
+          Tất cả đều trong tầm tay bạn.
+        </p>
+
+        <div class="mt-6 flex justify-center gap-4">
+          <router-link
+            to="/#books"
+            class="px-7 py-3 rounded-xl text-white font-medium shadow-md bg-gradient-to-r from-blue-700 to-blue-500 hover:scale-[1.04] transition duration-200"
+          >
+            Khám phá sách
+          </router-link>
+          <RouterLink to="/user/register">
+            <button
+              v-if="role !== 'user' && role !== 'staff'"
+              class="px-7 py-3 rounded-xl border-2 font-semibold cursor-pointer border-blue-600 text-blue-600 bg-white hover:bg-blue-50 transition duration-200"
+            >
+              Đăng ký ngay
+            </button>
+          </RouterLink>
+        </div>
       </div>
     </section>
-    <section class="px-4 mb-24">
+
+    <section class="px-4 mt-24 mb-24">
+      <h2 class="text-center text-2xl font-semibold text-gray-900 mb-6">
+        Không gian thư viện & tiện ích
+      </h2>
       <div class="max-w-6xl mx-auto flex gap-4 overflow-x-auto scrollbar-hide">
         <img
           src="/img/unnamed.webp"

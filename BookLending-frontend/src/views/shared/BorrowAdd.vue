@@ -81,7 +81,7 @@ onMounted(async () => {
         <div class="flex flex-col items-center">
           <div class="p-4 rounded-xl">
             <img
-              :src="book.image || defaultImage"
+              :src="`http://localhost:8080${book.image}`"
               class="w-72 h-92 object-cover rounded-lg"
             />
           </div>
@@ -130,18 +130,6 @@ onMounted(async () => {
               class="w-full rounded-lg px-3 py-2 bg-gray-100 border border-gray-300 cursor-not-allowed"
             />
           </div>
-
-          <!-- Quantity -->
-          <div class="mb-4">
-            <label class="text-sm font-medium block mb-1">Số quyển</label>
-            <input
-              v-model="quantity"
-              type="number"
-              readonly
-              class="w-full rounded-lg px-3 py-2 bg-gray-100 border border-gray-300 cursor-not-allowed"
-            />
-          </div>
-
           <!-- Borrow + Return Date -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>

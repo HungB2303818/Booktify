@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 require("dotenv").config();
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const ApiError = require("./app/api-error");
@@ -19,6 +20,8 @@ app.use("/api/publishers", publishersRouter);
 app.use("/api/readers", readersRouter);
 app.use("/api/borrowrecords", borrowrecordsRouter);
 app.use("/api/employees", EmployeesRouter);
+app.use("/images", express.static(path.join(__dirname, "images")));
+
 //Trang mặc định
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to book lending system." });

@@ -45,10 +45,12 @@ const deleteBook = async () => {
         class="grid grid-cols-1 md:grid-cols-[1fr_2fr] items-start gap-3 items-stretch"
       >
         <!-- Ảnh bìa -->
-        <div class="flex flex-col items-center space-y-4 bg-white rounded-xl shadow">
+        <div
+          class="flex flex-col items-center space-y-4 bg-white rounded-xl shadow"
+        >
           <div class="w-full flex justify-center py-4 bg-zinc-50">
             <img
-              :src="book.image || defaultImage"
+              :src="`http://localhost:8080${book.image}`"
               alt="Bìa sách"
               class="w-48 h-63 object-cover rounded-md"
             />
@@ -109,10 +111,12 @@ const deleteBook = async () => {
           <div class="pt-4">
             <h2 class="font-semibold text-lg mb-1">Mô tả</h2>
             <p class="text-gray-600 leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-              qui animi, eveniet nesciunt ipsam cumque. Odit doloribus
-              voluptatum rerum dolorem! A mollitia placeat quam ea cupiditate
-              dolore earum pariatur consequatur?
+              Một hành trình đầy bất ngờ mở ra khi nhân vật chính buộc phải bước
+              ra khỏi vùng an toàn của mình và đối mặt với những thử thách chưa
+              từng được chuẩn bị trước. Mỗi quyết định đều có thể thay đổi số
+              phận, và những thử thách nối tiếp nhau không chỉ thử lòng can đảm
+              mà còn mở ra những bài học sâu sắc về tình bạn, niềm tin và ý
+              nghĩa của sự trưởng thành.
             </p>
           </div>
         </div>

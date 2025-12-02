@@ -45,7 +45,7 @@ const handleUserLogin = handleSubmit(async () => {
 });
 </script>
 <template>
-  <div class="bg-zinc-100 min-h-screen p-4 flex justify-center items-center">
+  <div class="bg-zinc-100 min-h-screen p-4 flex flex-col justify-center items-center">
     <form @submit.prevent="handleUserLogin">
       <fieldset
         class="w-96 bg-base-100 border-base-300 rounded-box border p-6 shadow"
@@ -60,7 +60,7 @@ const handleUserLogin = handleSubmit(async () => {
           id="username"
           placeholder="Nhập tên đăng nhập"
         />
-        <span class="text-red-600 text-sm">{{ usernameError }}</span>
+        <div class="text-red-600 text-sm">{{ usernameError }}</div>
 
         <label class="label" for="password">Mật khẩu</label>
         <input
@@ -70,11 +70,12 @@ const handleUserLogin = handleSubmit(async () => {
           id="password"
           placeholder="Nhập mật khẩu"
         />
-        <span class="text-red-600 text-sm">{{ passwordError }}</span>
-
-        <button type="submit" class="btn btn-success text-white w-full mt-4">
+        <div class="text-red-600 text-sm">{{ passwordError }}</div>
+        <div class="flex justify-center">
+        <button type="submit" class="w-1/2 mt-4 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 hover:shadow-[0_0_35px_rgba(0,123,255,0.7)] transition duration-300">
           Đăng nhập
         </button>
+        </div>
       </fieldset>
     </form>
   </div>

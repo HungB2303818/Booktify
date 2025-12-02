@@ -17,9 +17,10 @@
         ></path>
       </svg>
       <p>
-        ACME Industries Ltd.
+        Booktify.
         <br />
-        Providing reliable tech since 1992
+        Hệ thống hỗ trợ mượn sách nhanh chóng, tiện lợi 
+        và dễ sử dụng
       </p>
     </aside>
     <nav>

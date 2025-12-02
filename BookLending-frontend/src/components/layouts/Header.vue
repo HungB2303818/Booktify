@@ -25,7 +25,7 @@ window.addEventListener("storage", () => {
 </script>
 
 <template>
-  <div class="sticky top-0 z-50 navbar bg-blue-700 shadow text-white h-[48px]">
+  <div class="navbar bg-blue-700 shadow text-white h-[48px]">
     <!-- PHẦN TRÁI -->
     <div v-if="role !== 'staff'" class="navbar-start">
       <!-- Logo -->
@@ -81,7 +81,7 @@ window.addEventListener("storage", () => {
             <li>
               <RouterLink
                 to="/"
-                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+                class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-yellow text-gray-100"
               >
                 Trang chủ
               </RouterLink>
@@ -91,7 +91,7 @@ window.addEventListener("storage", () => {
             <li>
               <RouterLink
                 to="/#books"
-                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+                class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-white text-gray-100"
               >
                 Sách
               </RouterLink>
@@ -101,7 +101,7 @@ window.addEventListener("storage", () => {
             <li>
               <RouterLink
                 to="/aboutus"
-                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+                class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-white text-gray-100"
               >
                 Giới thiệu
               </RouterLink>
@@ -111,7 +111,7 @@ window.addEventListener("storage", () => {
             <li>
               <RouterLink
                 to="/contact"
-                class="px-4 py-2 rounded-lg transition font-semibold hover:bg-blue-600 hover:text-white text-gray-100"
+                class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-white text-gray-100"
               >
                 Liên hệ
               </RouterLink>
@@ -127,7 +127,7 @@ window.addEventListener("storage", () => {
       <template v-if="!username">
         <RouterLink
           to="/user/login"
-          class="px-5 py-2 bg-white text-black font-semibold rounded-full shadow hover:bg-gray-100 active:scale-95 transition"
+          class="px-5 py-2 bg-white text-blue-600 font-semibold rounded-full shadow hover:bg-gray-100 active:scale-95 transition"
         >
           Đăng Nhập
         </RouterLink>

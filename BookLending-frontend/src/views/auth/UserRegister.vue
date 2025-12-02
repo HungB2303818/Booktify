@@ -46,110 +46,136 @@ const handleUserRegister = handleSubmit(async (values) => {
 </script>
 
 <template>
-    <div
-      class="min-h-screen bg-zinc-100 flex justify-center items-center p-6"
-    >
-      <form @submit.prevent="handleUserRegister" class="w-full max-w-md">
-        <fieldset
-          class="fieldset bg-white border-base-300 rounded-2xl border p-8 shadow"
-        >
-          <h1 class="font-bold text-2xl text-center mb-6">Tạo tài khoản mới</h1>
-
-          <label class="label font-medium" for="name">Tên</label>
-          <input
-            v-model="name"
-            type="text"
-            class="input w-full mb-1"
-            id="name"
-            placeholder="Nhập họ và tên"
-          />
-          <span class="text-red-600 text-sm">{{ nameError }}</span>
-
-          <label class="label" for="username">Tên đăng nhập</label>
-          <input
-            v-model="username"
-            type="text"
-            class="input w-full"
-            id="username"
-            placeholder="Nhập tên đăng nhập"
-          />
-          <span class="text-red-600 text-sm">{{ usernameError }}</span>
-
-          <label class="label" for="birthdate">Ngày sinh</label>
-          <input v-model="birthdate" type="date" id="birthdate" class="input w-full mb-1" />
-          <span class="text-red-600 text-sm">{{ birthdateError }}</span>
-
-          <label class="label">Giới tính</label>
-          <div class="flex gap-8">
-            <div>
-              <input
-                v-model="sex"
-                :value="true"
-                type="radio"
-                name="radio-1"
-                class="radio mr-1"
-              />
-              <span>Nam</span>
-            </div>
-            <div class="">
-              <input
-                v-model="sex"
-                :value="false"
-                type="radio"
-                name="radio-1"
-                class="radio mr-1"
-              />
-              <span>Nữ</span>
-            </div>
+  <div
+    class="min-h-screen bg-zinc-100 flex flex-col justify-center items-center p-6"
+  >
+    <h1 class="font-bold text-3xl text-center mb-8 text-gray-800">
+      Tạo tài khoản mới
+    </h1>
+    <form @submit.prevent="handleUserRegister" class="w-full max-w-3xl">
+      <fieldset class="bg-white rounded-2xl p-10 shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="label font-medium" for="name">Tên</label>
+            <input
+              v-model="name"
+              type="text"
+              id="name"
+              class="input w-full"
+              placeholder="Nhập họ và tên"
+            />
+            <span class="text-red-600 text-sm">{{ nameError }}</span>
           </div>
-          <span class="text-red-600 text-sm">{{ sexError }}</span>
 
-          <label class="label" for="address">Địa chỉ</label>
+          <div>
+            <label class="label font-medium" for="username"
+              >Tên đăng nhập</label
+            >
+            <input
+              v-model="username"
+              type="text"
+              id="username"
+              class="input w-full"
+              placeholder="Nhập tên đăng nhập"
+            />
+            <span class="text-red-600 text-sm">{{ usernameError }}</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+          <div>
+            <label class="label font-medium" for="birthdate">Ngày sinh</label>
+            <input
+              v-model="birthdate"
+              type="date"
+              id="birthdate"
+              class="input w-full"
+            />
+            <span class="text-red-600 text-sm">{{ birthdateError }}</span>
+          </div>
+
+          <div>
+            <label class="label font-medium">Giới tính</label>
+            <div class="flex items-center gap-8 mt-2">
+              <label class="flex items-center gap-2">
+                <input v-model="sex" :value="true" type="radio" class="radio" />
+                <span>Nam</span>
+              </label>
+
+              <label class="flex items-center gap-2">
+                <input
+                  v-model="sex"
+                  :value="false"
+                  type="radio"
+                  class="radio"
+                />
+                <span>Nữ</span>
+              </label>
+            </div>
+            <span class="text-red-600 text-sm">{{ sexError }}</span>
+          </div>
+        </div>
+
+        <!-- HÀNG 3: ĐỊA CHỈ -->
+        <div class="mt-6">
+          <label class="label font-medium" for="address">Địa chỉ</label>
           <input
             v-model="address"
             type="text"
-            class="input w-full mb-1"
             id="address"
+            class="input w-full"
             placeholder="Nhập địa chỉ"
           />
           <span class="text-red-600 text-sm">{{ addressError }}</span>
+        </div>
 
-          <label class="label" for="phone">Số điện thoại</label>
+        <!-- HÀNG 4: SỐ ĐIỆN THOẠI -->
+        <div class="mt-6">
+          <label class="label font-medium" for="phone">Số điện thoại</label>
           <input
             v-model="phone"
             type="text"
-            class="input w-full mb-1"
             id="phone"
+            class="input w-full"
             placeholder="Nhập số điện thoại"
           />
           <span class="text-red-600 text-sm">{{ phoneError }}</span>
+        </div>
 
-          <label class="label" for="password">Mật khẩu</label>
+        <!-- HÀNG 5: MẬT KHẨU -->
+        <div class="mt-6">
+          <label class="label font-medium" for="password">Mật khẩu</label>
           <input
             v-model="password"
             type="password"
-            class="input w-full mb-1"
             id="password"
+            class="input w-full"
             placeholder="Nhập mật khẩu"
           />
           <span class="text-red-600 text-sm">{{ passwordError }}</span>
-          <div class="flex justify-center">
-            <button
-              type="submit"
-              class="btn w-72 btn-success text-white mt-4 hover:scale-[1.01] text-base"
-            >
-              Đăng Ký
-            </button>
-          </div>
-          <span class="mt-8 text-base"
-            >Bạn đã có tài khoản?
-            <strong class="hover:underline">
-              <RouterLink to="/user/login" class="text-base underline"
-                >Đăng nhập</RouterLink
-              >
-            </strong>
-          </span>
-        </fieldset>
-      </form>
-    </div>
+        </div>
+
+        <!-- BUTTON -->
+        <div class="flex justify-center mt-8">
+          <button
+            type="submit"
+            class="w-1/4 mt-4 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 hover:shadow-[0_0_35px_rgba(0,123,255,0.7)] transition duration-300"
+          >
+            Đăng ký
+          </button>
+        </div>
+
+        <!-- LINK ĐĂNG NHẬP -->
+        <p class="mt-8 text-center text-gray-700">
+          Bạn đã có tài khoản?
+          <RouterLink
+            to="/user/login"
+            class="font-bold hover:underline"
+          >
+            Đăng nhập
+          </RouterLink>
+        </p>
+      </fieldset>
+    </form>
+  </div>
 </template>

@@ -8,9 +8,9 @@
           About Booktify / Giới Thiệu
         </h1>
         <p class="mt-4 text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Chào mừng bạn đến với trái tim của cộng đồng Booktify. Khám phá câu
+          Chào mừng đến với trái tim của cộng đồng Booktify. Khám phá câu
           chuyện, sứ mệnh và những giá trị đã tạo nên niềm đam mê lan tỏa tri
-          thức qua từng cuốn sách của chúng tôi.
+          thức qua từng cuốn sách.
         </p>
       </section>
 
@@ -29,7 +29,7 @@
             Sứ mệnh của chúng tôi
           </h2>
           <p class="mt-3 text-gray-700 leading-relaxed">
-            Sứ mệnh của chúng tôi là giúp tri thức trở nên dễ tiếp cận hơn với
+            Sứ mệnh của Booktify là giúp tri thức trở nên dễ tiếp cận hơn với
             mọi người bằng cách mang đến một trải nghiệm mượn sách liền mạch,
             thuận tiện và đầy cảm hứng. Chúng tôi nỗ lực xây dựng một cộng đồng
             học tập và đọc sách toàn cầu, phá bỏ mọi rào cản đối với giáo dục và
@@ -40,7 +40,7 @@
         <div>
           <h2 class="text-2xl font-bold text-gray-900">Tầm nhìn</h2>
           <p class="mt-3 text-gray-700 leading-relaxed">
-            Chúng tôi hướng đến một thế giới nơi mọi người đều có cơ hội học hỏi
+            Booktify hướng đến một thế giới nơi mọi người đều có cơ hội học hỏi
             và trưởng thành thông qua kho tàng vô hạn của văn học. Nền tảng của
             chúng tôi sẽ trở thành chất xúc tác cho sự tò mò, kết nối trí tuệ
             với những ý tưởng định hình tương lai.
@@ -54,7 +54,7 @@
       <section class="text-center py-6">
         <h2 class="text-3xl font-bold text-gray-900">Giá trị cốt lõi</h2>
         <p class="mt-2 text-gray-600 leading-relaxed">
-          Chúng tôi tin vào sức mạnh của tri thức trong việc thay đổi cuộc sống
+          Booktify tin vào sức mạnh của tri thức trong việc thay đổi cuộc sống
           và cam kết xây dựng một văn hóa học tập liên tục.
         </p>
 
@@ -87,7 +87,7 @@
             <div class="p-6">
               <h3 class="text-xl font-semibold text-gray-900">Cộng đồng</h3>
               <p class="mt-2 text-gray-600 text-sm leading-relaxed">
-                Chúng tôi nỗ lực xây dựng một cộng đồng sôi động gồm độc giả,
+                Booktify nỗ lực xây dựng một cộng đồng sôi động gồm độc giả,
                 người yêu sách và những người thích khám phá — kết nối với nhau
                 qua tình yêu dành cho sách.
               </p>
@@ -105,7 +105,7 @@
             <div class="p-6">
               <h3 class="text-xl font-semibold text-gray-900">Chất lượng</h3>
               <p class="mt-2 text-gray-600 text-sm leading-relaxed">
-                Chúng tôi cam kết mang đến bộ sưu tập sách chất lượng cao và
+                Cam kết mang đến bộ sưu tập sách chất lượng cao và
                 trải nghiệm nền tảng ổn định, đáng tin cậy.
               </p>
             </div>
@@ -119,7 +119,7 @@
       <section class="grid md:grid-cols-2 gap-12">
         <div>
           <h3 class="text-2xl font-bold text-gray-900">
-            Điều khiến chúng tôi khác biệt
+            Điều khiến Booktify khác biệt
           </h3>
           <p class="mt-3 text-gray-700 leading-relaxed">
             Booktify tạo nên sự khác biệt thông qua việc tuyển chọn sách cẩn
@@ -153,9 +153,9 @@
       <section
         class="mt-16 bg-white p-10 rounded-2xl shadow-md border border-gray-100 text-center"
       >
-        <h2 class="text-3xl font-bold text-gray-900">Cam kết của chúng tôi</h2>
+        <h2 class="text-3xl font-bold text-gray-900">Cam kết</h2>
         <p class="mt-3 text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Chúng tôi cam kết không ngừng cải thiện nền tảng, mở rộng bộ sưu tập
+          Booktify cam kết không ngừng cải thiện nền tảng, mở rộng bộ sưu tập
           sách và phát triển cộng đồng. Hành trình tri thức của bạn là ưu tiên
           hàng đầu của chúng tôi. Booktify hứa mang đến một môi trường đáng tin
           cậy, bổ ích và truyền cảm hứng cho mọi trải nghiệm đọc sách của bạn.

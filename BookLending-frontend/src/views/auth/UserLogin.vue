@@ -58,7 +58,7 @@ const handleUserLogin = handleSubmit(async () => {
         </h1>
 
         <p class="text-gray-500 max-w-md">
-          Borrow, read, and share thousands of titles with our community.
+          Đăng nhập để sử dụng trọn bộ dịch vụ của chúng tôi
         </p>
       </div>
     </div>
@@ -96,7 +96,7 @@ const handleUserLogin = handleSubmit(async () => {
           <div class="flex justify-center">
             <button
               type="submit"
-              class="btn w-full mt-6 bg-blue-600 text-white hover:bg-blue-700"
+              class="w-1/2 mt-4 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 hover:shadow-[0_0_35px_rgba(0,123,255,0.7)] transition duration-300"
             >
               Đăng nhập
             </button>
@@ -105,14 +105,20 @@ const handleUserLogin = handleSubmit(async () => {
           <!-- Links -->
           <p class="text-sm mt-4">
             Chưa có tài khoản?
-            <RouterLink to="/user/register" class="text-base font-semibold underline">
+            <RouterLink
+              to="/user/register"
+              class="text-base font-semibold underline"
+            >
               Đăng ký ngay
             </RouterLink>
           </p>
 
           <p class="text-sm mt-2">
             Đăng nhập với vai trò quản trị viên?
-            <RouterLink to="/staff/login" class="text-base font-semibold underline">
+            <RouterLink
+              to="/staff/login"
+              class="text-base font-semibold underline"
+            >
               Đăng nhập tại đây
             </RouterLink>
           </p>
