@@ -105,6 +105,11 @@ const routes = [
     path: "/contact",
     name: "contact",
     component: () => import("../views/shared/Contact.vue")
+  },
+  {
+    path: "/borrow/:id",
+    name: "borrow.detail",
+    component: () => import("../views/shared/BorrowDetail.vue")
   }
 ];
 const router = createRouter({

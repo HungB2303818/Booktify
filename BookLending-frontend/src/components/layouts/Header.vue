@@ -48,29 +48,36 @@ window.addEventListener("storage", () => {
         <template v-if="role === 'staff'">
           <li>
             <RouterLink
+              to="/home/staff"
+              class="text-base rounded-xl"
+              >Tổng quan</RouterLink
+            >
+          </li>
+          <li>
+            <RouterLink
               to="/books"
-              class="text-base rounded-xl font-semibold hover:font-bold"
+              class="text-base rounded-xl"
               >Danh mục sách</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/borrowrecords"
-              class="text-base rounded-xl font-semibold hover:font-bold"
+              class="text-base rounded-xl"
               >Đơn mượn sách</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/publishers"
-              class="text-base rounded-xl font-semibold hover:font-bold"
+              class="text-base rounded-xl"
               >Nhà xuất bản</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/users"
-              class="text-base rounded-xl font-semibold hover:font-bold"
+              class="text-base rounded-xl"
               >Người dùng</RouterLink
             >
           </li>

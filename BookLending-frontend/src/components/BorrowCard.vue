@@ -192,7 +192,7 @@ onMounted(() => {
       class="min-w-[150px] max-w-[220px] px-6 py-4 text-sm text-black font-bold flex items-center gap-3"
     >
       <img
-        :src="`http://localhost:8080${book.image}`"
+        :src="`http://localhost:8080${borrow.book_id?.image}`"
         alt="Book cover"
         class="w-10 h-14 object-cover rounded shadow"
       />
@@ -233,57 +233,81 @@ onMounted(() => {
       </span>
     </td>
 
-    <td class="px-6 py-4 text-start align-middle">
-      <!--staff-->
-      <div v-if="role === 'staff'" class="flex mt-4 gap-3 ">
-        <button
-          v-if="currentStatus.actions.approve"
-          @click="handleApproveBook(borrow._id)"
-          class="text-green-600 transition-all hover:text-green-900 cursor-pointer underline"
+    <td class="px-6 py-3 text-start align-middle">
+      <div class="flex gap-4 items-center">
+        <router-link
+          :to="`/borrow/${borrow._id}`"
+          class="text-gray-500 hover:text-gray-700"
+          title="Xem chi tiết đơn mượn"
         >
-          Duyệt
-        </button>
-        <span v-if="currentStatus.actions.approve && currentStatus.actions.reject" class="text-base-300">|</span>
-        <button
-          v-if="currentStatus.actions.reject"
-          @click="handleRejectBook(borrow._id)"
-          class="text-red-600 transition-all hover:text-red-900 cursor-pointer underline"
-        >
-          Từ chối
-        </button>
+          <i class="fa-solid fa-eye text-lg"></i>
+        </router-link>
 
-        <button
-          v-if="currentStatus.actions.approveReturn"
-          @click="handleApproveReturnBook(borrow._id)"
-          class="text-purple-500 transition-all hover:text-purple-900 cursor-pointer underline"
-        >
-          Duyệt trả
-        </button>
-        <button
-          v-if="currentStatus.actions.delete"
-          @click="handleDeleteBorrow(borrow._id)"
-          class="font-medium text-red-600 hover:text-red-800 transition-colors cursor-pointer underline"
-        >
-          Xóa
-        </button>
-      </div>
+        <!-- ================== STAFF ================== -->
+        <template v-if="role === 'staff'">
+          <!-- ✔ DUYỆT (Xanh) -->
+          <button
+            v-if="currentStatus.actions.approve"
+            @click="handleApproveBook(borrow._id)"
+            class="text-green-600 hover:text-green-800 cursor-pointer"
+            title="Duyệt"
+          >
+            <i class="fa-solid fa-check text-lg"></i>
+          </button>
 
-      <!-- ================== NÚT HÀNH ĐỘNG USER ================== -->
-      <div v-if="role === 'user'" class="mt-4 space-y-2">
-        <button
-          v-if="currentStatus.actions.returnpending"
-          @click="handleReturnBook(borrow._id)"
-          class="text-green-600 font-semibold transition-all hover:text-green-900 cursor-pointer underline"
-        >
-          Trả sách
-        </button>
-        <button
-          v-if="currentStatus.actions.delete"
-          @click="handleDeleteBorrow(borrow._id)"
-          class="font-semibold text-red-600 hover:text-red-800 transition-colors cursor-pointer underline"
-        >
-          Xóa
-        </button>
+          <!-- ✖ TỪ CHỐI (Đỏ) -->
+          <button
+            v-if="currentStatus.actions.reject"
+            @click="handleRejectBook(borrow._id)"
+            class="text-red-600 hover:text-red-800 cursor-pointer"
+            title="Từ chối"
+          >
+            <i class="fa-solid fa-xmark text-xl"></i>
+          </button>
+
+          <!-- ✔ DUYỆT TRẢ (Tím) -->
+          <button
+            v-if="currentStatus.actions.approveReturn"
+            @click="handleApproveReturnBook(borrow._id)"
+            class="text-purple-500 hover:text-purple-700 cursor-pointer"
+            title="Duyệt trả"
+          >
+            <i class="fa-solid fa-check text-lg"></i>
+          </button>
+
+          <!-- 🗑 XÓA (Đỏ) -->
+          <button
+            v-if="currentStatus.actions.delete"
+            @click="handleDeleteBorrow(borrow._id)"
+            class="text-red-600 hover:text-red-800 cursor-pointer"
+            title="Xóa"
+          >
+            <i class="fa-solid fa-trash text-lg"></i>
+          </button>
+        </template>
+
+        <!-- ================== USER ================== -->
+        <template v-if="role === 'user'">
+          <!-- ✔ TRẢ SÁCH -->
+          <button
+            v-if="currentStatus.actions.returnpending"
+            @click="handleReturnBook(borrow._id)"
+            class="text-purple-600 font-semibold hover:text-purple-800 cursor-pointer"
+            title="Trả sách"
+          >
+            Trả sách
+          </button>
+
+          <!-- 🗑 XÓA -->
+          <button
+            v-if="currentStatus.actions.delete"
+            @click="handleDeleteBorrow(borrow._id)"
+            class="text-red-600 hover:text-red-800 cursor-pointer"
+            title="Xóa"
+          >
+            <i class="fa-solid fa-trash text-lg"></i>
+          </button>
+        </template>
       </div>
     </td>
   </tr>

@@ -71,20 +71,6 @@ onMounted(async () => {
         <div class="tooltip" data-tip="Tên nhà xuất bản, địa chỉ">
           <InputSearch class="w-full" v-model="searchText"></InputSearch>
         </div>
-
-        <!-- <template v-if="role === 'staff'">
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-2"
-          >
-            
-            <button
-              class="btn btn-error hover:btn-error hover:text-white hover:scale-[1.01]"
-              @click="handleDeleteAllPublishers"
-            >
-              Xóa tất cả
-            </button>
-          </div>
-        </template> -->
       </div>
 
       <template v-if="searchFilteredPublishers.length > 0">

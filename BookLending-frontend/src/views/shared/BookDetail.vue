@@ -93,6 +93,10 @@ const deleteBook = async () => {
 
           <div class="text-gray-700 space-y-1 text-sm">
             <p>
+              Tác giả:
+              <span class="font-semibold"> {{ book.author }}</span>
+            </p>
+            <p>
               Nhà xuất bản:
               <span class="font-semibold"> {{ book.publisher }}</span>
             </p>

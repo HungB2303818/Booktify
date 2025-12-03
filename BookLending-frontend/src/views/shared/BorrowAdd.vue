@@ -130,7 +130,6 @@ onMounted(async () => {
               class="w-full rounded-lg px-3 py-2 bg-gray-100 border border-gray-300 cursor-not-allowed"
             />
           </div>
-          <!-- Borrow + Return Date -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="text-sm font-medium block mb-1">Ngày mượn</label>
@@ -156,13 +155,13 @@ onMounted(async () => {
           <!-- Submit Button -->
           <button
             type="submit"
-            class="mt-6 py-3 px-5 w-[128px] bg-blue-600 hover:bg-blue-700 cursor-pointer text-white rounded-lg shadow transition"
+            class="w-1/5 mt-12 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 hover:shadow-[0_0_35px_rgba(0,123,255,0.7)] transition duration-300"
           >
             Mượn
           </button>
 
           <!-- Back Link -->
-          <div class="mt-4">
+          <div class="mt-4 ml-2">
             <RouterLink to="/#books" class="font-semibold hover:underline">
               Quay lại
             </RouterLink>
