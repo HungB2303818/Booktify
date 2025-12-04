@@ -315,7 +315,9 @@ const currentStatus = computed(() => {
         </div>
         <div>
           <p class="text-sm">Trạng thái</p>
-          <p :class="currentStatus.class" class="inline-block">{{ currentStatus.label }}</p>
+          <p :class="currentStatus.class" class="inline-block">
+            {{ currentStatus.label }}
+          </p>
         </div>
       </div>
       <div class="max-w-6xl mx-auto mt-6 flex justify-end">
@@ -327,6 +329,44 @@ const currentStatus = computed(() => {
           >
             Trả sách
           </button>
+          <button
+            v-if="currentStatus.actions.delete"
+            @click="handleDeleteBorrow(borrow._id)"
+            class="flex items-center gap-2 bg-red-50 text-red-600 border border-red-200 px-4 py-2 rounded-xl hover:bg-red-100 hover:border-red-300 transition-all cursor-pointer"
+            title="Xóa đơn mượn"
+          >
+            <i class="fa-solid fa-trash text-base"></i>
+            <span class="font-medium">Xóa</span>
+          </button>
+        </div>
+        <div v-if="role === 'staff'" class="flex gap-2 items-center">
+          <button
+            v-if="currentStatus.actions.approve"
+            @click="handleApproveBook(borrow._id)"
+            class="flex items-center font-semibold gap-2 bg-green-50 text-green-600 border-2 border-green-200 px-4 py-2 rounded-xl hover:bg-green-100 hover:border-green-300 transition-all cursor-pointer"
+            title="Duyệt"
+          >
+            Duyệt
+          </button>
+
+          <button
+            v-if="currentStatus.actions.reject"
+            @click="handleRejectBook(borrow._id)"
+            class="flex items-center gap-2 bg-red-50 text-red-600 border-2 border-red-200 px-4 py-2 rounded-xl hover:bg-red-100 hover:border-red-300 transition-all cursor-pointer"
+            title="Từ chối"
+          >
+            Từ chối
+          </button>
+
+          <button
+            v-if="currentStatus.actions.approveReturn"
+            @click="handleApproveReturnBook(borrow._id)"
+            class="flex items-center font-semibold gap-2 bg-purple-50 text-purple-600 border-2 border-purple-200 px-4 py-2 rounded-xl hover:bg-purple-100 hover:border-purple-300 transition-all cursor-pointer"
+            title="Duyệt trả"
+          >
+            Duyệt trả
+          </button>
+
           <button
             v-if="currentStatus.actions.delete"
             @click="handleDeleteBorrow(borrow._id)"

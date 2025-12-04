@@ -22,7 +22,6 @@ onMounted(async () => {
   }
 });
 
-// Lọc theo từ khóa tìm kiếm
 const filteredBooks = computed(() => {
   if (!searchQuery.value.trim()) return books.value;
   return books.value.filter((b) =>
@@ -30,12 +29,10 @@ const filteredBooks = computed(() => {
   );
 });
 
-// Điều hướng tới trang chi tiết
 const goToDetail = (id) => {
   router.push(`/books/${id}`);
 };
 const goToEdit = (id) => router.push(`/books/edit/${id}`);
-// Điều hướng tới trang thêm mới
 const goToAddBook = () => {
   router.push("/books/add");
 };
@@ -56,28 +53,31 @@ const deleteBook = async (id) => {
   <div v-if="role === 'staff'" class="flex flex-col min-h-screen bg-zinc-100">
     <div class="container mx-auto px-4 py-4">
       <div class="flex flex-col items-center mb-16 mt-10 w-full">
-        <div class="flex items-center w-full max-w-2xl relative">
-          <!-- Icon search -->
-          <span class="absolute left-4 text-gray-400">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </span>
-
+        <div class="flex items-center w-full max-w-2xl gap-2">
           <!-- Ô tìm kiếm -->
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Tìm kiếm sách..."
-            class="w-full pl-12 pr-4 py-3 rounded-full shadow-md bg-white border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition"
-          />
+          <div class="relative flex-1">
+            <span
+              class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+            >
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
 
-          <!-- Nút thêm sách (hiển thị khi staff) -->
+            <input
+              v-model="searchQuery"
+              type="text"
+              placeholder="Tìm kiếm sách..."
+              class="w-full pl-12 pr-4 py-3 rounded-full shadow-sm bg-white border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition text-gray-700"
+            />
+          </div>
+
+          <!-- Nút thêm sách -->
           <button
             v-if="role === 'staff'"
             @click="goToAddBook"
             title="Thêm sách mới"
-            class="ml-4 w-13 h-12 flex items-center justify-center rounded-full bg-blue-600 cursor-pointer text-white text-2xl shadow-lg hover:bg-blue-700 hover:shadow-xl active:scale-95 transition-transform"
+            class="min-w-[150px] py-2.5 flex items-center gap-2 justify-center rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold text-base shadow-md hover:from-blue-600 hover:to-blue-700 hover:shadow-lg active:scale-95 transition-all cursor-pointer"
           >
-            <i class="fa-solid fa-plus"></i>
+            Thêm sách
           </button>
         </div>
       </div>

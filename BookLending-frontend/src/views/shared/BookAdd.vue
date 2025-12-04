@@ -41,99 +41,124 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-md mx-auto my-8 bg-white shadow-sm rounded-lg p-6">
-    <!-- Tiêu đề -->
-    <h2 class="text-2xl font-semibold text-blue-600 mb-6">Thêm sách</h2>
+  <div class="min-h-screen bg-zinc-100 p-10">
+    <div class="max-w-4xl mx-auto bg-white shadow-sm rounded-lg p-6">
+      <!-- Tiêu đề -->
+      <h2 class="text-2xl font-semibold text-blue-600 mb-6">Thêm sách</h2>
 
-    <!-- Form -->
-    <form @submit.prevent="handleCreateBook">
-      <dl class="divide-y divide-gray-200">
-        <!-- Tên sách -->
-        <div class="py-4 grid grid-cols-3 items-center">
-          <dt class="font-semibold text-gray-800 text-sm">Tên sách</dt>
-          <dd class="col-span-2">
-            <input
-              v-model="title"
-              type="text"
-              placeholder="Nhập tên sách"
-              class="input input-bordered w-full input-sm"
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8">
+        <!-- Cột trái: Ảnh bìa -->
+        <div class="flex flex-col items-start">
+          <div
+            class="w-64 h-92 border border-gray-300 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 mb-3"
+          >
+            <img
+              v-if="previewImage"
+              :src="previewImage"
+              class="object-cover w-full h-full"
             />
-            <span class="text-xs text-red-600">{{ titleError }}</span>
-          </dd>
+            <span v-else class="text-gray-400 text-sm">Chưa có ảnh</span>
+          </div>
         </div>
-        <div class="py-4 grid grid-cols-3 items-center">
-          <dt class="font-semibold text-gray-800 text-sm">Nhà xuất bản</dt>
-          <dd class="col-span-2">
-            <input
-              v-model="publisher"
-              type="text"
-              placeholder="Nhập nhà xuất bản"
-              class="input input-bordered w-full input-sm"
-            />
-            <span class="text-xs text-red-600">{{ publisherError }}</span>
-          </dd>
-        </div>
-        <!-- Tên sách -->
-        <div class="py-4 grid grid-cols-3 items-center">
-          <dt class="font-semibold text-gray-800 text-sm">Tác giả</dt>
-          <dd class="col-span-2">
-            <input
-              v-model="author"
-              type="text"
-              placeholder="Nhập tác giả"
-              class="input input-bordered w-full input-sm"
-            />
-            <span class="text-xs text-red-600">{{ authorError }}</span>
-          </dd>
-        </div>
-        <!-- Tên sách -->
-        <div class="py-4 grid grid-cols-3 items-center">
-          <dt class="font-semibold text-gray-800 text-sm">Năm xuất bản</dt>
-          <dd class="col-span-2">
-            <input
-              v-model="year"
-              type="number"
-              placeholder="Nhập năm xuất bản"
-              class="input input-bordered w-full input-sm"
-            />
-            <span class="text-xs text-red-600">{{ yearError }}</span>
-          </dd>
-        </div>
-        <div class="py-4 grid grid-cols-3 items-center">
-          <dt class="font-semibold text-gray-800 text-sm">Số lượng</dt>
-          <dd class="col-span-2">
-            <input
-              v-model="quantity"
-              type="number"
-              placeholder="Nhập số lượng"
-              class="input input-bordered w-full input-sm"
-            />
-            <span class="text-xs text-red-600">{{ quantityError }}</span>
-          </dd>
-        </div>
-        <div class="py-4 grid grid-cols-3 items-center">
-          <dt class="font-semibold text-gray-800 text-sm">Đơn giá</dt>
-          <dd class="col-span-2">
-            <input
-              v-model="price"
-              type="number"
-              placeholder="Nhập đơn giá"
-              class="input input-bordered w-full input-sm"
-            />
-            <span class="text-xs text-red-600">{{ priceError }}</span>
-          </dd>
-        </div>
-      </dl>
 
-      <!-- Nút -->
-      <div class="flex justify-end mt-6 space-x-2">
-        <RouterLink to="/books" class="btn btn-ghost text-sm hover:underline">
-          Quay lại
-        </RouterLink>
-        <button class="btn btn-success text-sm hover:scale-[1.02] transition">
-          Thêm sách
-        </button>
+        <form @submit.prevent="handleCreateBook" class="space-y-4">
+          <!-- Tên sách -->
+          <div>
+            <dt class="font-medium text-gray-800 text-sm mb-1">Tên sách</dt>
+            <dd>
+              <input
+                v-model="title"
+                type="text"
+                placeholder="Nhập tên sách"
+                class="input input-bordered w-full input-md"
+              />
+              <span class="text-xs text-red-600">{{ titleError }}</span>
+            </dd>
+          </div>
+
+          <!-- Tác giả -->
+          <div>
+            <dt class="font-medium text-gray-800 text-sm mb-1">Tác giả</dt>
+            <dd>
+              <input
+                v-model="author"
+                type="text"
+                placeholder="Nhập tên tác giả"
+                class="input input-bordered w-full input-md"
+              />
+              <span class="text-xs text-red-600">{{ authorError }}</span>
+            </dd>
+          </div>
+
+          <!-- Nhà xuất bản + Năm -->
+          <div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="font-medium text-gray-800 text-sm mb-1 block">
+                  Nhà xuất bản
+                </label>
+                <input
+                  v-model="publisher"
+                  type="text"
+                  placeholder="Nhà xuất bản"
+                  class="input input-bordered w-full input-md"
+                />
+                <span class="text-xs text-red-600">{{ publisherError }}</span>
+              </div>
+
+              <div>
+                <label class="font-medium text-gray-800 text-sm mb-1 block">
+                  Năm xuất bản
+                </label>
+                <input
+                  v-model="year"
+                  type="number"
+                  placeholder="Năm xuất bản"
+                  class="input input-bordered w-full input-md"
+                />
+                <span class="text-xs text-red-600">{{ yearError }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Số lượng -->
+          <div>
+            <dt class="font-medium text-gray-800 text-sm mb-1">Số lượng</dt>
+            <dd>
+              <input
+                v-model="quantity"
+                type="number"
+                placeholder="Nhập số lượng"
+                class="input input-bordered w-full input-md"
+              />
+              <span class="text-xs text-red-600">{{ quantityError }}</span>
+            </dd>
+          </div>
+
+          <!-- Đơn giá -->
+          <div>
+            <dt class="font-medium text-gray-800 text-sm mb-1">Đơn giá</dt>
+            <dd>
+              <input
+                v-model="price"
+                type="number"
+                placeholder="Nhập đơn giá"
+                class="input input-bordered w-full input-md"
+              />
+              <span class="text-xs text-red-600">{{ priceError }}</span>
+            </dd>
+          </div>
+
+          <!-- Nút -->
+          <div class="flex justify-end pt-3">
+            <button
+              class="px-6 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 hover:shadow-lg transition duration-300"
+            >
+              Thêm sách
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </template>

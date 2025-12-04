@@ -15,8 +15,6 @@ const role = computed(() => localStorage.getItem("role"));
 const fetchPublishers = async () => {
   try {
     const response = await publisherService.getAllPublishers();
-    // debug code later
-    // console.log(response);
     publishers.value = response;
   } catch (error) {
     console.error(error);
@@ -42,16 +40,16 @@ const goToAddPublisher = () => {
   router.push({ name: "publisher.add" });
 };
 
-const handleDeleteAllPublishers = async () => {
+const deletePublisher = async (id) => {
   try {
-    if (confirm("Xác nhận xóa tất cả nhà xuất bản?")) {
-      await publisherService.deleteAllPublishers();
-      push.success("Xóa tất cả nhà xuất bản thành công");
+    if (confirm("Xác nhận xóa nhà xuất bản?")) {
+      await publisherService.deletePublisher(id);
+      push.success("Xóa nhà xuất bản thành công");
       fetchPublishers();
     }
   } catch (error) {
     console.log(error);
-    push.error("Đã xảy ra lỗi khi xóa tất cả nhà xuất bản");
+    push.error("Đã xảy ra lỗi khi xóa nhà xuất bản");
   }
 };
 
@@ -64,15 +62,34 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen bg-[#f5f7fa] mx-4">
     <section class="flex-grow mx-4 my-8">
-      <!--input search and add publisher button -->
-      <div class="flex flex-col sm:flex-row gap-2 justify-end">
-        <div class="tooltip" data-tip="Tên nhà xuất bản, địa chỉ">
-          <InputSearch class="w-full" v-model="searchText"></InputSearch>
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4"
+      >
+        <!-- Tiêu đề -->
+        <h1 class="text-3xl font-bold text-gray-800">Danh sách nhà xuất bản</h1>
+
+        <div class="flex items-center gap-3">
+          <!-- Nút thêm -->
+          <button
+            @click="goToAddPublisher"
+            title="Thêm nhà xuất bản"
+            class="btn btn-circle bg-blue-600 text-white text-2xl font-bold hover:bg-blue-700 transition shadow-sm"
+          >
+            +
+          </button>
+
+          <!-- Thanh tìm kiếm -->
+          <div class="tooltip" data-tip="Tên nhà xuất bản, địa chỉ">
+            <InputSearch
+              v-model="searchText"
+              class="w-full sm:w-80 pl-4 pr-4 py-3 rounded-full shadow-sm bg-white border border-gray-200 focus:ring-2 focus:ring-blue-500 outline-none transition text-gray-700"
+              placeholder="Tìm kiếm..."
+            />
+          </div>
         </div>
       </div>
-
       <template v-if="searchFilteredPublishers.length > 0">
         <div
           class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-8 mt-8"
@@ -81,10 +98,8 @@ onMounted(async () => {
             v-for="publisher in searchFilteredPublishers"
             :key="publisher._id"
             :publisher="publisher"
+            @delete="deletePublisher"
           ></PublisherCard>
-          <div class="flex justify-center items-center ">
-            <button class="btn btn-circle w-15 h-15 text-4xl text-primary " @click="goToAddPublisher">+</button>
-          </div>
         </div>
       </template>
       <template v-else>

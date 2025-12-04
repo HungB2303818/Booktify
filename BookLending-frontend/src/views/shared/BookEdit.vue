@@ -59,7 +59,7 @@ onMounted(async () => {
   <div class="w-full flex justify-center bg-gray-100 py-10 px-4 min-h-screen">
     <div class="w-full max-w-6xl flex flex-col gap-8">
       <!-- Tiêu đề -->
-      <h2 class="text-3xl font-bold text-blue-600 text-center">
+      <h2 class="text-4xl font-bold text-center">
         Chỉnh sửa sách
       </h2>
 
@@ -164,7 +164,7 @@ onMounted(async () => {
             </RouterLink>
 
             <button
-              class="btn bg-blue-600 text-white hover:opacity-90 px-6 rounded-full text-sm"
+              class="w-1/8 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 transition duration-300 cursor-pointer"
             >
               Lưu
             </button>

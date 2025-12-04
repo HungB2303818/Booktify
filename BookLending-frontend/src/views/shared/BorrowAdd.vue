@@ -155,7 +155,7 @@ onMounted(async () => {
           <!-- Submit Button -->
           <button
             type="submit"
-            class="w-1/5 mt-12 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 hover:shadow-[0_0_35px_rgba(0,123,255,0.7)] transition duration-300"
+            class="w-1/5 mt-12 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 transition duration-300 cursor-pointer"
           >
             Mượn
           </button>

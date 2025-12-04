@@ -60,7 +60,7 @@ const deleteBook = async () => {
             <button
               v-if="role === 'staff'"
               @click="goToEdit"
-              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-500 text-white hover:bg-yellow-600 active:scale-95 transition-all shadow-sm"
+              class="flex items-center gap-2 bg-yellow-50 text-yellow-600 border-2 border-yellow-300 px-4 py-2 rounded-xl hover:bg-yellow-100 hover:border-yellow-400 transition-all cursor-pointer"
             >
               <i class="fa-solid fa-pen-to-square text-sm"></i>
               Chỉnh sửa
@@ -69,7 +69,7 @@ const deleteBook = async () => {
             <button
               v-if="role === 'staff'"
               @click="deleteBook"
-              class="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 active:scale-95 transition-all shadow-sm"
+              class="flex items-center gap-2 bg-red-50 text-red-600 border-2 border-red-200 px-4 py-2 rounded-xl hover:bg-red-100 hover:border-red-300 transition-all cursor-pointer"
             >
               <i class="fa-solid fa-trash text-sm"></i>
               Xóa
@@ -174,8 +174,6 @@ const deleteBook = async () => {
                 <span>0%</span>
               </div>
             </div>
-
-            <!-- ================== CỘT 3: THÔNG BÁO VIẾT ĐÁNH GIÁ ================== -->
           </div>
         </div>
       </div>

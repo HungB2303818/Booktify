@@ -110,6 +110,11 @@ const routes = [
     path: "/borrow/:id",
     name: "borrow.detail",
     component: () => import("../views/shared/BorrowDetail.vue")
+  },
+  {
+    path: "/publisher/:id",
+    name: "publisher.edit",
+    component: () => import("../views/shared/PublisherEdit.vue")
   }
 ];
 const router = createRouter({

@@ -245,7 +245,6 @@ onMounted(() => {
 
         <!-- ================== STAFF ================== -->
         <template v-if="role === 'staff'">
-          <!-- ✔ DUYỆT (Xanh) -->
           <button
             v-if="currentStatus.actions.approve"
             @click="handleApproveBook(borrow._id)"
@@ -255,7 +254,6 @@ onMounted(() => {
             <i class="fa-solid fa-check text-lg"></i>
           </button>
 
-          <!-- ✖ TỪ CHỐI (Đỏ) -->
           <button
             v-if="currentStatus.actions.reject"
             @click="handleRejectBook(borrow._id)"
@@ -265,7 +263,6 @@ onMounted(() => {
             <i class="fa-solid fa-xmark text-xl"></i>
           </button>
 
-          <!-- ✔ DUYỆT TRẢ (Tím) -->
           <button
             v-if="currentStatus.actions.approveReturn"
             @click="handleApproveReturnBook(borrow._id)"
@@ -275,7 +272,6 @@ onMounted(() => {
             <i class="fa-solid fa-check text-lg"></i>
           </button>
 
-          <!-- 🗑 XÓA (Đỏ) -->
           <button
             v-if="currentStatus.actions.delete"
             @click="handleDeleteBorrow(borrow._id)"
@@ -286,9 +282,7 @@ onMounted(() => {
           </button>
         </template>
 
-        <!-- ================== USER ================== -->
         <template v-if="role === 'user'">
-          <!-- ✔ TRẢ SÁCH -->
           <button
             v-if="currentStatus.actions.returnpending"
             @click="handleReturnBook(borrow._id)"
@@ -298,7 +292,6 @@ onMounted(() => {
             Trả sách
           </button>
 
-          <!-- 🗑 XÓA -->
           <button
             v-if="currentStatus.actions.delete"
             @click="handleDeleteBorrow(borrow._id)"
