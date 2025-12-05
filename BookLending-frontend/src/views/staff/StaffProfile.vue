@@ -24,10 +24,10 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-gray-100 pt-10 px-4 pb-20">
-    <!-- AVATAR + NAME SECTION -->
     <div class="flex flex-col items-center mb-10">
-      <!-- Avatar -->
-      <div class="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center shadow-inner">
+      <div
+        class="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center shadow-inner"
+      >
         <img
           v-if="staff.avatar"
           :src="staff.avatar"
@@ -37,25 +37,17 @@ onMounted(async () => {
         <i v-else class="fa-regular fa-user text-5xl text-gray-500"></i>
       </div>
 
-      <!-- Name -->
       <h2 class="mt-4 text-2xl font-bold text-gray-900">
-        {{ staff.name || "Người dùng" }}
+        {{ staff.name || "" }}
       </h2>
 
-      <!-- Username -->
-      <p class="text-gray-500 -mt-1">
-        @{{ staff.username || "unknown" }}
-      </p>
+      <p class="text-gray-500 -mt-1">@{{ staff.username || "" }}</p>
     </div>
 
-    <!-- PERSONAL INFO CARD -->
     <div class="max-w-5xl mx-auto bg-white rounded-xl shadow px-8 py-6">
       <h3 class="text-xl font-semibold mb-4">Thông tin nhân viên</h3>
 
-      <!-- GRID INFO (3 COLUMNS) -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 py-2">
-
-        <!-- Tên -->
         <div>
           <div class="flex items-center gap-2 text-gray-500">
             <i class="fa-regular fa-user"></i>
@@ -66,7 +58,6 @@ onMounted(async () => {
           </p>
         </div>
 
-        <!-- Tên đăng nhập -->
         <div>
           <div class="flex items-center gap-2 text-gray-500">
             <i class="fa-solid fa-at"></i>
@@ -76,7 +67,7 @@ onMounted(async () => {
             @{{ staff.username || "Không xác định" }}
           </p>
         </div>
-        <!-- Địa chỉ -->
+
         <div>
           <div class="flex items-center gap-2 text-gray-500">
             <i class="fa-solid fa-location-dot"></i>
@@ -87,7 +78,6 @@ onMounted(async () => {
           </p>
         </div>
 
-        <!-- Số điện thoại -->
         <div>
           <div class="flex items-center gap-2 text-gray-500">
             <i class="fa-solid fa-phone"></i>
@@ -97,10 +87,8 @@ onMounted(async () => {
             {{ staff.phone || "Không xác định" }}
           </p>
         </div>
-
       </div>
 
-      <!-- BUTTON -->
       <div class="flex justify-end mt-8">
         <button
           @click="goToUserProfileEdit(staff_id)"

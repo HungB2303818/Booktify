@@ -43,11 +43,9 @@ onMounted(() => {
 <template>
   <div class="min-h-screen bg-zinc-100 p-10">
     <div class="max-w-4xl mx-auto bg-white shadow-sm rounded-lg p-6">
-      <!-- Tiêu đề -->
       <h2 class="text-2xl font-semibold text-blue-600 mb-6">Thêm sách</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8">
-        <!-- Cột trái: Ảnh bìa -->
         <div class="flex flex-col items-start">
           <div
             class="w-64 h-92 border border-gray-300 rounded-lg overflow-hidden flex items-center justify-center bg-gray-50 mb-3"
@@ -62,7 +60,6 @@ onMounted(() => {
         </div>
 
         <form @submit.prevent="handleCreateBook" class="space-y-4">
-          <!-- Tên sách -->
           <div>
             <dt class="font-medium text-gray-800 text-sm mb-1">Tên sách</dt>
             <dd>
@@ -76,7 +73,6 @@ onMounted(() => {
             </dd>
           </div>
 
-          <!-- Tác giả -->
           <div>
             <dt class="font-medium text-gray-800 text-sm mb-1">Tác giả</dt>
             <dd>
@@ -90,7 +86,6 @@ onMounted(() => {
             </dd>
           </div>
 
-          <!-- Nhà xuất bản + Năm -->
           <div>
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -121,7 +116,6 @@ onMounted(() => {
             </div>
           </div>
 
-          <!-- Số lượng -->
           <div>
             <dt class="font-medium text-gray-800 text-sm mb-1">Số lượng</dt>
             <dd>
@@ -135,7 +129,6 @@ onMounted(() => {
             </dd>
           </div>
 
-          <!-- Đơn giá -->
           <div>
             <dt class="font-medium text-gray-800 text-sm mb-1">Đơn giá</dt>
             <dd>
@@ -149,7 +142,6 @@ onMounted(() => {
             </dd>
           </div>
 
-          <!-- Nút -->
           <div class="flex justify-end pt-3">
             <button
               class="px-6 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 hover:shadow-lg transition duration-300"

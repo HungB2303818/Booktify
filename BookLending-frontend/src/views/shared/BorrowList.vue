@@ -95,7 +95,6 @@ onMounted(fetchBorrows);
             Tất cả
           </button>
 
-          <!-- ĐANG MƯỢN -->
           <button
             @click="statusFilter = 'borrowing'"
             :class="
@@ -108,7 +107,7 @@ onMounted(fetchBorrows);
             Đang mượn
           </button>
 
-          <!-- ĐÃ TRẢ -->
+
           <button
             @click="statusFilter = 'returned'"
             :class="

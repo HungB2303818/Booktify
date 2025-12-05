@@ -1,6 +1,5 @@
 <template>
   <main class="w-full bg-white text-gray-800">
-    <!-- Header -->
     <section class="py-12 bg-gradient-to-r from-white to-slate-50">
       <div class="max-w-4xl mx-auto px-6 text-center">
         <h1 class="text-4xl font-bold text-gray-900">Liên hệ Booktify</h1>
@@ -11,10 +10,8 @@
       </div>
     </section>
 
-    <!-- Contact grid -->
     <section class="py-12">
       <div class="max-w-4xl mx-auto px-6 grid md:grid-cols-2 gap-10">
-        <!-- Contact Info -->
         <div>
           <h2 class="text-2xl font-semibold text-gray-900">
             Thông tin liên hệ
@@ -54,7 +51,6 @@
           </p>
         </div>
 
-        <!-- Contact Form -->
         <div>
           <form
             class="space-y-5 p-6 bg-white rounded-lg border border-gray-100 shadow-sm"
@@ -98,7 +94,6 @@
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="py-10 bg-slate-50">
       <div class="max-w-4xl mx-auto px-6 text-center">
         <h3 class="text-xl font-semibold text-gray-900">

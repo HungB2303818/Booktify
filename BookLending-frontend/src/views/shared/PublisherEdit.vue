@@ -46,13 +46,13 @@ onMounted(async () => {
 <template>
   <div class="min-h-screen bg-zinc-100 flex justify-center items-center px-4">
     <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
-      <!-- Tiêu đề -->
+
       <h2 class="text-2xl font-semibold mb-6">Chỉnh sửa nhà xuất bản</h2>
 
-      <!-- Form -->
+
       <form @submit.prevent="handleupdatePublisher">
         <dl>
-          <!-- Tên nhà xuất bản -->
+
           <div class="py-2 grid grid-cols-3 items-center">
             <dt class="font-semibold text-gray-800 text-sm">Nhà xuất bản</dt>
             <dd class="col-span-2">
@@ -67,7 +67,7 @@ onMounted(async () => {
             </dd>
           </div>
 
-          <!-- Địa chỉ -->
+
           <div class="py-2 grid grid-cols-3 items-center">
             <dt class="font-semibold text-gray-800 text-sm">Địa chỉ</dt>
             <dd class="col-span-2">
@@ -83,7 +83,6 @@ onMounted(async () => {
           </div>
         </dl>
 
-        <!-- Nút -->
         <div class="flex justify-end mt-6 space-x-2">
           <RouterLink
             to="/publishers"

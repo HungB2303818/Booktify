@@ -25,10 +25,6 @@ const { value: phone, errorMessage: phoneError } = useField("phone");
 const handleUserRegister = handleSubmit(async (values) => {
   try {
     await userService.register(values);
-    // ? Debug code
-    // console.log(data);
-    // console.log(response.data);
-
     push.success("Đăng ký người dùng thành công");
     router.push("/user/login");
   } catch (error) {
@@ -158,7 +154,7 @@ const handleUserRegister = handleSubmit(async (values) => {
         <div class="flex justify-center mt-8">
           <button
             type="submit"
-            class="w-1/4 mt-4 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 transition duration-300 cursor-pointer"
+            class="w-1/4 mt-4 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 transition duration-300 cursor-pointer"
           >
             Đăng ký
           </button>

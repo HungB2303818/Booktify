@@ -48,7 +48,6 @@ const handleUserProfileEdit = handleSubmit(async (values) => {
   }
 });
 
-// ====== INIT VALUES ======
 onMounted(async () => {
   const user_data = await userService.getUser(user_id.value);
   user.value = user_data;
@@ -63,7 +62,12 @@ onMounted(async () => {
       birthdate: user.value.birthdate
         ? new Date(user.value.birthdate).toISOString().slice(0, 10)
         : "",
-      sex: user.value.sex === 'true' ? 'true' : user.value.sex === 'false' ? 'false' : null,
+      sex:
+        user.value.sex === "true"
+          ? "true"
+          : user.value.sex === "false"
+          ? "false"
+          : null,
       address: user.value.address || "",
       phone: user.value.phone || "",
     },
@@ -73,10 +77,8 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-gray-100 px-4 py-10">
-    <!-- Title -->
     <h1 class="text-3xl font-bold text-center mb-10">Chỉnh sửa thông tin</h1>
 
-    <!-- Avatar -->
     <div class="flex flex-col items-center mb-8">
       <div
         class="w-28 h-28 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden shadow"
@@ -86,12 +88,9 @@ onMounted(async () => {
       </div>
     </div>
 
-    <!-- FORM CARD -->
     <div class="max-w-5xl mx-auto bg-white rounded-xl shadow p-8">
       <form @submit.prevent="handleUserProfileEdit" class="space-y-6">
-        <!-- GRID FORM 2 COLUMNS -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- TÊN -->
           <div>
             <label class="font-medium flex items-center gap-2 mb-1">
               <i class="fa-regular fa-user"></i>
@@ -107,7 +106,6 @@ onMounted(async () => {
             <p class="text-sm text-red-600">{{ nameError }}</p>
           </div>
 
-          <!-- TÊN ĐĂNG NHẬP -->
           <div>
             <label class="font-medium flex items-center gap-2 mb-1">
               <i class="fa-solid fa-at"></i>
@@ -123,7 +121,6 @@ onMounted(async () => {
             <p class="text-sm text-red-600">{{ usernameError }}</p>
           </div>
 
-          <!-- NGÀY SINH -->
           <div>
             <label class="font-medium flex items-center gap-2 mb-1">
               <i class="fa-regular fa-calendar"></i>
@@ -138,7 +135,6 @@ onMounted(async () => {
             <p class="text-sm text-red-600">{{ birthdateError }}</p>
           </div>
 
-          <!-- GIỚI TÍNH -->
           <div>
             <label class="font-medium flex items-center gap-2 mb-1">
               <i class="fa-solid fa-people-group"></i>
@@ -184,7 +180,6 @@ onMounted(async () => {
           </div>
         </div>
 
-        <!-- ĐỊA CHỈ -->
         <div>
           <label class="font-medium flex items-center gap-2 mb-1">
             <i class="fa-solid fa-location-dot"></i>
@@ -200,7 +195,6 @@ onMounted(async () => {
           <p class="text-sm text-red-600">{{ addressError }}</p>
         </div>
 
-        <!-- SỐ ĐIỆN THOẠI -->
         <div>
           <label class="font-medium flex items-center gap-2 mb-1">
             <i class="fa-solid fa-phone"></i>
@@ -216,7 +210,6 @@ onMounted(async () => {
           <p class="text-sm text-red-600">{{ phoneError }}</p>
         </div>
 
-        <!-- PASSWORD -->
         <div>
           <label class="font-medium flex items-center gap-2 mb-1">
             <i class="fa-solid fa-lock"></i>
@@ -232,7 +225,6 @@ onMounted(async () => {
           <p class="text-sm text-red-600">{{ passwordError }}</p>
         </div>
 
-        <!-- ACTION BUTTONS -->
         <div class="flex justify-end gap-3 pt-4">
           <RouterLink
             v-if="role === 'staff'"

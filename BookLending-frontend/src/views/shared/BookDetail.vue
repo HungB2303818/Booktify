@@ -11,7 +11,7 @@ const book = ref({});
 
 const defaultImage = "https://cdn-icons-png.flaticon.com/512/29/29302.png";
 const role = computed(() => localStorage.getItem("role"));
-// Lấy thông tin sách theo ID
+
 onMounted(async () => {
   try {
     const id = route.params.id;
@@ -40,11 +40,9 @@ const deleteBook = async () => {
 <template>
   <div class="w-full flex justify-center bg-zinc-100 py-4 px-4 min-h-screen">
     <div class="w-full max-w-6xl rounded-xl">
-      <!-- grid 2 cột -->
       <div
         class="grid grid-cols-1 md:grid-cols-[1fr_2fr] items-start gap-3 items-stretch"
       >
-        <!-- Ảnh bìa -->
         <div
           class="flex flex-col items-center space-y-4 bg-white rounded-xl shadow"
         >
@@ -56,7 +54,6 @@ const deleteBook = async () => {
             />
           </div>
           <div class="mb-2 flex gap-3">
-            <!-- Staff buttons -->
             <button
               v-if="role === 'staff'"
               @click="goToEdit"
@@ -74,8 +71,6 @@ const deleteBook = async () => {
               <i class="fa-solid fa-trash text-sm"></i>
               Xóa
             </button>
-
-            <!-- User button -->
             <button
               v-else-if="role === 'user'"
               @click="gotoBorrow"

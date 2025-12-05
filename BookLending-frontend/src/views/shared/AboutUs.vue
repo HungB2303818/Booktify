@@ -1,8 +1,8 @@
 <template>
   <main class="bg-[#f7f8fc] w-full text-gray-800 pb-16">
-    <!-- Container chính -->
+
     <div class="max-w-6xl mx-auto px-6">
-      <!-- Title -->
+
       <section class="text-center py-12">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
           About Booktify / Giới Thiệu
@@ -14,7 +14,6 @@
         </p>
       </section>
 
-      <!-- Hero Image -->
       <section class="my-6">
         <img
           src="/img/t3_may_tinh_2.jpg"
@@ -22,7 +21,6 @@
         />
       </section>
 
-      <!-- Mission + Vision -->
       <section class="grid md:grid-cols-2 gap-10 py-12">
         <div>
           <h2 class="text-2xl font-bold text-gray-900">
@@ -50,7 +48,6 @@
 
       <hr class="my-10 border-gray-300" />
 
-      <!-- Core Values -->
       <section class="text-center py-6">
         <h2 class="text-3xl font-bold text-gray-900">Giá trị cốt lõi</h2>
         <p class="mt-2 text-gray-600 leading-relaxed">
@@ -59,7 +56,7 @@
         </p>
 
         <div class="grid md:grid-cols-3 gap-8 mt-10">
-          <!-- Knowledge -->
+
           <div
             class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
           >
@@ -76,7 +73,6 @@
             </div>
           </div>
 
-          <!-- Community -->
           <div
             class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
           >
@@ -94,7 +90,6 @@
             </div>
           </div>
 
-          <!-- Quality -->
           <div
             class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden"
           >
@@ -115,7 +110,6 @@
 
       <hr class="my-14 border-gray-300" />
 
-      <!-- What Makes Us Different + Story -->
       <section class="grid md:grid-cols-2 gap-12">
         <div>
           <h3 class="text-2xl font-bold text-gray-900">
@@ -149,7 +143,6 @@
         </div>
       </section>
 
-      <!-- Commitment -->
       <section
         class="mt-16 bg-white p-10 rounded-2xl shadow-md border border-gray-100 text-center"
       >

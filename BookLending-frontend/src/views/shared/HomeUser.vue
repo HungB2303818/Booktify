@@ -2,8 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import BookCard from "@/components/BookCard.vue";
-import BookService from "@/services/book.service"; // nếu bạn có service
-
+import BookService from "@/services/book.service";
 const router = useRouter();
 const bookService = new BookService();
 
@@ -12,7 +11,6 @@ const searchQuery = ref("");
 
 const role = computed(() => localStorage.getItem("role"));
 
-// Lấy danh sách sách từ API (hoặc dữ liệu mẫu)
 onMounted(async () => {
   try {
     const res = await bookService.getAllBooks();
@@ -22,7 +20,6 @@ onMounted(async () => {
   }
 });
 
-// Lọc theo từ khóa tìm kiếm
 const filteredBooks = computed(() => {
   if (!searchQuery.value.trim()) return books.value;
   return books.value.filter((b) =>
@@ -30,12 +27,9 @@ const filteredBooks = computed(() => {
   );
 });
 
-// Điều hướng tới trang chi tiết
 const goToDetail = (id) => {
   router.push(`/books/${id}`);
 };
-
-// Điều hướng tới trang thêm mới
 const goToAddBook = () => {
   router.push("/books/add");
 };
@@ -44,14 +38,12 @@ const goToAddBook = () => {
 <template>
   <template v-if="role !== 'staff'">
     <section class="relative w-full py-24 text-center overflow-hidden">
-      <!-- Background image -->
       <img
         src="/img/library.jpg"
         alt="background"
         class="absolute inset-0 w-full h-full"
       />
 
-      <!-- GRADIENT FADE (từ trong suốt → trắng) -->
       <div
         class="absolute inset-0 z-[5]"
         style="
@@ -66,7 +58,6 @@ const goToAddBook = () => {
         "
       ></div>
 
-      <!-- CONTENT -->
       <div class="relative z-10 max-w-4xl mx-auto px-4">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900">
           Mượn sách nhanh – Mở rộng tri thức
@@ -132,7 +123,6 @@ const goToAddBook = () => {
         />
       </div>
 
-      <!-- Lưới hiển thị sách -->
       <div
         id="books"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8"
@@ -146,7 +136,6 @@ const goToAddBook = () => {
         />
       </div>
 
-      <!-- Nút thêm sách -->
       <div v-if="role === 'staff'" class="flex justify-end mt-10">
         <button
           class="btn btn-primary btn-circle text-2xl"

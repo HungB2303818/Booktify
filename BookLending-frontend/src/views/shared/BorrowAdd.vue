@@ -1,13 +1,12 @@
 <script setup>
-
 import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import BookService from "@/services/book.service";
 import BorrowService from "@/services/borrow.service";
 
-import { push } from 'notivue';
+import { push } from "notivue";
 import { useForm, useField } from "vee-validate";
-import { borrowSchema } from '@/validations/borrow.validation';
+import { borrowSchema } from "@/validations/borrow.validation";
 
 const bookService = new BookService();
 const borrowService = new BorrowService();
@@ -25,12 +24,10 @@ const { handleSubmit } = useForm({
   validationSchema: borrowSchema,
 });
 
-const { value: returnDate, errorMessage: returnDateError } = useField("returnDate");
+const { value: returnDate, errorMessage: returnDateError } =
+  useField("returnDate");
 
 const handleCreateBorrow = handleSubmit(async () => {
-  // debug code
-  // console.log(return_date.value);
-
   try {
     const data = {
       reader_id: user_id.value,
@@ -47,16 +44,13 @@ const handleCreateBorrow = handleSubmit(async () => {
     console.log(error);
     if (error.response.status === 422) {
       push.warning("Bạn đã mượn tối đa 3 quyển sách này");
-    }
-    else if (error.response.status === 409) {
+    } else if (error.response.status === 409) {
       push.warning("Bạn chỉ có thể mượn tối đa 10 quyển sách");
-    }
-    else {
+    } else {
       push.error("Đã có lỗi xảy ra trong quá trình tạo đơn mượn");
     }
   }
 });
-
 
 onMounted(async () => {
   if (role.value !== "user") {
@@ -73,11 +67,8 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-gray-100 p-6 flex justify-center">
-
     <div class="w-full max-w-6xl flex flex-col">
       <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] mb-12">
-
-        <!-- =================== BOOK COVER =================== -->
         <div class="flex flex-col items-center">
           <div class="p-4 rounded-xl">
             <img
@@ -87,17 +78,15 @@ onMounted(async () => {
           </div>
 
           <p class="text-3xl font-semibold mt-2">{{ book.title }}</p>
-          <p class="text-gray-500 ">{{ book.author }}</p>
+          <p class="text-gray-500">{{ book.author }}</p>
         </div>
 
-        <!-- =================== FORM =================== -->
         <form
           @submit.prevent="handleCreateBorrow"
           class="bg-white p-8 rounded-2xl shadow-md"
         >
           <h2 class="text-xl font-bold mb-6">Thông tin mượn sách</h2>
 
-          <!-- Book Title -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
               <label class="text-sm font-medium block mb-1">Tựa sách</label>
@@ -120,9 +109,10 @@ onMounted(async () => {
             </div>
           </div>
 
-          <!-- Publisher -->
           <div class="mb-4">
-            <label class="text-sm font-medium block mb-1">Tên nhà xuất bản</label>
+            <label class="text-sm font-medium block mb-1"
+              >Tên nhà xuất bản</label
+            >
             <input
               type="text"
               :value="book.publisher"
@@ -142,7 +132,9 @@ onMounted(async () => {
             </div>
 
             <div>
-              <label class="text-sm font-medium block mb-1">Ngày trả sách</label>
+              <label class="text-sm font-medium block mb-1"
+                >Ngày trả sách</label
+              >
               <input
                 v-model="returnDate"
                 type="date"
@@ -152,7 +144,6 @@ onMounted(async () => {
             </div>
           </div>
 
-          <!-- Submit Button -->
           <button
             type="submit"
             class="w-1/5 mt-12 px-4 py-2 rounded-2xl text-white font-medium bg-gradient-to-r from-blue-700 to-sky-400 hover:scale-105 transition duration-300 cursor-pointer"
@@ -160,16 +151,13 @@ onMounted(async () => {
             Mượn
           </button>
 
-          <!-- Back Link -->
           <div class="mt-4 ml-2">
             <RouterLink to="/#books" class="font-semibold hover:underline">
               Quay lại
             </RouterLink>
           </div>
-
         </form>
       </div>
     </div>
   </div>
 </template>
-

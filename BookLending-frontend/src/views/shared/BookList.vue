@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import BookCard from "@/components/BookCard.vue";
-import BookService from "@/services/book.service"; // nếu bạn có service
+import BookService from "@/services/book.service";
 
 const router = useRouter();
 const bookService = new BookService();
@@ -54,7 +54,7 @@ const deleteBook = async (id) => {
     <div class="container mx-auto px-4 py-4">
       <div class="flex flex-col items-center mb-16 mt-10 w-full">
         <div class="flex items-center w-full max-w-2xl gap-2">
-          <!-- Ô tìm kiếm -->
+
           <div class="relative flex-1">
             <span
               class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -70,7 +70,7 @@ const deleteBook = async (id) => {
             />
           </div>
 
-          <!-- Nút thêm sách -->
+
           <button
             v-if="role === 'staff'"
             @click="goToAddBook"
@@ -82,7 +82,7 @@ const deleteBook = async (id) => {
         </div>
       </div>
 
-      <!-- Lưới hiển thị sách -->
+
       <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mx-8"
       >
@@ -97,7 +97,7 @@ const deleteBook = async (id) => {
         />
       </div>
 
-      <!-- Nút thêm sách -->
+
     </div>
   </div>
 </template>

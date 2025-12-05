@@ -58,16 +58,10 @@ onMounted(async () => {
 <template>
   <div class="w-full flex justify-center bg-gray-100 py-10 px-4 min-h-screen">
     <div class="w-full max-w-6xl flex flex-col gap-8">
-      <!-- Tiêu đề -->
-      <h2 class="text-4xl font-bold text-center">
-        Chỉnh sửa sách
-      </h2>
+      <h2 class="text-4xl font-bold text-center">Chỉnh sửa sách</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8">
-        <!-- Bìa sách -->
-        <div
-          class="rounded-2xl  p-6 flex flex-col items-center justify-start"
-        >
+        <div class="rounded-2xl p-6 flex flex-col items-center justify-start">
           <img
             name="image"
             :src="`http://localhost:8080${book.image}`"
@@ -76,13 +70,11 @@ onMounted(async () => {
           />
         </div>
 
-        <!-- Form chỉnh sửa -->
         <form
           @submit.prevent="handleUpdateBook"
           class="bg-white rounded-2xl shadow p-8"
         >
           <div class="space-y-6">
-            <!-- Tên sách -->
             <div>
               <label class="font-semibold text-gray-700">Tên sách</label>
               <input
@@ -94,7 +86,6 @@ onMounted(async () => {
               <span class="text-xs text-red-600">{{ titleError }}</span>
             </div>
 
-            <!-- Nhà xuất bản -->
             <div>
               <label class="font-semibold text-gray-700">Nhà xuất bản</label>
               <input
@@ -106,7 +97,6 @@ onMounted(async () => {
               <span class="text-xs text-red-600">{{ publisherError }}</span>
             </div>
 
-            <!-- Tác giả -->
             <div>
               <label class="font-semibold text-gray-700">Tác giả</label>
               <input
@@ -118,7 +108,6 @@ onMounted(async () => {
               <span class="text-xs text-red-600">{{ authorError }}</span>
             </div>
 
-            <!-- 3 ô: năm / số lượng / giá -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label class="font-semibold text-gray-700">Năm xuất bản</label>
@@ -154,7 +143,6 @@ onMounted(async () => {
             </div>
           </div>
 
-          <!-- Nút -->
           <div class="flex justify-end mt-8 gap-3">
             <RouterLink
               to="/books"
