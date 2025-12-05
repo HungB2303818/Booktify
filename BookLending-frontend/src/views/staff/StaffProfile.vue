@@ -53,7 +53,7 @@ onMounted(async () => {
       <h3 class="text-xl font-semibold mb-4">Thông tin nhân viên</h3>
 
       <!-- GRID INFO (3 COLUMNS) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-2">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 py-2">
 
         <!-- Tên -->
         <div>
@@ -104,7 +104,7 @@ onMounted(async () => {
       <div class="flex justify-end mt-8">
         <button
           @click="goToUserProfileEdit(staff_id)"
-          class="flex items-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition active:scale-95"
+          class="flex items-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition active:scale-95 cursor-pointer"
         >
           <i class="fa-solid fa-pen-to-square"></i>
           Chỉnh sửa thông tin

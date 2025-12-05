@@ -14,7 +14,6 @@ const role = computed(() => localStorage.getItem("role"));
 const borrow = ref({});
 const loading = ref(true);
 
-// Lấy chi tiết đơn mượn
 const fetchBorrowDetail = async () => {
   try {
     const id = route.params.id;
@@ -36,9 +35,6 @@ const fetchBorrowDetail = async () => {
 
 onMounted(fetchBorrowDetail);
 
-//
-// ====== HÀNH ĐỘNG DUYỆT ======
-//
 const handleApproveBook = async () => {
   try {
     if (borrow.value.book_id?.quantity <= 0) {
@@ -203,14 +199,10 @@ const currentStatus = computed(() => {
 
 <template>
   <div class="w-full min-h-screen bg-zinc-100 p-6">
-    <!-- HEADER -->
     <div class="max-w-6xl mx-auto relative mt-4 mb-8">
       <h1 class="text-3xl font-bold text-gray-800 mb-3">Chi tiết đơn mượn</h1>
     </div>
-
-    <!-- GRID 2 CỘT -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-      <!-- CARD THÔNG TIN NGƯỜI MƯỢN -->
       <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
         <div class="flex items-center gap-3 mb-4">
           <div
@@ -227,33 +219,28 @@ const currentStatus = computed(() => {
         </div>
 
         <div class="text-gray-700 grid grid-cols-[150px_1fr] gap-y-4 text-sm">
-          <!-- Họ và tên -->
           <p class="text-gray-500">Họ và tên</p>
           <p class="font-semibold">{{ borrow.reader_id?.name }}</p>
 
-          <!-- Email -->
           <p class="text-gray-500">Tên đăng nhập</p>
           <p class="font-semibold">{{ borrow.reader_id?.username }}</p>
 
-          <!-- Số điện thoại -->
           <p class="text-gray-500">Số điện thoại</p>
           <p class="font-semibold">{{ borrow.reader_id?.phone }}</p>
 
-          <!-- Mã người dùng -->
           <p class="text-gray-500">Địa chỉ</p>
           <p class="font-semibold">{{ borrow.reader_id?.address }}</p>
         </div>
       </div>
-      <!-- CARD THÔNG TIN SÁCH -->
+
       <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-sm">
         <div class="flex items-start gap-4">
-          <!-- ẢNH SÁCH -->
           <img
             :src="`http://localhost:8080${borrow.book_id?.image}`"
             alt="Book cover"
             class="w-48 h-68 object-cover rounded shadow"
           />
-          <!-- THÔNG TIN SÁCH -->
+
           <div>
             <h2 class="text-gray-800 mb-1">Tựa sách</h2>
             <p class="font-semibold mb-2">{{ borrow.book_id?.title }}</p>
@@ -279,7 +266,6 @@ const currentStatus = computed(() => {
       </div>
     </div>
 
-    <!-- CARD THÔNG TIN MƯỢN -->
     <div
       class="max-w-6xl mx-auto mt-6 bg-white rounded-xl p-6 border border-gray-200 shadow-sm"
     >
@@ -379,7 +365,5 @@ const currentStatus = computed(() => {
         </div>
       </div>
     </div>
-
-    <!-- BUTTON TRẢ SÁCH -->
   </div>
 </template>

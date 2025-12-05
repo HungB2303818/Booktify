@@ -13,7 +13,7 @@ const handleDeleteUser = async (user_id) => {
     if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
       await userService.deleteUser(user_id);
       emit("fetchUsers");
-      push.success("Xóa đơn người dùng thành công");
+      push.success("Xóa người dùng thành công");
     }
   } catch (error) {
     console.log(error);
@@ -53,13 +53,13 @@ const handleDeleteUser = async (user_id) => {
       {{ user.phone }}
     </td>
 
-    <td class="px-6 py-4 text-start align-middle">
-      <div class="flex mt-4 gap-3">
+    <td class="px-6 py-4 text-center align-middle">
+      <div class="flex justify-center gap-3">
         <button
           @click="handleDeleteUser(user._id)"
           class="text-red-600 transition-all hover:text-green-900 cursor-pointer underline"
         >
-          Xóa
+          <i class="fa-solid fa-trash text-lg"></i>
         </button>
       </div>
     </td>

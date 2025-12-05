@@ -62,14 +62,13 @@ onMounted(fetchBorrows);
       <p class="text-gray-600 mt-1 text-lg">Tổng đơn: {{ totalborrows }}</p>
     </div>
 
-    <!-- TABLE LIST -->
     <div
       class="max-w-6xl mx-auto rounded-box border border-base-content/5 bg-base-100"
     >
       <div
         class="flex items-center justify-between px-6 py-4 border-b border-gray-200"
       >
-        <!-- SEARCH BAR -->
+
         <div class="relative w-full max-w-md">
           <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
             <i class="fa-solid fa-magnifying-glass"></i>
