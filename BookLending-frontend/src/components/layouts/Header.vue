@@ -49,35 +49,35 @@ window.addEventListener("storage", () => {
           <li>
             <RouterLink
               to="/home/staff"
-              class="text-base rounded-xl"
+              class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-yellow text-gray-100"
               >Tổng quan</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/books"
-              class="text-base rounded-xl"
+              class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-yellow text-gray-100"
               >Danh mục sách</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/borrowrecords"
-              class="text-base rounded-xl"
+              class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-yellow text-gray-100"
               >Đơn mượn sách</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/publishers"
-              class="text-base rounded-xl"
+              class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-yellow text-gray-100"
               >Nhà xuất bản</RouterLink
             >
           </li>
           <li>
             <RouterLink
               to="/users"
-              class="text-base rounded-xl"
+              class="px-4 py-2 rounded-lg transition font-medium hover:bg-blue-600 hover:text-yellow text-gray-100"
               >Người dùng</RouterLink
             >
           </li>
